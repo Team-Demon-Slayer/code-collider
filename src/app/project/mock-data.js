@@ -15,7 +15,43 @@ const mockData = {
 
   deliverables: [
     {
-      date: new Date(),
+      date: "Mon Dec 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [
+        {
+          task_id: 0,
+          title: "Do work",
+          owner: "timBuckToo",
+        },
+      ],
+    },
+    {
+      date: "Tue Dec 19 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [],
+    },
+    {
+      date: "Wed Dec 20 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [],
+    },
+    {
+      date: "Thu Dec 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [],
+    },
+    {
+      date: "Fri Dec 19 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [
+        {
+          task_id: 0,
+          title: "Do work",
+          owner: "timBuckToo",
+        },
+      ],
+    },
+    {
+      date: "Sat Dec 20 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      tasks: [],
+    },
+    {
+      date: "Sun Dec 21 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
       tasks: [
         {
           task_id: 0,

@@ -49,7 +49,7 @@ export default function MessageBoard({ messages, project_meta }) {
           className="send-message-input"
         />
         <button type="submit" disabled={isLoading} className="message-send-btn">
-          {!isLoading ? <span class="loader" /> : <IoMdSend />}
+          {!isLoading ? <span className="loader" /> : <IoMdSend />}
         </button>
       </form>
     </div>
