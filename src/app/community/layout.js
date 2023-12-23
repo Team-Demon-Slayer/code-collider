@@ -1,10 +1,13 @@
-import CommunityHeader from "./CommunityHeader";
+import CommunityHeader from './CommunityHeader';
+import { CommunityProvider } from './CommunityContext';
 
 export default function CommunityLayout({ children }) {
   return (
-<div>
-  <CommunityHeader />
-  {children}
-</div>
+    <div>
+      <CommunityProvider>
+        <CommunityHeader />
+        {children}
+      </CommunityProvider>
+    </div>
   );
 }
