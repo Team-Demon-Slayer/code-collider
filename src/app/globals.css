@@ -1,0 +1,15 @@
+:root {
+  --dark-color: #0c0f0a;
+  --red-color: #ff206e;
+  --yellow-color: #fbff12;
+  --teal-color: #41ead4;
+  --white-color: #ffffff;
+}
+
+[data-theme="dark"] {
+  --dark-color: #555;
+  --red-color: #ff206e;
+  --yellow-color: #fbff12;
+  --teal-color: #41ead4;
+  --white-color: #0c0f0a;
+}
