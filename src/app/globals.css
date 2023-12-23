@@ -5,6 +5,25 @@
   --teal-color: #41ead4;
   --white-color: #ffffff;
 }
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
 
 [data-theme="dark"] {
   --dark-color: #555;
