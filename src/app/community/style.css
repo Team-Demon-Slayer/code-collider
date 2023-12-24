@@ -1,0 +1,111 @@
+.project-details-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 10px;
+  position: relative;
+  cursor: default;
+  width: 95%;
+  background-color: var(--dark-color);
+  height: 180px;
+  border-radius: 60px;
+  margin-top: 10px;
+}
+
+.project-details-title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  position: absolute;
+  width: fit-content;
+  min-width: 230px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 20px;
+  z-index: 5;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  box-shadow: 2px 2px 1px 1px var(--red-color);
+  top: -10px;
+}
+
+.project-details-title h2 {
+  margin: 0px;
+  width: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap; /* Prevent title from wrapping */
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.project-details-title p {
+  margin: 0px;
+  font-size: 14px;
+  flex-wrap: nowrap;
+  white-space: nowrap; /* Prevent title from wrapping */
+}
+
+.languages {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  position: absolute;
+  left: 290px;
+  top: -5px;
+}
+
+.language-icon {
+  scale: 0.4;
+  width: 30px;
+}
+
+.project-details-description {
+  color: var(--white-color);
+  font-size: 13px;
+  width: 92%;
+  margin-top: 45px;
+  margin-left: 40px;
+}
+
+.project-details-team {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-left: 40px;
+  margin-top: 10px;
+  color: var(--white-color);
+  margin-bottom: 20px;
+}
+
+.team-member {
+  margin-right: 5px;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.search-input{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: fit-content;
+  min-width: 230px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 20px;
+  z-index: 5;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  box-shadow: 2px 2px 1px 1px var(--red-color);
+  top: -10px;
+}

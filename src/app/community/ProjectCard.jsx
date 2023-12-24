@@ -2,22 +2,33 @@
 
 export default function ProjectCard({ project }) {
   return (
-    <div
-      style={{
-        border: '1px solid black',
-        margin: '10px',
-        padding: '10px',
-      }}
-    >
-      <p>{project.title}</p>
-      <ul>
-        {project.languages.map(({ name, badge_url }) => (
-          <li key={name}>
-            <p>{name}</p> <img alt={name} url={badge_url} />
-          </li>
-        ))}
-      </ul>
-      <p>{project.content}</p>
+    <div className="project-details-info">
+      <div className="project-details-title">
+        <h2>{project.title}</h2>
+        <p>@{project.registeredDevelopers[0].name}</p>
+      </div>
+      <div className="languages">
+        {project.languages.map((language) => {
+          return (
+            <div className="language-icon" key={language.name}>
+              <img src={language.badge_url} />
+            </div>
+          );
+        })}
+      </div>
+      <div className="project-details-description">
+        {project.content}
+      </div>
+      <div className="project-details-team">
+        {project.registeredDevelopers.map(({name, id}, index) => {
+          return (
+            <div className="team-member" key={id}>
+              @{name}
+              {index === project.registeredDevelopers - 1 ? "" : " |"}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
