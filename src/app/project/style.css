@@ -363,11 +363,25 @@
   background-color: var(--dark-color);
   width: 95%;
   height: 450px;
-  border-radius: 10px;
+  border-radius: 25px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin-left: 25px;
+  position: relative;
+}
+
+.deliverables-header {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  z-index: 20px;
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--red-color);
+  padding: 10px;
+  border-radius: 20px;
+  width: fit-content;
+  font-weight: bold;
 }
 
 .deliverables-day {
@@ -378,11 +392,16 @@
   width: 10%;
   height: 75%;
   background-color: var(--white-color);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   cursor: default;
+  overflow-y: scroll;
+}
+
+.deliverables-day::-webkit-scrollbar {
+  display: none;
 }
 
 .deliverables-day h3 {
@@ -421,7 +440,7 @@
   height: 45px;
   width: 20px;
   border-radius: 20px;
-  left: 0;
+  left: -20px;
   z-index: 20px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -435,7 +454,7 @@
   height: 45px;
   width: 20px;
   border-radius: 20px;
-  left: 95.5%;
+  left: 98.5%;
   z-index: 20px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;

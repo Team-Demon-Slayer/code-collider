@@ -39,6 +39,7 @@ export default function Deliverables({
           date={selectedDate}
         />
       )}
+      <div className="deliverables-header">Deliverables & Deadlines</div>
       {deliverables.map((day) => {
         const date = formatDate(day.date);
         return (
