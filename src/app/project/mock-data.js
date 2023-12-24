@@ -20,7 +20,10 @@ const mockData = {
         {
           task_id: 0,
           title: "Do work",
+          description:
+            "Like the title says, do work get paid, then do more work. rinse and repeat. over and over until the end of time.",
           owner: "timBuckToo",
+          complete: false,
         },
       ],
     },
@@ -33,43 +36,51 @@ const mockData = {
       tasks: [],
     },
     {
-      date: "Thu Dec 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      date: "Thu Dec 21 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
       tasks: [],
     },
     {
-      date: "Fri Dec 19 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      date: "Fri Dec 22 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
       tasks: [
         {
-          task_id: 0,
-          title: "Do work",
+          task_id: 1,
+          title: "Do more work",
           owner: "timBuckToo",
         },
       ],
     },
     {
-      date: "Sat Dec 20 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      date: "Sat Dec 23 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
       tasks: [],
     },
     {
-      date: "Sun Dec 21 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+      date: "Sun Dec 24 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
       tasks: [
         {
-          task_id: 0,
-          title: "Do work",
+          task_id: 2,
+          title: "And more work",
+          owner: "timBuckToo",
+        },
+        {
+          task_id: 3,
+          title: "And mooore work",
           owner: "timBuckToo",
         },
       ],
     },
   ],
 
-  task: {
-    task_id: 0,
-    title: "Do work",
-    description: "Like the title says, do work",
-    owner: null,
-    due_date: new Date(),
-    complete: false,
-  },
+  task: [
+    {
+      task_id: 0,
+      title: "Do work",
+      description:
+        "Like the title says, do work get paid, then do more work. rinse and repeat. over and over until the end of time.",
+      owner: null,
+      due_date: new Date(),
+      complete: false,
+    },
+  ],
 
   messages: [
     {
