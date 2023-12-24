@@ -32,3 +32,16 @@ body {
   --teal-color: #41ead4;
   --white-color: #0c0f0a;
 }
+
+.modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff4c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100dvw;
+  height: 100dvh;
+}
