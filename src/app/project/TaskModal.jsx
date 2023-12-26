@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 import mockData from "./mock-data.js";
 import getUserColor from "../_utils/getUserColor.js";
@@ -14,11 +15,44 @@ export default function TaskModal({
   handleShowModal,
   handleMarkComplete,
   handleClaimTask,
+  handleEditTask,
   project_meta,
 }) {
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
+  const [edit, setEdit] = useState(false);
+  const [changes, setChanges] = useState(false);
+
   const username = "timBuckToo";
   const userIndex = project_meta.team.indexOf(username);
   const color = getUserColor(userIndex);
+
+  const sendUpdate = async () => {
+    const newTask = {
+      ...task,
+      title,
+      description,
+    };
+    await handleEditTask(task.task_id, newTask);
+    setEdit(false);
+    setChanges(false);
+  };
+
+  useEffect(() => {
+    if (title !== task.title || description !== task.description) {
+      setChanges(true);
+    } else {
+      setChanges(false);
+    }
+  }, [title, description]);
+
+  useEffect(() => {
+    if (!edit) {
+      setTitle(task.title);
+      setDescription(task.description);
+    }
+  }, [edit]);
+
   return (
     <div className="modal-overlay">
       <div className="task-modal">
@@ -26,10 +60,27 @@ export default function TaskModal({
           className="close-modal-btn"
           onClick={() => handleShowModal(false)}
         />
+        {changes && (
+          <div className="save-changes-btn" onClick={() => sendUpdate()}>
+            Save Changes
+          </div>
+        )}
         <div className="task-modal-header">
           <div className="task-title">
             <div className="task-due">Due Date - {date}</div>
-            {task.title}
+            <div className="task-title-edit">
+              <FaEdit
+                className={edit ? "edit-task-btn-true" : "edit-task-btn"}
+                onClick={() => setEdit(!edit)}
+              />
+              <input
+                type="task"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                disabled={!edit}
+                className={!edit ? "task-title-input" : "task-title-input-true"}
+              />
+            </div>
             {!task.owner ? (
               <div
                 className="claim-task-btn"
@@ -49,7 +100,14 @@ export default function TaskModal({
         </div>
         <div className="task-description-container">
           <p className="task-description-header">Description</p>
-          <p className="task-modal-body">{task.description}</p>
+          <textarea
+            className={!edit ? "task-modal-body" : "task-modal-body-true"}
+            disabled={!edit}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          >
+            {task.description}
+          </textarea>
         </div>
         <div className="task-modal-footer">
           <button

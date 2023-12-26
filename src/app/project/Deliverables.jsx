@@ -11,6 +11,7 @@ export default function Deliverables({
   deliverables,
   handleMarkComplete,
   handleClaimTask,
+  handleEditTask,
   project_meta,
 }) {
   const [selectedTask, setSelectedTask] = useState(null);
@@ -35,6 +36,7 @@ export default function Deliverables({
           handleShowModal={handleShowModal}
           handleMarkComplete={handleMarkComplete}
           handleClaimTask={handleClaimTask}
+          handleEditTask={handleEditTask}
           project_meta={project_meta}
           date={selectedDate}
         />
