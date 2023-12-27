@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import mockData from "./mock-data.js";
 import getUserColor from "../_utils/getUserColor.js";
 import formatDate from "../_utils/formatDate.js";
+import { v4 as uuidv4 } from "uuid";
 
 const { tasks } = mockData;
 
@@ -14,7 +15,6 @@ export default function AddTaskModal({
   date,
   handleShowAddModal,
   handleAddTask,
-  prevId,
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +28,7 @@ export default function AddTaskModal({
       title,
       description,
       date,
-      task_id: prevId + 1,
+      task_id: uuidv4(),
       owner: null,
       complete: false,
     };

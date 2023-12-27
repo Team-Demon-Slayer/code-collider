@@ -52,6 +52,7 @@ export default function TaskModal({
     } else {
       setChanges(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, description]);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ export default function TaskModal({
       setTitle(task.title);
       setDescription(task.description);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit]);
 
   return (
@@ -130,7 +132,7 @@ export default function TaskModal({
           </button>
           <button
             onClick={() => deleteAndClose()}
-            className="task-modal-complete-btn"
+            className="task-modal-delete-btn"
           >
             Delete Task
           </button>
