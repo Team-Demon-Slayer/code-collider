@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import "./style.css";
 
 export default function ProjectDetails({ project_meta }) {
   return (
