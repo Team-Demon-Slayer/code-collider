@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   username varchar(255),
   is_mentor BOOLEAN NOT NULL DEFAULT FALSE,
   experience varchar(255) NOT NULL,
@@ -9,21 +9,21 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS projects (
-  id SERIAL PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   title varchar(32) NOT NULL,
-  owner INT REFERENCES users(id) NOT NULL,
+  owner UUID REFERENCES users(id) NOT NULL,
   start_date DATE NOT NULL DEFAULT CURRENT_DATE,
   finish_date DATE NOT NULL,
   estimated_hours INT NOT NULL,
   description varchar(500),
   repo_link varchar(255),
-  mentor varchar(255),
+  mentor UUID REFERENCES users(id),
   max_developers INT NOT NULL DEFAULT 5,
   active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS languages (
-  id SERIAL PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   name varchar(32) NOT NULL,
   url varchar(32) NOT NULL,
   UNIQUE (url),
@@ -31,38 +31,38 @@ CREATE TABLE IF NOT EXISTS languages (
 );
 
 CREATE TABLE IF NOT EXISTS users_languages (
-  user_id INT REFERENCES users(id) NOT NULL,
-  language_id INT REFERENCES languages(id) NOT NULL,
+  user_id UUID REFERENCES users(id) NOT NULL,
+  language_id UUID REFERENCES languages(id) NOT NULL,
   PRIMARY KEY (user_id, language_id)
 );
 
 CREATE TABLE IF NOT EXISTS projects_languages (
-  project_id INT REFERENCES projects(id) NOT NULL,
-  language_id INT REFERENCES languages(id) NOT NULL,
+  project_id UUID REFERENCES projects(id) NOT NULL,
+  language_id UUID REFERENCES languages(id) NOT NULL,
   PRIMARY KEY(project_id, language_id)
 );
 
 CREATE TABLE IF NOT EXISTS projects_users (
-  project_id INT REFERENCES projects(id) NOT NULL,
-  user_id INT REFERENCES users(id) NOT NULL,
+  project_id UUID REFERENCES projects(id) NOT NULL,
+  user_id UUID REFERENCES users(id) NOT NULL,
   PRIMARY KEY (project_id, user_id)
 );
 
 CREATE TABLE IF NOT EXISTS deliverables (
-  id SERIAL PRIMARY KEY,
-  project_id INT REFERENCES projects(id) NOT NULL,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
+  project_id UUID REFERENCES projects(id) NOT NULL,
   date DATE NOT NULL,
   title varchar(255) NOT NULL,
   description varchar(255),
-  owner varchar(255),
+  owner UUID REFERENCES users(id),
   complete BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS messages (
-  id SERIAL PRIMARY KEY,
-  project_id REFERENCES projects(id) NOT NULL,
-  posted_by REFERENCES users(id) NOT NULL,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
+  project_id UUID REFERENCES projects(id) NOT NULL,
+  posted_by UUID REFERENCES users(id) NOT NULL,
   posted_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  text: varchar(255),
+  text varchar(255)
 );
 
