@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa";
 
 import mockData from "./mock-data.js";
 import getUserColor from "../_utils/getUserColor.js";
+import formatDate from "../_utils/formatDate.js";
 
 const { tasks } = mockData;
 
@@ -16,6 +17,7 @@ export default function TaskModal({
   handleMarkComplete,
   handleClaimTask,
   handleEditTask,
+  handleDeleteTask,
   project_meta,
 }) {
   const [title, setTitle] = useState(task.title);
@@ -26,6 +28,7 @@ export default function TaskModal({
   const username = "timBuckToo";
   const userIndex = project_meta.team.indexOf(username);
   const color = getUserColor(userIndex);
+  const dateFormatted = formatDate(date);
 
   const sendUpdate = async () => {
     const newTask = {
@@ -38,12 +41,18 @@ export default function TaskModal({
     setChanges(false);
   };
 
+  const deleteAndClose = async () => {
+    await handleDeleteTask(task.task_id, date);
+    handleShowModal(false);
+  };
+
   useEffect(() => {
     if (title !== task.title || description !== task.description) {
       setChanges(true);
     } else {
       setChanges(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, description]);
 
   useEffect(() => {
@@ -51,6 +60,7 @@ export default function TaskModal({
       setTitle(task.title);
       setDescription(task.description);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit]);
 
   return (
@@ -67,7 +77,7 @@ export default function TaskModal({
         )}
         <div className="task-modal-header">
           <div className="task-title">
-            <div className="task-due">Due Date - {date}</div>
+            <div className="task-due">Due Date - {dateFormatted}</div>
             <div className="task-title-edit">
               <FaEdit
                 className={edit ? "edit-task-btn-true" : "edit-task-btn"}
@@ -119,6 +129,12 @@ export default function TaskModal({
             }
           >
             {task.complete ? "Completed" : "Mark Complete"}
+          </button>
+          <button
+            onClick={() => deleteAndClose()}
+            className="task-modal-delete-btn"
+          >
+            Delete Task
           </button>
         </div>
       </div>

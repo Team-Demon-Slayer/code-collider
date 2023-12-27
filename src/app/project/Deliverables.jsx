@@ -4,22 +4,35 @@ import React, { useState } from "react";
 import formatDate from "../_utils/formatDate.js";
 import truncateString from "../_utils/truncateString.js";
 import getUserColor from "../_utils/getUserColor.js";
-import { FaChevronLeft, FaChevronRight, FaCheck } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaPlus, FaCheck } from "react-icons/fa";
 import TaskModal from "./TaskModal.jsx";
+import AddTaskModal from "./AddTaskModal.jsx";
 
 export default function Deliverables({
   deliverables,
   handleMarkComplete,
   handleClaimTask,
   handleEditTask,
+  handleAddTask,
   project_meta,
+  handleDeleteTask,
 }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false);
 
   const handleShowModal = (value) => {
     setShowModal(value);
+  };
+
+  const handleShowAddModal = (value) => {
+    setShowAddTask(value);
+  };
+
+  const handleAddTaskClick = (date) => {
+    setSelectedDate(date);
+    setShowAddTask(true);
   };
 
   const handleSelectTask = (task, date) => {
@@ -38,7 +51,15 @@ export default function Deliverables({
           handleClaimTask={handleClaimTask}
           handleEditTask={handleEditTask}
           project_meta={project_meta}
+          handleDeleteTask={handleDeleteTask}
           date={selectedDate}
+        />
+      )}
+      {showAddTask && (
+        <AddTaskModal
+          handleAddTask={handleAddTask}
+          date={selectedDate}
+          handleShowAddModal={handleShowAddModal}
         />
       )}
       <div className="deliverables-header">Deliverables & Deadlines</div>
@@ -56,7 +77,7 @@ export default function Deliverables({
                 <div
                   key={task.task_id}
                   className="day-task-main"
-                  onClick={() => handleSelectTask(task, date)}
+                  onClick={() => handleSelectTask(task, day.date)}
                   style={{
                     justifyContent: task.owner ? "flex-start" : "center",
                   }}
@@ -71,6 +92,10 @@ export default function Deliverables({
                 </div>
               );
             })}
+            <FaPlus
+              className="deliverables-day-add-task"
+              onClick={() => handleAddTaskClick(day.date)}
+            />
           </div>
         );
       })}
