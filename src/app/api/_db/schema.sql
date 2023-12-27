@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
-  username varchar(255),
+  username varchar(255) NOT NULL,
   is_mentor BOOLEAN NOT NULL DEFAULT FALSE,
   experience varchar(255) NOT NULL,
   profile_photo varchar(255),
-  bio varchar(500)
+  bio varchar(500),
+  UNIQUE(username)
   --...auth related fields TBD
 );
 
@@ -19,7 +20,8 @@ CREATE TABLE IF NOT EXISTS projects (
   repo_link varchar(255),
   mentor UUID REFERENCES users(id),
   max_developers INT NOT NULL DEFAULT 5,
-  active BOOLEAN NOT NULL DEFAULT TRUE
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+  UNIQUE(title, owner)
 );
 
 CREATE TABLE IF NOT EXISTS languages (
