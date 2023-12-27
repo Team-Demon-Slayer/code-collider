@@ -55,6 +55,15 @@ export default function ProjectPage() {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleAddTask = async (newTask) => {
+    await deliverables.forEach((deliverable) => {
+      if (deliverable.date === newTask.date) {
+        deliverable.tasks.push(newTask);
+      }
+    });
+    setTriggerUpdate(!triggerUpdate);
+  };
+
   useEffect(() => {
     getData();
     setIsLoading(false);
@@ -77,6 +86,7 @@ export default function ProjectPage() {
           handleMarkComplete={handleMarkComplete}
           handleClaimTask={handleClaimTask}
           handleEditTask={handleEditTask}
+          handleAddTask={handleAddTask}
           project_meta={project_meta}
         />
         <a
