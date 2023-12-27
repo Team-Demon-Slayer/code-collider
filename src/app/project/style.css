@@ -421,9 +421,32 @@
   height: 70px;
   margin-bottom: 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.day-task-title {
+  flex-wrap: wrap;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px;
+  margin-top: 5px;
+}
+
+.task-complete {
+  position: absolute;
+  top: -10px;
+  left: 85%;
+  background-color: var(--teal-color);
+  border-radius: 100px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 0px 0.5px var(--dark-color);
 }
 
 .day-task-main:hover {
@@ -494,7 +517,7 @@
   width: 30px;
   left: 85%;
   top: 30px;
-  z-index: 20px;
+  z-index: 40px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
@@ -509,7 +532,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px;
   position: relative;
 }
@@ -569,15 +592,15 @@
   color: var(--white-color);
   border: none;
   outline: none;
-  font-size: 25px;
-  width: fit-content;
+  font-size: 20px;
+  width: 100%;
 }
 .task-title-input-true {
   background-color: var(--dark-color);
   color: var(--white-color);
-  font-size: 25px;
-  width: fit-content;
-  border-radius: 15px;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 10px;
   padding: 0px 10px;
   box-shadow: 0px 0px 1px 1px #fff;
   border: 0px;

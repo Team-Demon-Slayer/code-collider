@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import formatDate from "../_utils/formatDate.js";
 import truncateString from "../_utils/truncateString.js";
 import getUserColor from "../_utils/getUserColor.js";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaCheck } from "react-icons/fa";
 import TaskModal from "./TaskModal.jsx";
 
 export default function Deliverables({
@@ -48,7 +48,8 @@ export default function Deliverables({
           <div className="deliverables-day" key={day.date}>
             <h3>{date}</h3>
             {day.tasks.map((task) => {
-              const title = truncateString(task.title, 10);
+              const { complete } = task;
+              const title = truncateString(task.title, 20);
               const userIndex = project_meta.team.indexOf(task.owner);
               const color = getUserColor(userIndex);
               return (
@@ -60,6 +61,7 @@ export default function Deliverables({
                     justifyContent: task.owner ? "flex-start" : "center",
                   }}
                 >
+                  {complete && <FaCheck className="task-complete" />}
                   {task.owner && (
                     <div className={`task-owner-name-${color}`}>
                       @{task.owner}
