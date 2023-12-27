@@ -1,29 +1,44 @@
 "use client";
 import "../globals.css";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Carousel from "./Carousel.jsx";
-import mockData from "../my-projects/hp-mockData.js";
+import CurrentProject from "./CurrentProject.jsx";
 
-export default function HomePage() {
-  const [projects, setProjects] = useState(mockData || []);
+export default function HomePage({ data, currentProject }) {
+  const [recentProjects, setRecentProjects] = useState(null);
+  const [spotlightProjects, setSpotlightProjects] = useState(null);
 
+  const getRecent = () => {
+    const recent = data.filter((project) => {
+      return project.active && project.max_size - project.team > 0;
+    });
+    setRecentProjects(recent);
+  };
 
-  const resetProjects = (arr) => { setProjects(arr); }
+  const getSpotlight = () => {
+    const spotlight = data.filter((project) => {
+      return !project.active;
+    });
+    setSpotlightProjects(spotlight);
+  };
+
+  useEffect(() => {
+    getRecent();
+    getSpotlight();
+  }, [data]);
+
   return (
-    <main id="body">
+    recentProjects &&
+    spotlightProjects && (
+      <div className="home-container">
+        <div className="hp-banner">
+        <CurrentProject project_meta={currentProject} />
+        </div>
 
-      <div className="hp-banner">
-        <h1>Current Project</h1>
+        <Carousel projects={recentProjects} header="Recently Added" />
+
+        <Carousel projects={spotlightProjects} header="Spotlight Project" />
       </div>
-      <div className="hp-title"> {'Project: ' + mockData[0].title}</div>
-      <br />
-      <div>
-        <Carousel resetProjects={resetProjects} projects={projects} header='Recently Added'/>
-      </div>
-      <br />
-      <div>
-        <Carousel resetProjects={resetProjects} projects={projects} header='Spotlight Project'/>
-      </div>
-    </main>
+    )
   );
 }
