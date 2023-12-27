@@ -13,6 +13,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 1,
+    start: "Mon Dec 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope: 14,
     max_size: 5,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Jeff Bezos",
@@ -32,6 +34,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 3,
+    start: "Mon Dec 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope:  20,
     max_size: 3,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Larry Bird",
@@ -50,6 +54,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 2,
+    start: "Mon DEC 18 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope: 10,
     max_size: 4,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Gary Payton",
@@ -69,6 +75,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 3,
+    start: "Mon Dec 28 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope:  20,
     max_size: 4,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Kevin Garnett",
@@ -87,6 +95,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 3,
+    start: "Mon Dec 20 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope:  15,
     max_size: 4,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Kevin Garnett",
@@ -105,6 +115,8 @@ const hpMockData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor. Ut diam quam nulla porttitor massa id. Sed blandit libero volutpat sed cras ornare arcu. Nisi porta lorem mollis aliquam ut porttitor leo a diam. Curabitur vitae nunc sed velit dignissim sodales ut eu sem. Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Ipsum consequat nisl vel pretium lectus quam id leo. At risus viverra adipiscing at in tellus integer feugiat.",
     team: 3,
+    start: "Mon Dec 20 2023 14:33:12 GMT-0800 (Pacific Standard Time)",
+    scope:  21,
     max_size: 4,
     repo_link: "https://github.com/LukeLarson2",
     mentor: "Kevin Garnett",

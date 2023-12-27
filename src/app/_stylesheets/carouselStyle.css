@@ -114,7 +114,10 @@
 }
 
 .carousel-item-status{
-
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  font-size: 13px;
 }
 
 

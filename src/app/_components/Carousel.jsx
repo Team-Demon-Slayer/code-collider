@@ -5,7 +5,7 @@ import truncateString from "../_utils/truncateString.js";
 import "../_stylesheets/carouselStyle.css";
 // import Card from "./Card.jsx";
 
-export default function Carousel({ projects, header }) {
+export default function Carousel({ projects, getProject, header }) {
   const [display, setDisplay] = useState(null);
   const [firstPointer, setFirstPointer] = useState(0);
   const [secondPointer, setSecondPointer] = useState(1);
@@ -79,7 +79,11 @@ export default function Carousel({ projects, header }) {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_size - project.team;
           return (
-            <div key={project.project_id} className="carousel-item-main">
+            <div
+              key={project.project_id}
+              className="carousel-item-main"
+              onClick={() => getProject(project)}
+            >
               <div className="carousel-header">{header}</div>
 
               <div className="carousel-item-title">{project.title}</div>

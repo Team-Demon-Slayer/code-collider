@@ -3,10 +3,13 @@ import "../globals.css";
 import { useState, useEffect } from "react";
 import Carousel from "./Carousel.jsx";
 import CurrentProject from "./CurrentProject.jsx";
+import ProjectModal from "./ProjectModal.jsx";
 
 export default function HomePage({ data, currentProject }) {
   const [recentProjects, setRecentProjects] = useState(null);
   const [spotlightProjects, setSpotlightProjects] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectProject, setSelectProject] = useState(null);
 
   const getRecent = () => {
     const recent = data.filter((project) => {
@@ -22,6 +25,15 @@ export default function HomePage({ data, currentProject }) {
     setSpotlightProjects(spotlight);
   };
 
+  const getProject = (obj) => {
+    setSelectProject(obj);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     getRecent();
     getSpotlight();
@@ -32,12 +44,21 @@ export default function HomePage({ data, currentProject }) {
     spotlightProjects && (
       <div className="home-container">
         <div className="hp-banner">
-        <CurrentProject project_meta={currentProject} />
+          <CurrentProject project_meta={currentProject} />
         </div>
-
-        <Carousel projects={recentProjects} header="Recently Added" />
-
-        <Carousel projects={spotlightProjects} header="Spotlight Project" />
+        {showModal && (
+          <ProjectModal project={selectProject} closeModal={closeModal} />
+        )}
+        <Carousel
+          projects={recentProjects}
+          getProject={getProject}
+          header="Recently Added"
+        />
+        <Carousel
+          projects={spotlightProjects}
+          getProject={getProject}
+          header="Spotlight Project"
+        />
       </div>
     )
   );
