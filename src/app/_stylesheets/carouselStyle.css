@@ -1,0 +1,122 @@
+
+.home-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.carousel-main{
+  display: flex;
+  width: 100%;
+  height: 250px;
+  justify-content: space-evenly;
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.prev-project-btn{
+  background-color: var(--teal-color);
+  padding: 20px 10px;
+  height: 45px;
+  width: 20px;
+  border-radius: 20px;
+  z-index: 20px;
+  cursor: pointer;
+  color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.prev-project-btn:hover,
+.next-project-btn:hover{
+  opacity: 0.7;
+  scale: 0.97;
+}
+
+.next-project-btn{
+  background-color: var(--teal-color);
+  padding: 20px 10px;
+  height: 45px;
+  width: 20px;
+  border-radius: 20px;
+  z-index: 20px;
+  cursor: pointer;
+  color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.carousel-item-main{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border-radius: 50px;
+  padding: 25px;
+  width: 190px;
+  height:190px;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  user-select: none;
+}
+.carousel-item-main:hover{
+  opacity: 0.7;
+  scale: 0.97;
+}
+
+.carousel-header{
+  display: flex;
+  padding: 10px;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  border-radius: 20px;
+  box-shadow: 2px 2px 0px 1px var(--red-color);
+}
+
+
+
+.carousel-item-title{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.carousel-item-owner{
+  margin-top: -10px;
+  font-size: 14px;
+}
+
+.carousel-item-languages{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  margin-bottom: -20px;
+}
+
+.language-icon {
+ scale: 0.8;
+ width: 30px;
+}
+
+.carousel-item-description{
+  font-size: 14px;
+}
+
+.carousel-item-status{
+
+}
+
+
+
+
