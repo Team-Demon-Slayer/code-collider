@@ -12,7 +12,6 @@ export default function MessageBoard({ messages, project_meta }) {
   const handleSendMessage = async (e) => {
     setIsLoading(true);
     e.preventDefault();
-    console.log(userMessage);
     setUserMessage("");
     setIsLoading(false);
   };
@@ -49,7 +48,7 @@ export default function MessageBoard({ messages, project_meta }) {
           className="send-message-input"
         />
         <button type="submit" disabled={isLoading} className="message-send-btn">
-          {!isLoading ? <span className="loader" /> : <IoMdSend />}
+          {isLoading ? <span className="loader" /> : <IoMdSend />}
         </button>
       </form>
     </div>
