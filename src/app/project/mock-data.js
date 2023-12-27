@@ -70,18 +70,6 @@ const mockData = {
     },
   ],
 
-  task: [
-    {
-      task_id: 0,
-      title: "Do work",
-      description:
-        "Like the title says, do work get paid, then do more work. rinse and repeat. over and over until the end of time.",
-      owner: null,
-      due_date: new Date(),
-      complete: false,
-    },
-  ],
-
   messages: [
     {
       message_id: 0,

@@ -780,7 +780,7 @@
 
 .task-modal-footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-top: 10px;
@@ -792,7 +792,23 @@
   align-items: center;
   outline: none;
   border: none;
-  width: 70%;
+  width: 45%;
+  background-color: var(--yellow-color);
+  color: var(--dark-color);
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  height: 50px;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.task-modal-delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  width: 45%;
   background-color: var(--red-color);
   color: var(--white-color);
   border-radius: 20px;
@@ -805,9 +821,11 @@
 
 .task-modal-complete-btn-completed {
   background-color: var(--teal-color);
+  color: var(--white-color);
 }
 
-.task-modal-complete-btn:hover {
+.task-modal-complete-btn:hover,
+.task-modal-delete-btn:hover {
   scale: 0.97;
   opacity: 0.7;
 }

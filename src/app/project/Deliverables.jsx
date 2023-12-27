@@ -21,7 +21,6 @@ export default function Deliverables({
   const [selectedDate, setSelectedDate] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showAddTask, setShowAddTask] = useState(false);
-  const [prevId, setPrevId] = useState(0);
 
   const handleShowModal = (value) => {
     setShowModal(value);
@@ -31,8 +30,7 @@ export default function Deliverables({
     setShowAddTask(value);
   };
 
-  const handleAddTaskClick = (date, currentId) => {
-    setPrevId(currentId);
+  const handleAddTaskClick = (date) => {
     setSelectedDate(date);
     setShowAddTask(true);
   };
@@ -62,13 +60,11 @@ export default function Deliverables({
           handleAddTask={handleAddTask}
           date={selectedDate}
           handleShowAddModal={handleShowAddModal}
-          prevId={prevId}
         />
       )}
       <div className="deliverables-header">Deliverables & Deadlines</div>
       {deliverables.map((day) => {
         const date = formatDate(day.date);
-        const tasksLength = day.tasks.length - 1;
         return (
           <div className="deliverables-day" key={day.date}>
             <h3>{date}</h3>
@@ -98,7 +94,7 @@ export default function Deliverables({
             })}
             <FaPlus
               className="deliverables-day-add-task"
-              onClick={() => handleAddTaskClick(day.date, tasksLength)}
+              onClick={() => handleAddTaskClick(day.date)}
             />
           </div>
         );
