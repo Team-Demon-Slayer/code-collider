@@ -15,6 +15,7 @@ export default function Deliverables({
   handleEditTask,
   handleAddTask,
   project_meta,
+  handleDeleteTask,
 }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -52,6 +53,7 @@ export default function Deliverables({
           handleClaimTask={handleClaimTask}
           handleEditTask={handleEditTask}
           project_meta={project_meta}
+          handleDeleteTask={handleDeleteTask}
           date={selectedDate}
         />
       )}
@@ -79,7 +81,7 @@ export default function Deliverables({
                 <div
                   key={task.task_id}
                   className="day-task-main"
-                  onClick={() => handleSelectTask(task, date)}
+                  onClick={() => handleSelectTask(task, day.date)}
                   style={{
                     justifyContent: task.owner ? "flex-start" : "center",
                   }}

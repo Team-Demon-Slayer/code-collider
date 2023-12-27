@@ -64,6 +64,21 @@ export default function ProjectPage() {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleDeleteTask = async (task_id, date) => {
+    // Assuming deliverables is an array of deliverables, each containing a date and an array of tasks
+    deliverables.forEach((deliverable) => {
+      // Check if the deliverable matches the specified date
+      if (deliverable.date === date) {
+        // Filter out the task with the specified task_id
+        deliverable.tasks = deliverable.tasks.filter(
+          (task) => task.task_id !== task_id
+        );
+      }
+    });
+
+    setTriggerUpdate(!triggerUpdate);
+  };
+
   useEffect(() => {
     getData();
     setIsLoading(false);
@@ -87,6 +102,7 @@ export default function ProjectPage() {
           handleClaimTask={handleClaimTask}
           handleEditTask={handleEditTask}
           handleAddTask={handleAddTask}
+          handleDeleteTask={handleDeleteTask}
           project_meta={project_meta}
         />
         <a
