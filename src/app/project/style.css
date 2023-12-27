@@ -414,11 +414,25 @@
   background-color: var(--dark-color);
   width: 95%;
   height: 450px;
-  border-radius: 10px;
+  border-radius: 25px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin-left: 25px;
+  position: relative;
+}
+
+.deliverables-header {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  z-index: 20px;
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--red-color);
+  padding: 10px;
+  border-radius: 20px;
+  width: fit-content;
+  font-weight: bold;
 }
 
 .deliverables-day {
@@ -429,11 +443,16 @@
   width: 10%;
   height: 75%;
   background-color: var(--white-color);
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
   cursor: default;
+  overflow-y: scroll;
+}
+
+.deliverables-day::-webkit-scrollbar {
+  display: none;
 }
 
 .deliverables-day h3 {
@@ -453,9 +472,32 @@
   height: 70px;
   margin-bottom: 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.day-task-title {
+  flex-wrap: wrap;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0px;
+  margin-top: 5px;
+}
+
+.task-complete {
+  position: absolute;
+  top: -10px;
+  left: 85%;
+  background-color: var(--teal-color);
+  border-radius: 100px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 0px 0.5px var(--dark-color);
 }
 
 .day-task-main:hover {
@@ -472,7 +514,7 @@
   height: 45px;
   width: 20px;
   border-radius: 20px;
-  left: 0;
+  left: -20px;
   z-index: 20px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -486,7 +528,7 @@
   height: 45px;
   width: 20px;
   border-radius: 20px;
-  left: 95.5%;
+  left: 98.5%;
   z-index: 20px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -515,7 +557,7 @@
   cursor: default;
   z-index: 100;
   padding: 50px;
-  box-shadow: 2px 2px 0px 2px var(--white-color);
+  box-shadow: 3px 3px 0px 2px var(--white-color);
 }
 
 .close-modal-btn {
@@ -526,7 +568,7 @@
   width: 30px;
   left: 85%;
   top: 30px;
-  z-index: 20px;
+  z-index: 40px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
@@ -541,8 +583,9 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .task-title {
@@ -558,6 +601,7 @@
 .task-due {
   font-size: 13px;
   margin: 0px;
+  margin-bottom: 10px;
   width: fit-content;
 }
 
@@ -567,11 +611,74 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
+  width: 100%;
 }
 
 .task-description-header {
   font-size: 25px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
+}
+
+.task-title-edit {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.edit-task-btn {
+  height: 18px;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  color: var(--yellow-color);
+}
+.edit-task-btn-true {
+  height: 18px;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  color: var(--teal-color);
+}
+
+.task-title-input {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border: none;
+  outline: none;
+  font-size: 20px;
+  width: 100%;
+}
+.task-title-input-true {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  font-size: 20px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 0px 10px;
+  box-shadow: 0px 0px 1px 1px #fff;
+  border: 0px;
+}
+
+.save-changes-btn {
+  position: absolute;
+  background-color: var(--teal-color);
+  color: var(--white-color);
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.save-changes-btn:hover {
+  scale: 0.97;
+  opacity: 0.7;
+}
+
+.edit-task-btn:hover {
+  scale: 0.97;
+  opacity: 0.7;
 }
 
 .task-modal-body {
@@ -582,6 +689,29 @@
   color: var(--white-color);
   width: 100%;
   height: 100%;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  resize: none;
+  border: 0px;
+  padding: 5px;
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
+}
+.task-modal-body-true {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  color: var(--white-color);
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  resize: none;
+  padding: 8px;
+  border-radius: 15px;
+  border: 0px;
+  box-shadow: 0px 0px 1px 1px #fff;
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
 }
 
 .task-modal-footer {
@@ -589,6 +719,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 10px;
 }
 
 .task-modal-complete-btn {
@@ -634,6 +765,16 @@
   cursor: pointer;
   margin-top: 10px;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.claim-task-btn:hover,
+.unclaim-task-btn-user-1:hover,
+.unclaim-task-btn-user-2:hover,
+.unclaim-task-btn-user-3:hover,
+.unclaim-task-btn-user-4:hover,
+.unclaim-task-btn-user-5:hover {
+  scale: 0.97;
+  opacity: 0.7;
 }
 
 .unclaim-task-btn-user-1,
