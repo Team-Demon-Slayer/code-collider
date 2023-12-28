@@ -93,7 +93,7 @@ export default function Carousel({ projects, getProject, header }) {
                   return (
                     <img
                       src={language}
-                      className="language-icon"
+                      className="carousel-language-icon"
                       key={language}
                     />
                   );

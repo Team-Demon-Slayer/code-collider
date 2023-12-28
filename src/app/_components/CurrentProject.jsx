@@ -1,18 +1,20 @@
 "use client";
 
 import React from "react";
-import "../project/style.css";
-import {useRouter} from "next/navigation";
+import "../_styleSheets/currentProjectStyle.css";
+import { useRouter } from "next/navigation";
 
 export default function CurrentProject({ project_meta }) {
   const router = useRouter();
   const navToProject = () => {
-    router.push('/project')
+    router.push("/project");
   };
   return (
-    <div className="project-details-info" style={{margin: "0px", marginBottom: "30px"}} onClick={navToProject}>
-      <div className="project-details-title" >
-        <div className="project-details-current-project">Current Project - {project_meta.title}</div>
+    <div className="current-project-details-info">
+      <div className="project-details-title">
+        <div className="project-details-current-project">
+          Current Project - {project_meta.title}
+        </div>
       </div>
       <div className="languages-current">
         {project_meta.languages.map((language) => {
@@ -38,7 +40,7 @@ export default function CurrentProject({ project_meta }) {
             );
           })}
         </div>
-
+        <button className="project-details-page-btn" onClick={navToProject}>PROJECT PAGE</button>
         <a
           className="project-details-header-repo-btn"
           href={project_meta.repo_link}
