@@ -13,9 +13,7 @@ export default function ProjectDetails({ project_meta }) {
       <div className="languages">
         {project_meta.languages.map((language) => {
           return (
-            <div className="language-icon" key={language}>
-              <img src={language} />
-            </div>
+            <img src={language} key={language} className="language-icon" />
           );
         })}
       </div>
