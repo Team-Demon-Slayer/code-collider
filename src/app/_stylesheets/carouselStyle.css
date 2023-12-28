@@ -1,5 +1,4 @@
-
-.home-container{
+.home-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,7 +7,7 @@
   align-items: flex-start;
 }
 
-.carousel-main{
+.carousel-main {
   display: flex;
   width: 100%;
   height: 250px;
@@ -18,8 +17,7 @@
   margin-bottom: 20px;
 }
 
-
-.prev-project-btn{
+.prev-project-btn {
   background-color: var(--teal-color);
   padding: 20px 10px;
   height: 45px;
@@ -33,12 +31,12 @@
 }
 
 .prev-project-btn:hover,
-.next-project-btn:hover{
+.next-project-btn:hover {
   opacity: 0.7;
   scale: 0.97;
 }
 
-.next-project-btn{
+.next-project-btn {
   background-color: var(--teal-color);
   padding: 20px 10px;
   height: 45px;
@@ -51,8 +49,8 @@
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
-.carousel-item-main{
-  display:flex;
+.carousel-item-main {
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
@@ -61,20 +59,21 @@
   border-radius: 50px;
   padding: 25px;
   width: 190px;
-  height:190px;
+  height: 190px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
   user-select: none;
 }
-.carousel-item-main:hover{
+.carousel-item-main:hover {
   opacity: 0.7;
   scale: 0.97;
 }
 
-.carousel-header{
+.carousel-header {
   display: flex;
   padding: 10px;
   position: absolute;
+  font-weight: bold;
   top: -20px;
   left: 0;
   background-color: var(--white-color);
@@ -83,19 +82,17 @@
   box-shadow: 2px 2px 0px 1px var(--red-color);
 }
 
-
-
-.carousel-item-title{
+.carousel-item-title {
   font-size: 20px;
   font-weight: bold;
 }
 
-.carousel-item-owner{
+.carousel-item-owner {
   margin-top: -10px;
   font-size: 14px;
 }
 
-.carousel-item-languages{
+.carousel-item-languages {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -109,17 +106,13 @@
   margin-right: 5px;
 }
 
-.carousel-item-description{
+.carousel-item-description {
   font-size: 14px;
 }
 
-.carousel-item-status{
+.carousel-item-status {
   display: flex;
   justify-content: flex-end;
   margin-top: 25px;
   font-size: 13px;
 }
-
-
-
-

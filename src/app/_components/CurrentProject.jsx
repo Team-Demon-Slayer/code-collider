@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "../_styleSheets/currentProjectStyle.css";
+import "../_stylesheets/currentProjectStyle.css";
 import { useRouter } from "next/navigation";
 
 export default function CurrentProject({ project_meta }) {
@@ -19,9 +19,7 @@ export default function CurrentProject({ project_meta }) {
       <div className="languages-current">
         {project_meta.languages.map((language) => {
           return (
-            <div className="language-icon" key={language}>
-              <img src={language} />
-            </div>
+            <img src={language} key={language} className="language-icon" />
           );
         })}
       </div>
@@ -40,7 +38,9 @@ export default function CurrentProject({ project_meta }) {
             );
           })}
         </div>
-        <button className="project-details-page-btn" onClick={navToProject}>PROJECT PAGE</button>
+        <div className="project-details-page-btn" onClick={navToProject}>
+          PROJECT PAGE
+        </div>
         <a
           className="project-details-header-repo-btn"
           href={project_meta.repo_link}
