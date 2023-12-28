@@ -8,7 +8,7 @@ import ProjectDetails from "./ProjectDetails.jsx";
 
 import "./style.css";
 
-export default function ProjectPage() {
+export default function ProjectPage({ params }) {
   const [project_meta, setProject_meta] = useState(null);
   const [deliverables, setDeliverables] = useState(null);
   const [messages, setMessages] = useState(null);
@@ -27,9 +27,20 @@ export default function ProjectPage() {
   };
 
   const getData = async () => {
-    setDeliverables(mockData.deliverables);
-    setMessages(mockData.messages);
-    setProject_meta(mockData.project_meta);
+    const projectData = await mockData.project_meta.filter(
+      (data) => `${data.project_id}` === params.projectId
+    );
+    const messageData = await mockData.messages.filter(
+      (data) => `${data.project_id}` === params.projectId
+    );
+    const deliverablesData = await mockData.deliverables.filter(
+      (data) => `${data.project_id}` === params.projectId
+    );
+
+    console.log(deliverablesData);
+    setDeliverables(deliverablesData);
+    setMessages(messageData);
+    setProject_meta(projectData[0]);
   };
 
   const handleClaimTask = async (username, task_id) => {
@@ -93,27 +104,29 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="main-container">
-      <div className="project-deliverables-link">
-        <ProjectDetails project_meta={project_meta} />
-        <Deliverables
-          deliverables={deliverables}
-          handleMarkComplete={handleMarkComplete}
-          handleClaimTask={handleClaimTask}
-          handleEditTask={handleEditTask}
-          handleAddTask={handleAddTask}
-          handleDeleteTask={handleDeleteTask}
-          project_meta={project_meta}
-        />
-        <a
-          href={project_meta.repo_link}
-          className="link-project"
-          target="_blank"
-        >
-          LINK TO PROJECT REPO
-        </a>
+    (project_meta, deliverables, messages) && (
+      <div className="main-container">
+        <div className="project-deliverables-link">
+          <ProjectDetails project_meta={project_meta} />
+          <Deliverables
+            deliverables={deliverables}
+            handleMarkComplete={handleMarkComplete}
+            handleClaimTask={handleClaimTask}
+            handleEditTask={handleEditTask}
+            handleAddTask={handleAddTask}
+            handleDeleteTask={handleDeleteTask}
+            project_meta={project_meta}
+          />
+          <a
+            href={project_meta.repo_link}
+            className="link-project"
+            target="_blank"
+          >
+            LINK TO PROJECT REPO
+          </a>
+        </div>
+        <MessageBoard messages={messages} project_meta={project_meta} />
       </div>
-      <MessageBoard messages={messages} project_meta={project_meta} />
-    </div>
+    )
   );
 }

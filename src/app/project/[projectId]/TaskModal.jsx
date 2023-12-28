@@ -5,8 +5,8 @@ import { FaTimes } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 
 import mockData from "./mock-data.js";
-import getUserColor from "../_utils/getUserColor.js";
-import formatDate from "../_utils/formatDate.js";
+import getUserColor from "../../_utils/getUserColor.js";
+import formatDate from "../../_utils/formatDate.js";
 
 const { tasks } = mockData;
 

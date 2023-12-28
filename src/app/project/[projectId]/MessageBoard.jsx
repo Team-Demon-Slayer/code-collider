@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import getUserColor from "../_utils/getUserColor.js";
+import getUserColor from "../../_utils/getUserColor.js";
 import { IoMdSend } from "react-icons/io";
 
 export default function MessageBoard({ messages, project_meta }) {
