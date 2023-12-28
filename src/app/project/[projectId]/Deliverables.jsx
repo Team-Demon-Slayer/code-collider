@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import formatDate from "../_utils/formatDate.js";
-import truncateString from "../_utils/truncateString.js";
-import getUserColor from "../_utils/getUserColor.js";
+import formatDate from "../../_utils/formatDate.js";
+import truncateString from "../../_utils/truncateString.js";
+import getUserColor from "../../_utils/getUserColor.js";
 import { FaChevronLeft, FaChevronRight, FaPlus, FaCheck } from "react-icons/fa";
 import TaskModal from "./TaskModal.jsx";
 import AddTaskModal from "./AddTaskModal.jsx";
