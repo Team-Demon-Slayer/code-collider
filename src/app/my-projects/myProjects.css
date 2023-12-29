@@ -1,0 +1,17 @@
+
+.my-projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+}
+
+#my-projects-split{
+  display: flex;
+  width: 82%;
+  min-height: 10px;
+  background-color: var(--dark-color);
+  border-radius: 10px;
+}
