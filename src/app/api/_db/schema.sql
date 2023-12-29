@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS projects (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   title varchar(32) NOT NULL,
   owner UUID REFERENCES users(id) NOT NULL,
-  start_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  finish_date DATE NOT NULL,
+  start_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  finish_date TIMESTAMP WITH TIME ZONE NOT NULL,
   estimated_hours INT NOT NULL,
   description varchar(500),
   repo_link varchar(255),
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS projects_users (
 CREATE TABLE IF NOT EXISTS deliverables (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   project_id UUID REFERENCES projects(id) NOT NULL,
-  date DATE NOT NULL,
+  date TIMESTAMP WITH TIME ZONE NOT NULL,
   title varchar(255) NOT NULL,
   description varchar(255),
   owner UUID REFERENCES users(id),
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS messages (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v1(),
   project_id UUID REFERENCES projects(id) NOT NULL,
   posted_by UUID REFERENCES users(id) NOT NULL,
-  posted_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  posted_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT  NOW(),
   text varchar(255)
 );
 
