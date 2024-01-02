@@ -5,6 +5,7 @@
   --teal-color: #41ead4;
   --white-color: #ffffff;
 }
+
 body {
   margin: 0px;
   width: 100vw;
@@ -14,6 +15,7 @@ body {
   align-items: flex-start;
   overflow: hidden;
 }
+
 .main-container {
   display: flex;
   width: 100%;
