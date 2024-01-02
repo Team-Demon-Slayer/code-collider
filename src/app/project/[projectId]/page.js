@@ -5,9 +5,13 @@ import React, { useState, useEffect } from "react";
 import Deliverables from "./Deliverables.jsx";
 import MessageBoard from "./MessageBoard.jsx";
 import ProjectDetails from "./ProjectDetails.jsx";
-import getMessages from "../../api/_db/_queries/getMessages";
-import getProject from "../../api/_db/_queries/getProject";
-import getDeliverables from "../../api/_db/_queries/getDeliverables";
+// import messagesModels from "../../api/_db/_models/messagesModels";
+// import projectsModels from "../../api/_db/_models/projectsModels";
+// import deliverablesModels from "../../api/_db/_models/deliverablesModels";
+
+import { getMessages } from "../../api/_db/_models/messagesModels.js";
+import { getProject } from "../../api/_db/_models/projectsModels.js";
+import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
 import "./style.css";
 
@@ -34,9 +38,12 @@ export default function ProjectPage({ params }) {
     const projectData = await getProject(params.projectId);
     const messageData = await getMessages(params.projectId);
     const deliverablesData = await getDeliverables(params.projectId);
+    console.log("messageData", messageData);
+    console.log("projectData", projectData);
+    console.log("deliverablesData", deliverablesData);
     setDeliverables(deliverablesData);
-    setMessages(messageData);
-    setProject_meta(projectData[0]);
+    setMessages(messageData[0].messages);
+    setProject_meta(projectData);
   };
 
   const handleClaimTask = async (username, task_id) => {

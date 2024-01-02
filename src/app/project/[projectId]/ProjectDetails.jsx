@@ -4,6 +4,7 @@ import React from "react";
 import "./style.css";
 
 export default function ProjectDetails({ project_meta }) {
+  console.log("in component", project_meta);
   return (
     project_meta && (
       <div className="project-details-info">

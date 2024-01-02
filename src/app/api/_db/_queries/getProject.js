@@ -5,7 +5,7 @@ const {
 
 const supabase = createClientComponentClient();
 
-module.exports = getProjects = async (projectId) => {
+export const getProjects = async (projectId) => {
   let { data, error } = await supabase
     .from("projects")
     .select(

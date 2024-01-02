@@ -1,9 +1,12 @@
-const db = require('../');
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-exports.getProject = async (projectId) => {
-  let { data, error } = await db
-    .from('projects')
-    .select(`
+const supabase = createClientComponentClient();
+
+export const getProject = async (projectId) => {
+  let { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
       id,
       title,
       owner(id,username),
@@ -17,23 +20,30 @@ exports.getProject = async (projectId) => {
       mentor(id,username),
       active,
       upvotes
-    `)
+    `
+    )
     //For project scope, use differenceInDays(start_date, finish_date) from date-fns
-    .eq('id', projectId);
+    .eq("id", projectId);
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
 
   return data[0];
 };
 
-exports.getProjectPage = async (page = 1, count = 10, active, sortingMethod = ['start_date', {ascending: false}]) => {
+export const getProjectPage = async (
+  page = 1,
+  count = 10,
+  active,
+  sortingMethod = ["start_date", { ascending: false }]
+) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
   let { data, error } = await db
-    .from('projects')
-    .select(`
+    .from("projects")
+    .select(
+      `
       id,
       title,
       owner(id,username),
@@ -46,24 +56,35 @@ exports.getProjectPage = async (page = 1, count = 10, active, sortingMethod = ['
       mentor(id,username),
       active,
       upvotes
-    `)
-    .eq('active', active === undefined ? (true || false) : active)
+    `
+    )
+    .eq("active", active === undefined ? true || false : active)
     .order(sortingMethod[0], sortingMethod[1])
     .range(rangeStart, rangeEnd);
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
   console.log(rangeStart, rangeEnd);
   return data;
 };
 
-exports.getProjectPageByLanguage = async (page = 1, count = 10, active, languages, sortingMethod = ['start_date', {referencedTable: 'projects', ascending: false}]) => {
+export const getProjectPageByLanguage = async (
+  page = 1,
+  count = 10,
+  active,
+  languages,
+  sortingMethod = [
+    "start_date",
+    { referencedTable: "projects", ascending: false },
+  ]
+) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
   let { data, error } = await db
-    .from('languages')
-    .select(`
+    .from("languages")
+    .select(
+      `
       url,
       projects(
         id,
@@ -79,13 +100,14 @@ exports.getProjectPageByLanguage = async (page = 1, count = 10, active, language
         active,
         upvotes
       )
-    `)
-    .in('url', languages)
-    .eq('projects.active', active === undefined ? (true || false) : active)
-    .order(sortingMethod[0], sortingMethod[1], {referencedTable: 'projects'})
-    .range(rangeStart, rangeEnd, {referencedTable: 'projects'})
+    `
+    )
+    .in("url", languages)
+    .eq("projects.active", active === undefined ? true || false : active)
+    .order(sortingMethod[0], sortingMethod[1], { referencedTable: "projects" })
+    .range(rangeStart, rangeEnd, { referencedTable: "projects" });
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
   console.log(rangeStart, rangeEnd);

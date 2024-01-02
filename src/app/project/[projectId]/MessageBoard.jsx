@@ -83,11 +83,11 @@ export default function MessageBoard({
           <h2>Team Chat</h2>
         </div>
         <div className="message-board-messages">
-          {messages[0].messages.length < 1 ? (
+          {messages.length < 1 ? (
             <div className="no-messages">No messages yet...</div>
           ) : (
             <>
-              {messages[0].messages.map((message, index) => {
+              {messages.map((message, index) => {
                 const userIndex = users.findIndex(
                   (user) => user.username === message.posted_by
                 );

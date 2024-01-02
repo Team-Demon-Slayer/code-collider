@@ -1,7 +1,9 @@
-const db = require("../");
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-exports.getMessages = async (projectId) => {
-  let { data, error } = await db
+const supabase = createClientComponentClient();
+
+export const getMessages = async (projectId) => {
+  let { data, error } = await supabase
     .from("projects")
     .select(
       `
