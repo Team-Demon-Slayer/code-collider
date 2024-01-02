@@ -38,8 +38,7 @@ export default function Login() {
     if (error) {
       alert(error.message);
     } else {
-      console.log(data);
-      router.push('/');
+      router.push("/");
     }
   };
 
@@ -62,13 +61,16 @@ export default function Login() {
   };
 
   const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
 
   return (
     <div className="container">
-      <h1>CODE <br /> COLLIDER </h1>
+      <h1>
+        CODE <br /> COLLIDER{" "}
+      </h1>
       <h2>Collide. Collab. Create.</h2>
       <div className="login-container">
         <h1 className="login-header">Login</h1>
@@ -105,8 +107,14 @@ export default function Login() {
           <Link href="/forgot-password"> Forgot Password</Link>
         </form>
       </div>
-      {showRegisterModal && <RegisterModal setShowRegisterModal={setShowRegisterModal} showRegisterModal={showRegisterModal} email={email} password={password} />}
+      {showRegisterModal && (
+        <RegisterModal
+          setShowRegisterModal={setShowRegisterModal}
+          showRegisterModal={showRegisterModal}
+          email={email}
+          password={password}
+        />
+      )}
     </div>
   );
 }
-

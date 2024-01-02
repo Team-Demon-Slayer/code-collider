@@ -1,19 +1,40 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "../supabase";
-import '../../globals.css';
-import './RegisterModal.css';
+import "../../globals.css";
+import "./RegisterModal.css";
 
-
-const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, password }) => {
-  const [experienceLevel, setExperienceLevel] = useState('');
-  const [reasonForJoining, setReasonForJoining] = useState('');
+const RegisterModal = ({
+  showRegisterModal,
+  setShowRegisterModal,
+  email,
+  password,
+}) => {
+  const [experienceLevel, setExperienceLevel] = useState("");
+  const [reasonForJoining, setReasonForJoining] = useState("");
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   const router = useRouter();
 
-  const codingLanguages = ['JavaScript', 'C#', 'Python', 'Java', 'Go', 'Kotlin', 'Swift', 'C++', 'HTML', 'CSS', 'Ruby', 'Rust', 'TypeScript', 'Bash', 'Assembly', 'Visual Basic'];
+  const codingLanguages = [
+    "JavaScript",
+    "C#",
+    "Python",
+    "Java",
+    "Go",
+    "Kotlin",
+    "Swift",
+    "C++",
+    "HTML",
+    "CSS",
+    "Ruby",
+    "Rust",
+    "TypeScript",
+    "Bash",
+    "Assembly",
+    "Visual Basic",
+  ];
 
   const handleExperienceLevelChange = (event) => {
     setExperienceLevel(event.target.value);
@@ -47,10 +68,9 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
       if (error) {
         console.error(error);
       } else {
-        console.log(user);
-        alert('Check your email for verification.');
+        alert("Check your email for verification.");
         setTimeout(() => {
-          router.push('/login');
+          router.push("/login");
         }, 3000);
       }
     } catch (error) {
@@ -60,13 +80,22 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
 
   return (
     <div className="modal-overlay" onClick={handleModalOverlayClick}>
-      <div className="register-modal" onClick={(e) => { e.stopPropagation() }}>
+      <div
+        className="register-modal"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <h1 className="register-modal__title">Tell us about yourself</h1>
         <div className="register-modal__dropdown">
           <label>
             Experience Level
             <br />
-            <select className="register-modal-select" value={experienceLevel} onChange={handleExperienceLevelChange}>
+            <select
+              className="register-modal-select"
+              value={experienceLevel}
+              onChange={handleExperienceLevelChange}
+            >
               <option value="">Select</option>
               <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
@@ -77,7 +106,11 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
           <label>
             Reason for Joining
             <br />
-            <select className="register-modal-select" value={reasonForJoining} onChange={handleReasonForJoiningChange}>
+            <select
+              className="register-modal-select"
+              value={reasonForJoining}
+              onChange={handleReasonForJoiningChange}
+            >
               <option value="">Select</option>
               <option value="Learning">Learning</option>
               <option value="Career Change">Career Change</option>
@@ -93,7 +126,9 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
             {codingLanguages.map((language) => (
               <label
                 key={language}
-                className={`language-label ${selectedLanguages.includes(language) ? 'selected' : ''}`}
+                className={`language-label ${
+                  selectedLanguages.includes(language) ? "selected" : ""
+                }`}
                 onClick={() => handleLanguageSelection(language)}
               >
                 {language}
@@ -101,9 +136,13 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
             ))}
           </div>
         </div>
-        <button className="register-modal__button" onClick={handleRegister}>Register</button>
+        <button className="register-modal__button" onClick={handleRegister}>
+          Register
+        </button>
         <br />
-        <a onClick={() => setShowRegisterModal(!showRegisterModal)}>Already have an account? Log in</a>
+        <a onClick={() => setShowRegisterModal(!showRegisterModal)}>
+          Already have an account? Log in
+        </a>
       </div>
     </div>
   );
