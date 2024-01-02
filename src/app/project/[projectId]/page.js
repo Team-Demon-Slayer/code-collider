@@ -38,9 +38,6 @@ export default function ProjectPage({ params }) {
     const projectData = await getProject(params.projectId);
     const messageData = await getMessages(params.projectId);
     const deliverablesData = await getDeliverables(params.projectId);
-    console.log("messageData", messageData);
-    console.log("projectData", projectData);
-    console.log("deliverablesData", deliverablesData);
     setDeliverables(deliverablesData);
     setMessages(messageData[0].messages);
     setProject_meta(projectData);
@@ -106,7 +103,7 @@ export default function ProjectPage({ params }) {
   useEffect(() => {
     const getMessagesTrigger = async () => {
       const messageData = await getMessages(params.projectId);
-      setMessages(messageData);
+      setMessages(messageData[0].messages);
     };
 
     getMessagesTrigger();
