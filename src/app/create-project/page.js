@@ -1,12 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import ProjectTitle from "./ProjectTitle.jsx";
-import Description from "./Description.jsx";
-import SelectEngineers from "./SelectEngineers.jsx";
-import SelectLanguages from "./SelectLanguages.jsx";
-import StartDate from "./StartDate.jsx";
-import Scope from "./Scope.jsx";
+import searchLanguages from './helper-funcs/searchLanguages';
 
 const [title, setTitle] = useState('My Project');
 const [engineers, setEngineers] = useState(5);
@@ -18,26 +13,95 @@ const [scope, setScope] = useState({
   hours: 5,
 });
 
+const [searchInput, setSearchInput] = useState('');
+const maximumSearchResults = 8;
+
 const onSubmit = (e) => {
   e.preventDefault();
-  console.log(e.formData);
+  console.log([title, engineers, languages, description, startDate, scope]);
 };
 
 const setState = (setter, newValue) => {
   setter(newValue);
 };
 
-const setters = {
-  updateTitle: setState.bind(null, setTitle),
-  updateEngineers: setState.bind(null, setEngineers),
-  updateLanguages: setState.bind(null, setLanguages),
-  updateDescription: setState.bind(null, setDescription),
-  updateStartDate: setState.bind(null, setStartDate),
-  updateScope: setState.bind(null, setScope),
+const update = {
+  title: setState.bind(null, setTitle),
+  engineers: setState.bind(null, setEngineers),
+  languages: setState.bind(null, setLanguages),
+  description: setState.bind(null, setDescription),
+  startDate: setState.bind(null, setStartDate),
+  scope: setState.bind(null, setScope),
 };
 
 export default function CreateProject() {
   return (
+    <div className='create-project-title'>
 
+      <input
+        value={title}
+        onChange={(e) => update.title(e.target.value)}
+        className='create-project-title'
+        type='text'
+        placeholder='Project Title' />
+    </div>
+
+    <div className='create-project-engineers'>
+      <select name='engineers' onChange={(e) => update.engineers(e.target.value)}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+      </select>
+    </div>
+
+    <div className='create-project-languages'>
+      <input type="text" id="searchBar" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
+        <ul className='languageSearchResults'>
+          {searchLanguages(searchInput.slice(0, maximumSearchResults)).map(({ name, url }) => (
+            <li key={name} onClick={() => update.languages([...languages, name])}>{name}</li>
+          ))}
+        </ul>
+    </div>
+
+    <div className='create-project-description'>
+      <input
+        value={description}
+        onChange={(e) => update.description(e.target.value)}
+        className='create-project-description'
+        type='text'
+        placeholder='Project Description' />
+    </div>
+
+    <div className='create-project-start-date'>
+      <input
+        value={startDate}
+        onChange={(e) => update.startDate(e.target.value)}
+        className='create-project-start-date'
+        type='date'
+        placeholder='Start Date' />
+    </div>
+
+    <div className='create-project-scope'>
+      <select name='days' onChange={(e) => update.scope({ ...scope, days: e.target.value })}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option default value='5'>5</option>
+      </select>
+      <select name='hours' onChange={(e) => update.scope({ ...scope, hours: e.target.value })}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option default value='5'>5</option>
+      </select>
+    </div>
+
+    <div className='create-project-submit'>
+      <button onClick={onSubmit}>Submit</button>
+    </div>
   );
 };
