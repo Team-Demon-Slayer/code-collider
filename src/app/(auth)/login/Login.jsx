@@ -45,6 +45,14 @@ export default function Login() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (!validatePassword(password)) {
+      alert("Please enter a valid password. Password must be at least 8 characters long.");
+      return;
+    }
     setShowRegisterModal(true);
   };
 
