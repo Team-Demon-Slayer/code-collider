@@ -7,7 +7,7 @@ const {
 
 const supabase = createClientComponentClient();
 
-module.exports = getDeliverables = async (projectId, curDate) => {
+exports.getDeliverables = async (projectId, curDate) => {
   curDate = curDate || new Date();
   const prevMon = previousMonday(curDate).toISOString();
   const nextMon = nextMonday(curDate).toISOString();
@@ -33,8 +33,7 @@ module.exports = getDeliverables = async (projectId, curDate) => {
     console.error(error);
   }
 
-  data = data[0];
-  data.date = prevMon;
+  data = data[0]?.deliverables;
 
   return data;
 };

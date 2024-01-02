@@ -28,7 +28,7 @@ export default function Login() {
     }
     if (!validatePassword(password)) {
       alert(
-        "Please enter a valid password. Password must be at least 8 characters long."
+        "Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character."
       );
       return;
     }
@@ -46,6 +46,16 @@ export default function Login() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (!validatePassword(password)) {
+      alert(
+        "Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+      return;
+    }
     setShowRegisterModal(true);
   };
 
