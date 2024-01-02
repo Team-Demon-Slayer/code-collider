@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import RegisterModal from "./RegisterModal";
-
+import { supabase } from "../supabase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,15 +17,43 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    // Perform sign in logic here
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    // if (!validatePassword(password)) {
+    //   alert("Please enter a valid password. Password must be at least 8 characters long.");
+    //   return;
+    // }
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      console.log(data);
+      window.location.href = '/';
+    }
   };
 
-  const handleSignUp = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     setShowRegisterModal(true);
   };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // const validatePassword = (password) => {
+  //   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  //   return passwordRegex.test(password);
+  // };
 
   return (
     <div className="container">
@@ -59,14 +87,14 @@ export default function Login() {
           <button
             className="register-button"
             disabled={!email || !password}
-            onClick={handleSignUp}
+            onClick={handleRegister}
           >
             Sign Up
           </button>
-          <a href="#">Forgot Password</a>
+          <Link href="/forgot-password"> Forgot Password</Link>
         </form>
       </div>
-      {showRegisterModal && <RegisterModal setShowRegisterModal={setShowRegisterModal} showRegisterModal={showRegisterModal} />}
+      {showRegisterModal && <RegisterModal setShowRegisterModal={setShowRegisterModal} showRegisterModal={showRegisterModal} email={email} password={password} />}
     </div>
   );
 }

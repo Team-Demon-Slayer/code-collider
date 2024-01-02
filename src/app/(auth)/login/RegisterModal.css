@@ -1,19 +1,6 @@
-.register-modal-overlay {
-  position: absolute;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff4c;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
 .register-modal {
-  width: 800px;
-  height: 520px;
+  width: 750px;
+  height: 630px;
   border-radius: 50px;
   background-color: var(--dark-color);
   color: var(--white-color);
@@ -23,22 +10,86 @@
   margin-top: 40px;
   margin-bottom: 30px;
   font-size: 25px;
-  font-weight: lighter;
+  font-weight: light;
   color: var(--red-color);
 }
 
-.register-modal__form {
-  /* Styles for the form element in the RegisterModal component */
+.register-modal__dropdown {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
-.register-modal__input {
-  /* Styles for the input elements in the RegisterModal component */
+.register-modal-select {
+  width: 200px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  appearance: none;
+  text-align: center;
+  border-radius: 15px;
+  padding: 10px;
+  background-image: none;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+}
+
+.register-modal-select option:first-child {
+  display: none;
+}
+
+.selected-language {
+  background-color: var(--teal-color);
+}
+
+.language-label {
+  margin: 2px;
+  padding: 10px;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  border-radius: 15px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-label.selected {
+  background-color: var(--teal-color);
+  color: var(--white-color);
+}
+
+.hidden-checkbox {
+  display: none;
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 20px;
 }
 
 .register-modal__button {
-  /* Styles for the button element in the RegisterModal component */
+  font-size: 20px;
+  width: 55%;
+  background-color: var(--teal-color);
+  color: var(--white-color);
+  margin-bottom: 40px;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
-.register-modal__error {
-  /* Styles for the error message element in the RegisterModal component */
+a {
+  margin: 15px;
+  margin-bottom: 25px;
+  text-decoration: none;
+  color: var(--white-color);
+  cursor: pointer;
 }
