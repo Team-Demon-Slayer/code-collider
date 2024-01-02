@@ -1,0 +1,11 @@
+.main-container {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+}
+
+.column1 {
+  border: 1px solid red;
+}
