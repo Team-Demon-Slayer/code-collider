@@ -5,6 +5,9 @@ import mockData from "./mock-data";
 import Deliverables from "./Deliverables.jsx";
 import MessageBoard from "./MessageBoard.jsx";
 import ProjectDetails from "./ProjectDetails.jsx";
+import getMessages from "../../api/_db/_queries/getMessages";
+import getProject from "../../api/_db/_queries/getProject";
+import getDeliverables from "../../api/_db/_queries/getDeliverables";
 
 import "./style.css";
 
@@ -27,17 +30,9 @@ export default function ProjectPage({ params }) {
   };
 
   const getData = async () => {
-    const projectData = await mockData.project_meta.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-    const messageData = await mockData.messages.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-    const deliverablesData = await mockData.deliverables.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-
-    console.log(deliverablesData);
+    const projectData = await getProject(params.projectId);
+    const messageData = await getMessages(params.projectId);
+    const deliverablesData = await getDeliverables(params.projectId);
     setDeliverables(deliverablesData);
     setMessages(messageData);
     setProject_meta(projectData[0]);
@@ -90,6 +85,10 @@ export default function ProjectPage({ params }) {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleUpdateMessages = async (newMessages) => {
+    setMessages(newMessages);
+  };
+
   useEffect(() => {
     getData();
     setIsLoading(false);
@@ -125,7 +124,11 @@ export default function ProjectPage({ params }) {
             LINK TO PROJECT REPO
           </a>
         </div>
-        <MessageBoard messages={messages} project_meta={project_meta} />
+        <MessageBoard
+          messages={messages}
+          project_meta={project_meta}
+          handleUpdateMessages={handleUpdateMessages}
+        />
       </div>
     )
   );
