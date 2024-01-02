@@ -1,6 +1,6 @@
 const db = require('../');
 
-module.exports = getMessages = async (projectId) => {
+exports.getMessages = async (projectId) => {
   let { data, error } = await db
     .from('projects')
     .select(`
