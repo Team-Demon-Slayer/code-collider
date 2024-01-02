@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import mockData from "./mock-data";
+// import mockData from "./mock-data";
 import Deliverables from "./Deliverables.jsx";
 import MessageBoard from "./MessageBoard.jsx";
 import ProjectDetails from "./ProjectDetails.jsx";
+// import messagesModels from "../../api/_db/_models/messagesModels";
+// import projectsModels from "../../api/_db/_models/projectsModels";
+// import deliverablesModels from "../../api/_db/_models/deliverablesModels";
+
+import { getMessages } from "../../api/_db/_models/messagesModels.js";
+import { getProject } from "../../api/_db/_models/projectsModels.js";
+import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
 import "./style.css";
 
@@ -14,6 +21,7 @@ export default function ProjectPage({ params }) {
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
+
   const handleMarkComplete = (task_id) => {
     deliverables.forEach((deliverable) => {
       deliverable.tasks.forEach((task) => {
@@ -27,20 +35,12 @@ export default function ProjectPage({ params }) {
   };
 
   const getData = async () => {
-    const projectData = await mockData.project_meta.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-    const messageData = await mockData.messages.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-    const deliverablesData = await mockData.deliverables.filter(
-      (data) => `${data.project_id}` === params.projectId
-    );
-
-    console.log(deliverablesData);
+    const projectData = await getProject(params.projectId);
+    const messageData = await getMessages(params.projectId);
+    const deliverablesData = await getDeliverables(params.projectId);
     setDeliverables(deliverablesData);
-    setMessages(messageData);
-    setProject_meta(projectData[0]);
+    setMessages(messageData[0].messages);
+    setProject_meta(projectData);
   };
 
   const handleClaimTask = async (username, task_id) => {
@@ -90,13 +90,23 @@ export default function ProjectPage({ params }) {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleUpdateMessages = (newMessages) => {
+    setMessages((prevMessages) => [...prevMessages, newMessages]);
+    setTriggerUpdate(!triggerUpdate);
+  };
+
   useEffect(() => {
     getData();
     setIsLoading(false);
-  }, []);
+  }, [params.projectId]);
 
   useEffect(() => {
-    setDeliverables(mockData.deliverables);
+    const getMessagesTrigger = async () => {
+      const messageData = await getMessages(params.projectId);
+      setMessages(messageData[0].messages);
+    };
+
+    getMessagesTrigger();
   }, [triggerUpdate]);
 
   if (isLoading) {
@@ -104,11 +114,13 @@ export default function ProjectPage({ params }) {
   }
 
   return (
-    (project_meta, deliverables, messages) && (
+    project_meta &&
+    deliverables &&
+    messages && (
       <div className="main-container">
         <div className="project-deliverables-link">
           <ProjectDetails project_meta={project_meta} />
-          <Deliverables
+          {/* <Deliverables
             deliverables={deliverables}
             handleMarkComplete={handleMarkComplete}
             handleClaimTask={handleClaimTask}
@@ -116,7 +128,7 @@ export default function ProjectPage({ params }) {
             handleAddTask={handleAddTask}
             handleDeleteTask={handleDeleteTask}
             project_meta={project_meta}
-          />
+          /> */}
           <a
             href={project_meta.repo_link}
             className="link-project"
@@ -125,7 +137,11 @@ export default function ProjectPage({ params }) {
             LINK TO PROJECT REPO
           </a>
         </div>
-        <MessageBoard messages={messages} project_meta={project_meta} />
+        <MessageBoard
+          messages={messages}
+          project_meta={project_meta}
+          handleUpdateMessages={handleUpdateMessages}
+        />
       </div>
     )
   );
