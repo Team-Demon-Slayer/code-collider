@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { supabase } from "../supabase";
 import '../../globals.css';
 import './RegisterModal.css';
@@ -10,6 +10,8 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
   const [experienceLevel, setExperienceLevel] = useState('');
   const [reasonForJoining, setReasonForJoining] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState([]);
+
+  const router = useRouter();
 
   const codingLanguages = ['JavaScript', 'C#', 'Python', 'Java', 'Go', 'Kotlin', 'Swift', 'C++', 'HTML', 'CSS', 'Ruby', 'Rust', 'TypeScript', 'Bash', 'Assembly', 'Visual Basic'];
 
@@ -48,7 +50,7 @@ const RegisterModal = ({ showRegisterModal, setShowRegisterModal, email, passwor
         console.log(user);
         alert('Check your email for verification.');
         setTimeout(() => {
-          window.location.href = '/login';
+          router.push('/login');
         }, 3000);
       }
     } catch (error) {
