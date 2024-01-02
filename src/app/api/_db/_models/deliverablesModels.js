@@ -1,13 +1,20 @@
-const db = require('../');
-const { previousMonday, nextMonday } = require('date-fns');
+// const db = require("../index.js");
+const { previousMonday, nextMonday } = require("date-fns");
 
-exports.getDeliverables = async (projectId, curDate) => {
+const {
+  createClientComponentClient,
+} = require("@supabase/auth-helpers-nextjs");
+
+const supabase = createClientComponentClient();
+
+export const getDeliverables = async (projectId, curDate) => {
   curDate = curDate || new Date();
   const prevMon = previousMonday(curDate).toISOString();
   const nextMon = nextMonday(curDate).toISOString();
-  let { data, error } = await db
-    .from('projects')
-    .select(`
+  let { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
       deliverables(
         date,
         id,
@@ -16,17 +23,17 @@ exports.getDeliverables = async (projectId, curDate) => {
         owner,
         complete
       )
-    `)
-    .eq('id', projectId)
-    .gte('deliverables.date', prevMon)
-    .lt('deliverables.date', nextMon);
+    `
+    )
+    .eq("id", projectId)
+    .gte("deliverables.date", prevMon)
+    .lt("deliverables.date", nextMon);
 
-
-  if(error) {
+  if (error) {
     console.error(error);
   }
 
   data = data[0]?.deliverables;
 
   return data;
-}
+};
