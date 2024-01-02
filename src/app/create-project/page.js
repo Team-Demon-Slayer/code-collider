@@ -36,72 +36,80 @@ const update = {
 
 export default function CreateProject() {
   return (
-    <div className='create-project-title'>
+    <div className='create-project'>
+      <div className='create-project-title'>
+        Project Title
+        <input
+          value={title}
+          onChange={(e) => update.title(e.target.value)}
+          className='create-project-title'
+          type='text'
+          placeholder='Project Title' />
+      </div>
 
-      <input
-        value={title}
-        onChange={(e) => update.title(e.target.value)}
-        className='create-project-title'
-        type='text'
-        placeholder='Project Title' />
-    </div>
+      <div className='create-project-engineers'>
+        Engineers
+        <select name='engineers' onChange={(e) => update.engineers(e.target.value)}>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option value='5'>5</option>
+        </select>
+      </div>
 
-    <div className='create-project-engineers'>
-      <select name='engineers' onChange={(e) => update.engineers(e.target.value)}>
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option value='5'>5</option>
-      </select>
-    </div>
-
-    <div className='create-project-languages'>
-      <input type="text" id="searchBar" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
+      <div className='create-project-languages'>
+        Languages
+        <input type="text" id="searchBar" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
         <ul className='languageSearchResults'>
           {searchLanguages(searchInput.slice(0, maximumSearchResults)).map(({ name, url }) => (
             <li key={name} onClick={() => update.languages([...languages, name])}>{name}</li>
           ))}
         </ul>
-    </div>
+      </div>
 
-    <div className='create-project-description'>
-      <input
-        value={description}
-        onChange={(e) => update.description(e.target.value)}
-        className='create-project-description'
-        type='text'
-        placeholder='Project Description' />
-    </div>
+      <div className='create-project-description'>
+        Project Description
+        <input
+          value={description}
+          onChange={(e) => update.description(e.target.value)}
+          className='create-project-description'
+          type='text'
+          placeholder='Project Description' />
+      </div>
 
-    <div className='create-project-start-date'>
-      <input
-        value={startDate}
-        onChange={(e) => update.startDate(e.target.value)}
-        className='create-project-start-date'
-        type='date'
-        placeholder='Start Date' />
-    </div>
+      <div className='create-project-start-date'>
+        Start Date
+        <input
+          value={startDate}
+          onChange={(e) => update.startDate(e.target.value)}
+          className='create-project-start-date'
+          type='date'
+          placeholder='Start Date' />
+      </div>
 
-    <div className='create-project-scope'>
-      <select name='days' onChange={(e) => update.scope({ ...scope, days: e.target.value })}>
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option default value='5'>5</option>
-      </select>
-      <select name='hours' onChange={(e) => update.scope({ ...scope, hours: e.target.value })}>
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option default value='5'>5</option>
-      </select>
-    </div>
+      <div className='create-project-scope'>
+        No. of Days
+        <select name='days' onChange={(e) => update.scope({ ...scope, days: e.target.value })}>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option default value='5'>5</option>
+        </select>
+        No. of Hours
+        <select name='hours' onChange={(e) => update.scope({ ...scope, hours: e.target.value })}>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+          <option default value='5'>5</option>
+        </select>
+      </div>
 
-    <div className='create-project-submit'>
-      <button onClick={onSubmit}>Submit</button>
+      <div className='create-project-submit'>
+        <button onClick={onSubmit}>Submit</button>
+      </div>
     </div>
   );
 };
