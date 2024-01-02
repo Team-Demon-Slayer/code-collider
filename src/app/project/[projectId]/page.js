@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import mockData from "./mock-data";
+// import mockData from "./mock-data";
 import Deliverables from "./Deliverables.jsx";
 import MessageBoard from "./MessageBoard.jsx";
 import ProjectDetails from "./ProjectDetails.jsx";
@@ -17,6 +17,7 @@ export default function ProjectPage({ params }) {
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
+
   const handleMarkComplete = (task_id) => {
     deliverables.forEach((deliverable) => {
       deliverable.tasks.forEach((task) => {
@@ -85,17 +86,23 @@ export default function ProjectPage({ params }) {
     setTriggerUpdate(!triggerUpdate);
   };
 
-  const handleUpdateMessages = async (newMessages) => {
-    setMessages(newMessages);
+  const handleUpdateMessages = (newMessages) => {
+    setMessages((prevMessages) => [...prevMessages, newMessages]);
+    setTriggerUpdate(!triggerUpdate);
   };
 
   useEffect(() => {
     getData();
     setIsLoading(false);
-  }, []);
+  }, [params.projectId]);
 
   useEffect(() => {
-    setDeliverables(mockData.deliverables);
+    const getMessagesTrigger = async () => {
+      const messageData = await getMessages(params.projectId);
+      setMessages(messageData);
+    };
+
+    getMessagesTrigger();
   }, [triggerUpdate]);
 
   if (isLoading) {
@@ -103,11 +110,13 @@ export default function ProjectPage({ params }) {
   }
 
   return (
-    (project_meta, deliverables, messages) && (
+    project_meta &&
+    deliverables &&
+    messages && (
       <div className="main-container">
         <div className="project-deliverables-link">
           <ProjectDetails project_meta={project_meta} />
-          <Deliverables
+          {/* <Deliverables
             deliverables={deliverables}
             handleMarkComplete={handleMarkComplete}
             handleClaimTask={handleClaimTask}
@@ -115,7 +124,7 @@ export default function ProjectPage({ params }) {
             handleAddTask={handleAddTask}
             handleDeleteTask={handleDeleteTask}
             project_meta={project_meta}
-          />
+          /> */}
           <a
             href={project_meta.repo_link}
             className="link-project"

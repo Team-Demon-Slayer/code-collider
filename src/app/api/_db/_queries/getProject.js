@@ -1,9 +1,15 @@
-const db = require('../');
+// const db = require("../index.js");
+const {
+  createClientComponentClient,
+} = require("@supabase/auth-helpers-nextjs");
+
+const supabase = createClientComponentClient();
 
 module.exports = getProjects = async (projectId) => {
-  let { data, error } = await db
-    .from('projects')
-    .select(`
+  let { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
       id,
       title,
       owner(id,username),
@@ -12,12 +18,13 @@ module.exports = getProjects = async (projectId) => {
       users!projects_users(id,username),
       repo_link,
       mentor(id,username)
-    `)
-    .eq('id', projectId);
+    `
+    )
+    .eq("id", projectId);
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
 
   return data;
-}
+};
