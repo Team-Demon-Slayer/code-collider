@@ -8,8 +8,8 @@ export default function BrowsePage({ params: { page } }) {
   const { keyword, language, spots, startDate, openMentor } =
     useCommunityContext();
   return (
-    <div className="page-container">
-      <div>
+    <div>
+      <div className="page-container">
         {query(projects, keyword, language, spots, openMentor).map(
           p => (
             <ProjectCard key={p.title} project={p} />

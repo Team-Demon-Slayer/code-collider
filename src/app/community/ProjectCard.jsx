@@ -1,33 +1,35 @@
 'use client';
+import '../_stylesheets/currentProjectStyle.css';
 
 export default function ProjectCard({ project }) {
   return (
-    <div className="project-details-info">
+    <div className="current-project-details-info">
       <div className="project-details-title">
-        <h2>{project.title}</h2>
-        <p>@{project.registeredDevelopers[0].name}</p>
+        <div className="project-details-current-project">
+          {project.title} - @{project.registeredDevelopers[0].name}
+        </div>
       </div>
-      <div className="languages">
-        {project.languages.map((language) => {
+      <div className="languages-current">
+        {project.languages.map(language => {
           return (
-            <div className="language-icon" key={language.name}>
-              <img src={language.badge_url} />
-            </div>
+              <img alt={language.badge_url} key={language.badge_url} src={language.badge_url} className="language-icon" />
           );
         })}
       </div>
-      <div className="project-details-description">
-        {project.content}
-      </div>
-      <div className="project-details-team">
-        {project.registeredDevelopers.map(({name, id}, index) => {
-          return (
-            <div className="team-member" key={id}>
-              @{name}
-              {index === project.registeredDevelopers - 1 ? "" : " |"}
-            </div>
-          );
-        })}
+
+      <div className="project-details-description">{project.content}</div>
+
+      <div className="project-details-footer">
+        <div className="project-details-team">
+          {project.registeredDevelopers.map(({ name, id }, index) => {
+            return (
+              <div className="team-member" key={id}>
+                @{name}
+                {index === project.registeredDevelopers - 1 ? '' : ' |'}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
