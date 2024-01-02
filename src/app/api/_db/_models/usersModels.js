@@ -1,27 +1,32 @@
-const db = require('../');
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-exports.getMiniUser = async (userId) => {
-  let { data, error } = await db
-    .from('users')
-    .select(`
+const supabase = createClientComponentClient();
+
+module.exports.getMiniUser = async (userId) => {
+  let { data, error } = await supabase
+    .from("users")
+    .select(
+      `
       id,
       username,
       is_mentor,
       profile_photo
-    `)
-    .eq('id', userId);
+    `
+    )
+    .eq("id", userId);
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
 
   return data[0];
-}
+};
 
 exports.getExpandedUser = async (userId) => {
   let { data, error } = await db
-    .from('users')
-    .select(`
+    .from("users")
+    .select(
+      `
       id,
       username,
       bio,
@@ -29,12 +34,13 @@ exports.getExpandedUser = async (userId) => {
       is_mentor,
       profile_photo,
       languages(name,url)
-    `)
-    .eq('id', userId);
+    `
+    )
+    .eq("id", userId);
 
-  if(error) {
+  if (error) {
     console.error(error);
   }
 
   return data[0];
-}
+};
