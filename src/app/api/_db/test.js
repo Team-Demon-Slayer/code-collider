@@ -23,14 +23,8 @@ projects.getProject('c7791ad6-a506-11ee-a7fd-02c6baa627c7')
 
 deliverables.getDeliverables('c7791ad6-a506-11ee-a7fd-02c6baa627c7', deliverablesDate)
 .then((res) => {
-  let data = {};
-  res.forEach((d) => {
-    let date = format(new Date(d.date), "R'-'LL'-'dd");
-    data[date] = data[date] || [];
-    data[date].push(d);
-  })
   console.log('Deliverables');
-  console.log(data);
+  console.log(res);
 })
 .catch((err) => {
   console.log(JSON.stringify(err.message));
@@ -69,7 +63,7 @@ users.getExpandedUser('55b7811c-a506-11ee-8cf5-02c6baa627c7')
   console.log(JSON.stringify(err.message));
 });
 
-projects.getProjectPage(2, 1)
+projects.getProjectPageByLanguage(2, 1)
 .then((res) => {
   console.log('Project Page');
   console.log(res);
