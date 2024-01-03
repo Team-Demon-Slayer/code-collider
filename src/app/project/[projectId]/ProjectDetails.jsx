@@ -9,22 +9,18 @@ export default function ProjectDetails({ project_meta, username }) {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    const checkUser = async () => {
-      if (
-        project_meta.users.findIndex((user) => user.username === username) ===
-        -1
-      ) {
-        router.push("/");
-      }
-      setIsLoading(false);
-    };
-    checkUser();
-  }, [project_meta]);
-
-  if (isLoading) {
-    return <span className="loader"></span>;
-  }
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     if (
+  //       project_meta.users.findIndex((user) => user.username === username) ===
+  //       -1
+  //     ) {
+  //       router.push("/");
+  //     }
+  //     setIsLoading(false);
+  //   };
+  //   checkUser();
+  // }, [project_meta]);
 
   return (
     project_meta && (

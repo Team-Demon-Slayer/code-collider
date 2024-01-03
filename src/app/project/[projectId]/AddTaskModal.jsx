@@ -7,6 +7,8 @@ import { FaEdit } from "react-icons/fa";
 import mockData from "./mock-data.js";
 import getUserColor from "../../_utils/getUserColor.js";
 import formatDate from "../../_utils/formatDate.js";
+import supabase from "../../api/_db/index.js";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 
 const { tasks } = mockData;
@@ -18,10 +20,11 @@ export default function AddTaskModal({
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [username, setUsername] = useState(null);
+
+  const supabseClient = createClientComponentClient();
 
   const dateFormatted = formatDate(date);
-
-  const username = "timBuckToo";
 
   const sendUpdate = async () => {
     const newTask = {
@@ -35,6 +38,29 @@ export default function AddTaskModal({
     await handleAddTask(newTask);
     handleShowAddModal(false);
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const {
+        data: { user },
+      } = await supabseClient.auth.getUser();
+      if (!user) {
+        console.log(user);
+        return;
+      }
+      if (user) {
+        const { data: profile } = await supabseClient
+          .from("users")
+          .select("username")
+          .eq("email", user.email)
+          .single();
+        if (profile) {
+          setUsername(profile[0].username);
+        }
+      }
+    };
+    fetchUserData();
+  }, []);
 
   return (
     <div className="modal-overlay">
