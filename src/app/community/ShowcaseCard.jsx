@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import useCommunityContext from './useCommunityContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../_stylesheets/currentProjectStyle.css';
 
 const testIfUpvoted = (userUpvotes, projectId) => {
@@ -15,7 +15,11 @@ export default function ProjectCard({ project, userUpvotes }) {
   const router = useRouter();
   const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
-  const [upvoted, setUpvoted] = useState(testIfUpvoted(userUpvotes, project.id));
+  const [upvoted, setUpvoted] = useState(true);
+
+  useEffect(() => {
+    setUpvoted(testIfUpvoted(userUpvotes, project.id));
+  }, [userUpvotes, project.id]);
 
   const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
