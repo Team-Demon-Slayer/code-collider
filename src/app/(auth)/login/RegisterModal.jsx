@@ -115,7 +115,7 @@ const RegisterModal = ({
               <option value="Learning">Learning</option>
               <option value="Career Change">Career Change</option>
               <option value="Personal Interest">Personal Interest</option>
-              <option value="Personal Interest">Mentoring</option>
+              <option value="Mentoring">Mentoring</option>
             </select>
           </label>
         </div>
