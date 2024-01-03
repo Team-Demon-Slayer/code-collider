@@ -16,6 +16,7 @@ export default function ProjectCard({ project, userUpvotes }) {
   const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
   const [upvoted, setUpvoted] = useState(true);
+  const [upvoteCount, setUpvoteCount] = useState(project.upvotes[0].count);
   const [isUpvoteLoading, setIsUpvoteLoading] = useState(true);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function ProjectCard({ project, userUpvotes }) {
       .from('upvotes')
       .insert({ project_id: project.id, user_id: user.id });
     setUpvoted(true);
+    setUpvoteCount(upvoteCount + 1);
   };
 
   return (
@@ -44,7 +46,7 @@ export default function ProjectCard({ project, userUpvotes }) {
             {project.title} - @{project.owner.username}
           </div>
         </div>
-        <div className="project-spot">{project.upvotes[0].count} upvotes</div>
+        <div className="project-spot">{upvoteCount} upvotes</div>
       </div>
       <div className="languages-current">
         {project.languages.map(({ url, name }) => {
