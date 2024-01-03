@@ -8,7 +8,9 @@ import ProjectDetails from "./ProjectDetails.jsx";
 // import messagesModels from "../../api/_db/_models/messagesModels";
 // import projectsModels from "../../api/_db/_models/projectsModels";
 // import deliverablesModels from "../../api/_db/_models/deliverablesModels";
+import supabase from "../../api/_db/index";
 
+// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { getMessages } from "../../api/_db/_models/messagesModels.js";
 import { getProject } from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
@@ -18,9 +20,13 @@ import "./style.css";
 export default function ProjectPage({ params }) {
   const [project_meta, setProject_meta] = useState(null);
   const [deliverables, setDeliverables] = useState(null);
+  const [username, setUsername] = useState(null);
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
+  const [user, setUser] = useState(null);
+
+  // const supabase = createClientComponentClient();
 
   const handleMarkComplete = (task_id) => {
     deliverables.forEach((deliverable) => {
@@ -37,8 +43,8 @@ export default function ProjectPage({ params }) {
   const getData = async () => {
     const projectData = await getProject(params.projectId);
     const messageData = await getMessages(params.projectId);
-    const deliverablesData = await getDeliverables(params.projectId);
-    setDeliverables(deliverablesData);
+    // const deliverablesData = await getDeliverables(params.projectId);
+    // setDeliverables(deliverablesData);
     setMessages(messageData[0].messages);
     setProject_meta(projectData);
   };
@@ -115,11 +121,11 @@ export default function ProjectPage({ params }) {
 
   return (
     project_meta &&
-    deliverables &&
+    // deliverables &&
     messages && (
       <div className="main-container">
         <div className="project-deliverables-link">
-          <ProjectDetails project_meta={project_meta} />
+          <ProjectDetails project_meta={project_meta} username={username} />
           {/* <Deliverables
             deliverables={deliverables}
             handleMarkComplete={handleMarkComplete}
