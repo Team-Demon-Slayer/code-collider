@@ -8,7 +8,7 @@ import '../_stylesheets/currentProjectStyle.css';
 
 const testIfUpvoted = (userUpvotes, projectId) => {
   if (!userUpvotes) return false;
-  return userUpvotes.some(({project_id}) => project_id === projectId);
+  return userUpvotes.some(({ project_id }) => project_id === projectId);
 };
 
 export default function ProjectCard({ project, userUpvotes }) {
@@ -16,10 +16,14 @@ export default function ProjectCard({ project, userUpvotes }) {
   const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
   const [upvoted, setUpvoted] = useState(true);
+  const [isUpvoteLoading, setIsUpvoteLoading] = useState(true);
 
   useEffect(() => {
     setUpvoted(testIfUpvoted(userUpvotes, project.id));
-  }, [userUpvotes, project.id]);
+    if (userUpvotes && project) {
+      setIsUpvoteLoading(false);
+    }
+  }, [userUpvotes, project]);
 
   const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
@@ -75,16 +79,19 @@ export default function ProjectCard({ project, userUpvotes }) {
           >
             View Project
           </button>
-          {upvoted ? (
-            <button className="project-upvote-button" disabled>✅</button>
-          ) : (
-            <button
-              onClick={handleUpvoteProject}
-              className="project-upvote-button"
-            >
-              Upvote
-            </button>
-          )}
+          {!isUpvoteLoading &&
+            (upvoted ? (
+              <button className="project-upvote-button" disabled>
+                ✅
+              </button>
+            ) : (
+              <button
+                onClick={handleUpvoteProject}
+                className="project-upvote-button"
+              >
+                Upvote
+              </button>
+            ))}
         </div>
       </div>
     </div>
