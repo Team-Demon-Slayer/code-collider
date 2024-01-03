@@ -1,9 +1,10 @@
-:root {
-  --dark-color: #0c0f0a;
+[data-theme="dark"] {
+  --dark-color: #ffffff;
   --red-color: #ff206e;
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
-  --white-color:  #ffffff;
+  --white-color: #0c0f0a;
+  --bg-color:#000;
 }
 
 body {
@@ -14,9 +15,11 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
 }
 
 .main-container {
+  margin-left: 200px;
   display: flex;
   width: 100%;
   height: 90%;
@@ -26,14 +29,16 @@ body {
   padding-bottom: 0px;
   position: relative;
   overflow: hidden;
+  background-color: var(--bg-color);
 }
 
-[data-theme="dark"] {
-  --dark-color: #555;
+[data-theme="light"] {
+  --white-color: #fff;
   --red-color: #ff206e;
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
-  --white-color: #0c0f0a;
+  --dark-color: #0c0f0a;
+  --bg-color:#fff;
 }
 
 .modal-overlay {
