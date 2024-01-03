@@ -5,14 +5,17 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import useCommunityContext from './useCommunityContext';
 import '../_stylesheets/currentProjectStyle.css';
 
-
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, userUpvotes }) {
   const router = useRouter();
+  const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
 
   const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
   };
+
+  const handleUpvoteProject = async () => {};
+
   return (
     <div className="current-project-details-info">
       <div className="project-card-head">
@@ -55,6 +58,12 @@ export default function ProjectCard({ project }) {
             className="project-details-page-btn"
           >
             View Project
+          </button>
+          <button
+            onClick={handleUpvoteProject}
+            className="project-upvote-button"
+          >
+            Upvote
           </button>
         </div>
       </div>

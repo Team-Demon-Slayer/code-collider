@@ -57,7 +57,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 2px;
 }
 
 .project-mentor-button {
@@ -84,6 +84,28 @@
 
 .project-mentor-button:disabled {
   cursor: not-allowed;
+}
+
+.project-upvote-button {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: var(--red-color);
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--white-color);
+  padding: 5px 10px;
+  min-width: 150px;
+  margin-right: 45px;
+  margin-bottom: 20px;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  border: none;
 }
 
 .project-details-page-btn:disabled {

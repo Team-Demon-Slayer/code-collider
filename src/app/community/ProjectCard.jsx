@@ -25,7 +25,6 @@ export default function ProjectCard({ project }) {
   const handleJoinProject = async () => {
     const userId = await getUserIdWithEmail(user.email);
     console.log(userId);
-    // alert(`Should join project ${project.id} with user ${userId}`)
     await supabase
       .from('projects_users')
       .insert({ project_id: project.id, user_id: userId });
