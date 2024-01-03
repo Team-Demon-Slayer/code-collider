@@ -40,7 +40,7 @@ export const getProjectPage = async (
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
-  let { data, error } = await db
+  let { data, error } = await supabase
     .from("projects")
     .select(
       `
@@ -55,7 +55,8 @@ export const getProjectPage = async (
       finish_date,
       mentor(id,username),
       active,
-      upvotes
+      upvotes,
+      repo_link
     `
     )
     .eq("active", active === undefined ? true || false : active)
@@ -81,7 +82,7 @@ export const getProjectPageByLanguage = async (
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
-  let { data, error } = await db
+  let { data, error } = await supabase
     .from("languages")
     .select(
       `
