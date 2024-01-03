@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { FaLock } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import "./style.css";
 
@@ -26,6 +27,7 @@ export default function ProjectDetails({ project_meta, username }) {
     project_meta && (
       <div className="project-details-info">
         <div className="project-details-title">
+          {!project_meta.active && <FaLock className="project-close-icon" />}
           <h2>{project_meta.title}</h2>
           <p>@{project_meta.owner.username}</p>
         </div>
