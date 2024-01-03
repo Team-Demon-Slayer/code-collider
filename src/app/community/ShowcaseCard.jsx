@@ -3,18 +3,30 @@
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import useCommunityContext from './useCommunityContext';
+import { useState } from 'react';
 import '../_stylesheets/currentProjectStyle.css';
+
+const testIfUpvoted = (userUpvotes, projectId) => {
+  if (!userUpvotes) return false;
+  return userUpvotes.some(({project_id}) => project_id === projectId);
+};
 
 export default function ProjectCard({ project, userUpvotes }) {
   const router = useRouter();
   const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
+  const [upvoted, setUpvoted] = useState(testIfUpvoted(userUpvotes, project.id));
 
   const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
   };
 
-  const handleUpvoteProject = async () => {};
+  const handleUpvoteProject = async () => {
+    await supabase
+      .from('upvotes')
+      .insert({ project_id: project.id, user_id: user.id });
+    setUpvoted(true);
+  };
 
   return (
     <div className="current-project-details-info">
@@ -59,12 +71,16 @@ export default function ProjectCard({ project, userUpvotes }) {
           >
             View Project
           </button>
-          <button
-            onClick={handleUpvoteProject}
-            className="project-upvote-button"
-          >
-            Upvote
-          </button>
+          {upvoted ? (
+            <button className="project-upvote-button" disabled>✅</button>
+          ) : (
+            <button
+              onClick={handleUpvoteProject}
+              className="project-upvote-button"
+            >
+              Upvote
+            </button>
+          )}
         </div>
       </div>
     </div>

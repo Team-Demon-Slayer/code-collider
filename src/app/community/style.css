@@ -108,6 +108,11 @@
   border: none;
 }
 
+.project-upvote-button:disabled {
+  cursor: not-allowed;
+  background-color: #444;
+}
+
 .project-details-page-btn:disabled {
   cursor: not-allowed;
   background-color: #444;

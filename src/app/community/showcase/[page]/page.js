@@ -29,13 +29,13 @@ export default function ShowcasePage({ params: { page } }) {
     async function getUserUpvotes() {
       if (user) {
         const expandedUser = await getExpandedUser(user?.id);
-        setUserUpvotes(user.upvotes);
+        setUserUpvotes(expandedUser.upvotes);
       }
     }
     getUserUpvotes();
   }, [user]);
 
-  console.log(userUpvotes); //FIXME: test
+  console.log({userUpvotes}); //FIXME: test
   console.log(user?.id); //FIXME: test
   return (
     <>
