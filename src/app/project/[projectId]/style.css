@@ -17,7 +17,7 @@
   position: relative;
   cursor: default;
   width: 95%;
-  background-color: var(--white-color);
+  background-color: var(--element-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   height: 180px;
   border-radius: 60px;
@@ -418,7 +418,7 @@
 }
 
 .deliverables-main {
-  background-color: var(--white-color);
+  background-color: var(--bg-color);
   width: 95%;
   height: 370px;
   border-radius: 25px;
@@ -451,7 +451,7 @@
   align-items: center;
   width: 10%;
   height: 60%;
-  background-color: var(--white-color);
+  background-color: var(--bg-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   border-radius: 15px;
   padding: 10px;
