@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 
-import mockData from "./mock-data.js";
 import getUserColor from "../../_utils/getUserColor.js";
 import formatDate from "../../_utils/formatDate.js";
 
-const { tasks } = mockData;
+import supabase from "../../api/_db/index.js";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function TaskModal({
   task,
@@ -24,11 +24,15 @@ export default function TaskModal({
   const [description, setDescription] = useState(task.description);
   const [edit, setEdit] = useState(false);
   const [changes, setChanges] = useState(false);
+  const [username, setUsername] = useState(null);
 
-  const username = "timBuckToo";
-  const userIndex = project_meta.team.indexOf(username);
+  const userIndex = project_meta.users.findIndex(
+    (user) => user.username === task.owner
+  );
   const color = getUserColor(userIndex);
   const dateFormatted = formatDate(date);
+
+  const supabseClient = createClientComponentClient();
 
   const sendUpdate = async () => {
     const newTask = {
@@ -94,14 +98,14 @@ export default function TaskModal({
             {!task.owner ? (
               <div
                 className="claim-task-btn"
-                onClick={() => handleClaimTask(username, task.task_id)}
+                onClick={() => handleClaimTask(task)}
               >
                 Claim
               </div>
             ) : (
               <div
                 className={`unclaim-task-btn-${color}`}
-                onClick={() => handleClaimTask(null, task.task_id)}
+                onClick={() => handleClaimTask(task)}
               >
                 @{task.owner}
               </div>

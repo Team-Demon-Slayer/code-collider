@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: 90%;
+  height: 95%;
   position: relative;
   overflow: hidden;
 }
@@ -12,7 +12,7 @@
 .project-details-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   position: relative;
   cursor: default;
@@ -418,15 +418,16 @@
 }
 
 .deliverables-main {
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
   width: 95%;
-  height: 450px;
+  height: 370px;
   border-radius: 25px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-left: 25px;
+  margin-left: 23px;
   position: relative;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .deliverables-header {
@@ -435,6 +436,7 @@
   left: 0;
   z-index: 20px;
   background-color: var(--white-color);
+  color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--red-color);
   padding: 10px;
   border-radius: 20px;
@@ -448,8 +450,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 10%;
-  height: 62%;
+  height: 60%;
   background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
   border-radius: 15px;
   padding: 10px;
   padding-top: 50px;
@@ -469,23 +472,25 @@
   background-color: var(--white-color);
   color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  width: 8%;
+  width: 6%;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  top: 36%;
+  font-size: 15px;
+  top: 45%;
 }
 
 .deliverables-day-add-task {
-  background-color: var(--white-color);
+  background-color: var(--teal-color);
+  color: #fff;
   border-radius: 10px;
-  width: 6.5%;
+  width: 5.5%;
   height: 20px;
   padding: 5px 10px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  top: 73%;
+  top: 75%;
   position: fixed;
   cursor: pointer;
   z-index: 10;
@@ -507,8 +512,8 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  color: var(--dark-color);
   border-radius: 10px;
   width: 100%;
   min-height: 70px;
@@ -517,6 +522,7 @@
   font-size: 14px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 .day-task-title {
   flex-wrap: wrap;
@@ -550,7 +556,7 @@
 .deliverables-left-arrow {
   position: absolute;
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 20px 10px;
   height: 45px;
@@ -564,7 +570,7 @@
 .deliverables-right-arrow {
   position: absolute;
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 20px 10px;
   height: 45px;
@@ -588,8 +594,8 @@
   justify-content: space-between;
   align-items: flex-start;
   position: absolute;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border-radius: 60px;
   width: 450px;
   height: 450px;
@@ -604,7 +610,7 @@
 
 .close-modal-btn {
   position: absolute;
-  color: var(--white-color);
+  color: #fff;
   padding: 10px;
   height: 30px;
   width: 30px;
@@ -628,6 +634,7 @@
   width: 90%;
   margin-bottom: 20px;
   position: relative;
+  background-color: #0c0f0a;
 }
 
 .task-title {
@@ -638,6 +645,7 @@
   text-align: left;
   align-items: flex-start;
   flex-direction: column;
+  background-color: #0c0f0a;
 }
 
 .task-due {
@@ -665,6 +673,7 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  background-color: #0c0f0a;
 }
 
 .edit-task-btn {
@@ -681,16 +690,16 @@
 }
 
 .task-title-input {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border: none;
   outline: none;
   font-size: 20px;
   width: 100%;
 }
 .add-task-title-input {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border: none;
   outline: none;
   font-size: 20px;
@@ -700,8 +709,8 @@
   padding: 5px 10px;
 }
 .task-title-input-true {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   font-size: 20px;
   width: 100%;
   border-radius: 10px;
@@ -739,11 +748,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
+  color: #fff;
   width: 100%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
   resize: none;
   border: 0px;
   padding: 5px;
@@ -754,11 +762,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
   width: 96%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   resize: none;
   border: 0px;
   border-radius: 10px;
@@ -772,11 +779,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
   width: 100%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   resize: none;
   padding: 8px;
   border-radius: 15px;
@@ -801,7 +807,7 @@
   border: none;
   width: 45%;
   background-color: var(--yellow-color);
-  color: var(--dark-color);
+  color: #0c0f0a;
   border-radius: 20px;
   font-size: 22px;
   font-weight: bold;
