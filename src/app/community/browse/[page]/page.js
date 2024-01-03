@@ -1,19 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
 import useCommunityContext from '../../useCommunityContext';
 import { projects, query } from '../../temp-fake-data';
 import ProjectCard from '../../ProjectCard';
 
 export default function BrowsePage({ params: { page } }) {
-  const { keyword, language, spots, startDate, openMentor, user, storeUserDataFromSupabase } =
+  const { keyword, language, spots, startDate, openMentor, user} =
     useCommunityContext();
-
-  useEffect(() => {
-    if(!user) {
-      storeUserDataFromSupabase();
-    }
-  }, [user, storeUserDataFromSupabase]);
   return (
     <div>
       <div className="page-container">

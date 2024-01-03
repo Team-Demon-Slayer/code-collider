@@ -1,6 +1,11 @@
 'use client';
 
-import { createContext, useState, useMemo, useCallback } from 'react';
+import {
+  createContext,
+  useState,
+  useMemo,
+  useEffect
+} from 'react';
 import supabase from '../api/_db/index.js';
 
 export const CommunityContext = createContext();
@@ -13,11 +18,13 @@ export function CommunityProvider({ children }) {
   const [openMentor, setOpenMentor] = useState(false);
   const [user, setUser] = useState(null);
 
-  const storeUserDataFromSupabase = useCallback(async () => {
-    if (user !== null) return;
-    const { data } = await supabase.auth.getUser();
-    setUser(data.user);
-  }, [user, setUser]);
+  useEffect(() => {
+    async function getUser() {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    }
+    getUser();
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -31,18 +38,9 @@ export function CommunityProvider({ children }) {
       setStartDate,
       openMentor,
       setOpenMentor,
-      user,
-      storeUserDataFromSupabase
+      user
     }),
-    [
-      keyword,
-      language,
-      spots,
-      startDate,
-      openMentor,
-      user,
-      storeUserDataFromSupabase
-    ]
+    [keyword, language, spots, startDate, openMentor, user]
   );
 
   return (

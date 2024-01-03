@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import useCommunityContext from '../../useCommunityContext';
 import { projects, query } from '../../temp-fake-data';
 import ProjectCard from '../../ProjectCard';
@@ -13,13 +12,7 @@ export default function ShowcasePage({ params: { page } }) {
     startDate,
     openMentor,
     user,
-    storeUserDataFromSupabase
   } = useCommunityContext();
-  useEffect(() => {
-    if (!user) {
-      storeUserDataFromSupabase();
-    }
-  }, [user, storeUserDataFromSupabase]);
   return (
     <div className="page-container">
       <div>
