@@ -17,7 +17,7 @@
   position: relative;
   cursor: default;
   width: 95%;
-  background-color: var(--element-color);
+  background-color: var(--grey-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   height: 180px;
   border-radius: 60px;
@@ -36,7 +36,7 @@
   padding-left: 10px;
   padding-right: 20px;
   z-index: 5;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
@@ -150,7 +150,7 @@
   height: 90% !important;
   max-height: 90%;
   width: 18%;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   height: 180px;
   border-radius: 70px;
   margin-top: 10px;
@@ -168,7 +168,7 @@
   width: 150px;
   padding: 10px;
   z-index: 5;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   border-radius: 40px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
   top: -10px;
@@ -211,7 +211,7 @@
   padding: 10px;
   border-radius: 20px;
   position: relative;
-  width: 90.5%;
+  width: 89.5%;
   margin-top: 35px;
   color: var(--white-color);
 }
@@ -228,6 +228,7 @@
   z-index: 6;
   font-weight: bold;
   background-color: var(--dark-color);
+  color: var(--white-color);
   border-radius: 40px;
   top: -25px;
   left: 0;
@@ -418,7 +419,7 @@
 }
 
 .deliverables-main {
-  background-color: var(--bg-color);
+  background-color: var(--grey-color);
   width: 95%;
   height: 370px;
   border-radius: 25px;
@@ -435,7 +436,7 @@
   top: -20px;
   left: 0;
   z-index: 20px;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--red-color);
   padding: 10px;
@@ -451,7 +452,7 @@
   align-items: center;
   width: 10%;
   height: 60%;
-  background-color: var(--bg-color);
+  background-color: var(--grey-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   border-radius: 15px;
   padding: 10px;
@@ -469,7 +470,7 @@
 .deliverables-day h3 {
   position: fixed;
   z-index: 20;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   width: 6%;
@@ -512,7 +513,7 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 10px;
   width: 100%;
