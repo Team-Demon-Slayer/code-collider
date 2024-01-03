@@ -125,7 +125,7 @@ export default function TaskModal({
         </div>
         <div className="task-modal-footer">
           <button
-            onClick={() => handleMarkComplete(task.task_id)}
+            onClick={() => handleMarkComplete(task.id)}
             className={
               task.complete
                 ? "task-modal-complete-btn task-modal-complete-btn-completed"

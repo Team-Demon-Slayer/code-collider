@@ -30,11 +30,11 @@ export default function ProjectPage({ params }) {
 
   const supabaseClient = createClientComponentClient();
 
-  const handleMarkComplete = async (task_id) => {
+  const handleMarkComplete = async (taskId) => {
     const { data, error } = await supabase
       .from("deliverables")
-      .select("completed")
-      .eq("id", task_id);
+      .select("complete")
+      .eq("id", taskId);
 
     if (error) {
       console.log(error);
@@ -43,8 +43,8 @@ export default function ProjectPage({ params }) {
 
     const { error: completeError } = await supabase
       .from("deliverables")
-      .update({ completed: !data[0].completed })
-      .eq("id", 1);
+      .update({ complete: !data[0].complete })
+      .eq("id", taskId);
 
     if (completeError) {
       console.log(completeError);
@@ -162,6 +162,20 @@ export default function ProjectPage({ params }) {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleCloseProject = async (complete) => {
+    const { error } = await supabase
+      .from("projects")
+      .update({ active: !complete })
+      .eq("id", params.projectId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setTriggerUpdate(!triggerUpdate);
+  };
+
   useEffect(() => {
     getData();
     setIsLoading(false);
@@ -235,13 +249,25 @@ export default function ProjectPage({ params }) {
             handleDeleteTask={handleDeleteTask}
             project_meta={project_meta}
           />
-          <a
-            href={project_meta.repo_link}
-            className="link-project"
-            target="_blank"
-          >
-            LINK TO PROJECT REPO
-          </a>
+          <div className="project-footer-btns">
+            <a
+              href={project_meta.repo_link}
+              className="link-project"
+              target="_blank"
+            >
+              LINK TO PROJECT REPO
+            </a>
+            <div
+              className={
+                !project_meta.active
+                  ? "close-project-btn-false"
+                  : "close-project-btn"
+              }
+              onClick={() => handleCloseProject(project_meta.active)}
+            >
+              {!project_meta.active ? "Open Project" : "Close Project"}
+            </div>
+          </div>
         </div>
         <MessageBoard
           messages={messages}
