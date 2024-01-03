@@ -4,7 +4,7 @@
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
   --white-color: #0c0f0a;
-  --element-color: #0c0f0ab8;
+  --grey-color: #161a12;
 }
 
 body {
@@ -49,7 +49,7 @@ body section {
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
   --dark-color: #0c0f0a;
-  --element-color: #f3f3f3f7;
+  --grey-color: #f3f3f3f7;
 }
 
 .modal-overlay {

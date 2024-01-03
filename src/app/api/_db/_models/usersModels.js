@@ -23,7 +23,7 @@ export const getMiniUser = async (userId) => {
 };
 
 export const getExpandedUser = async (userId) => {
-  let { data, error } = await db
+  let { data, error } = await supabase
     .from("users")
     .select(
       `
