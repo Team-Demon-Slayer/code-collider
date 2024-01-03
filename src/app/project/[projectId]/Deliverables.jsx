@@ -22,8 +22,6 @@ export default function Deliverables({
   const [showModal, setShowModal] = useState(false);
   const [showAddTask, setShowAddTask] = useState(false);
 
-  console.log(deliverables);
-
   const handleShowModal = (value) => {
     setShowModal(value);
   };
@@ -74,11 +72,13 @@ export default function Deliverables({
               {day.tasks.map((task) => {
                 const { complete } = task;
                 const title = truncateString(task.title, 20);
-                const userIndex = project_meta.team.indexOf(task.owner);
+                const userIndex = project_meta.users.findIndex(
+                  (user) => user.username === task.owner
+                );
                 const color = getUserColor(userIndex);
                 return (
                   <div
-                    key={task.task_id}
+                    key={task.id}
                     className="day-task-main"
                     onClick={() => handleSelectTask(task, day.date)}
                     style={{

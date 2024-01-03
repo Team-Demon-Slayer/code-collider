@@ -7,8 +7,7 @@ import "./myProjects.css";
 
 export default function UserProjects({ data }) {
   const router = useRouter();
-
-  // const [userProjects, setUserProjects] = useState(null);
+  
   const [currentProjects, setCurrentProjects] = useState(null);
   const [pastProjects, setSpotPastProjects] = useState(null);
   const [navToSelected, setNavToSelected] = useState(null);
@@ -40,19 +39,19 @@ export default function UserProjects({ data }) {
     currentProjects &&
     pastProjects && (
       <div className="my-projects-container">
-        <Carousel
+        {/* <Carousel
           projects={currentProjects}
           getProject={navToProject}
           header="Current Projects"
-        />
+        /> */}
 
         <div id="my-projects-split" />
-
+{/*
         <Carousel
           projects={pastProjects}
           getProject={navToProject}
           header="Past Projects"
-        />
+        /> */}
       </div>
     )
   );

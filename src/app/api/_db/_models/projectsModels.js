@@ -40,7 +40,7 @@ export const getProjectPage = async (
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
-  let { data, error } = await db
+  let { data, error } = await supabase
     .from("projects")
     .select(
       `
@@ -54,9 +54,10 @@ export const getProjectPage = async (
       start_date,
       finish_date,
       mentor(id,username),
-      active
-    `,
-    `upvotes(count)`
+      active,
+      upvotes,
+      repo_link
+    `
     )
     .eq("active", active === undefined ? (true || false) : active)
     .order(sortingMethod[0], sortingMethod[1])
@@ -81,7 +82,7 @@ export const getProjectPageByLanguage = async (
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
-  let { data, error } = await db
+  let { data, error } = await supabase
     .from("languages")
     .select(
       `
