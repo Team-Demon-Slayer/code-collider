@@ -15,6 +15,8 @@ import { getMessages } from "../../api/_db/_models/messagesModels.js";
 import { getProject } from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
+import { v4 as uuidv4 } from "uuid";
+
 import "./style.css";
 
 export default function ProjectPage({ params }) {
@@ -28,15 +30,26 @@ export default function ProjectPage({ params }) {
 
   const supabaseClient = createClientComponentClient();
 
-  const handleMarkComplete = (task_id) => {
-    deliverables.forEach((deliverable) => {
-      deliverable.tasks.forEach((task) => {
-        if (task.task_id === task_id) {
-          const toggleValue = task.complete === false ? true : false;
-          task.complete = toggleValue;
-        }
-      });
-    });
+  const handleMarkComplete = async (task_id) => {
+    const { data, error } = await supabase
+      .from("deliverables")
+      .select("completed")
+      .eq("id", task_id);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    const { error: completeError } = await supabase
+      .from("deliverables")
+      .update({ completed: !data[0].completed })
+      .eq("id", 1);
+
+    if (completeError) {
+      console.log(completeError);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
@@ -55,17 +68,25 @@ export default function ProjectPage({ params }) {
   const getData = async () => {
     const projectData = await getProject(params.projectId);
     const messageData = await getMessages(params.projectId);
-    const deliverablesData = await getDeliverables(params.projectId);
-
+    const deliverablesData = await getDeliverables(
+      params.projectId,
+      projectData.start_date
+    );
     const dates = generateDates(projectData.start_date, 7);
-    const structuredDeliverables = dates.map((date) => ({
-      date: date.toISOString().split("T")[0], // Format date as 'YYYY-MM-DD'
-      tasks: deliverablesData.filter(
-        (deliverable) =>
-          new Date(deliverable.date).toISOString().split("T")[0] ===
-          date.toISOString().split("T")[0]
-      ),
-    }));
+    const structuredDeliverables = dates.map((generatedDate) => {
+      const formattedGeneratedDate = generatedDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
+      const tasksForDate = deliverablesData.filter((deliverable) => {
+        const deliverableDateWithoutTime = new Date(deliverable.date)
+          .toISOString()
+          .split("T")[0]; // Also 'YYYY-MM-DD'
+        return deliverableDateWithoutTime === formattedGeneratedDate;
+      });
+      return {
+        date: formattedGeneratedDate,
+        tasks: tasksForDate,
+      };
+    });
+
     setDeliverables(structuredDeliverables);
     setMessages(messageData[0].messages);
     setProject_meta(projectData);
@@ -98,38 +119,40 @@ export default function ProjectPage({ params }) {
     }
   };
 
-  const handleEditTask = async (task_id, newTask) => {
-    await deliverables.forEach((deliverable) => {
-      deliverable.tasks.forEach((task) => {
-        if (task.task_id === task_id) {
-          task.title = newTask.title;
-          task.description = newTask.description;
-        }
-      });
-    });
+  const handleEditTask = async (taskId, newTask) => {
+    const { error } = await supabase
+      .from("deliverables")
+      .update({ title: newTask.title, description: newTask.description })
+      .eq("id", taskId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
   const handleAddTask = async (newTask) => {
-    await deliverables.forEach((deliverable) => {
-      if (deliverable.date === newTask.date) {
-        deliverable.tasks.push(newTask);
-      }
-    });
+    const { error } = await supabase.from("deliverables").insert(newTask);
+    if (error) {
+      console.log(error);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
-  const handleDeleteTask = async (task_id, date) => {
+  const handleDeleteTask = async (task_id) => {
     // Assuming deliverables is an array of deliverables, each containing a date and an array of tasks
-    deliverables.forEach((deliverable) => {
-      // Check if the deliverable matches the specified date
-      if (deliverable.date === date) {
-        // Filter out the task with the specified task_id
-        deliverable.tasks = deliverable.tasks.filter(
-          (task) => task.task_id !== task_id
-        );
-      }
-    });
+
+    const { error } = await supabaseClient
+      .from("deliverables")
+      .delete()
+      .eq("id", task_id);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
 
     setTriggerUpdate(!triggerUpdate);
   };
