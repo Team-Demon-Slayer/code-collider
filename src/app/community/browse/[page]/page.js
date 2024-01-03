@@ -1,22 +1,38 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import {
+  getProjectPage,
+  getProjectPageByLanguage
+} from '@/app/api/_db/_models/projectsModels';
 import useCommunityContext from '../../useCommunityContext';
-import { projects, query } from '../../temp-fake-data';
+// import { projects, query } from '../../temp-fake-data';
 import ProjectCard from '../../ProjectCard';
 
 export default function BrowsePage({ params: { page } }) {
-  const { keyword, language, spots, startDate, openMentor, user} =
+  const [isLoading, setIsLoading] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const { keyword, language, spots, startDate, openMentor, user } =
     useCommunityContext();
+  useEffect(() => {
+    async function getprojects() {
+      setIsLoading(true);
+      console.log({page}); // FIXME: test
+      const projects = await getProjectPage(page, 10, true);
+      setProjects(projects);
+      setIsLoading(false);
+    }
+    getprojects();
+  }, [page]);
   return (
-    <div>
+    <>
       <div className="page-container">
-        {query(projects, keyword, language, spots, openMentor).map(
-          p => (
-            <ProjectCard key={p.title} project={p} />
-          )
+        {isLoading ? (
+          <span className="loader"></span>
+        ) : (
+          projects.map(p => <ProjectCard key={p.if} project={p} />)
         )}
       </div>
-      {JSON.stringify(user)}
-    </div>
+    </>
   );
 }
