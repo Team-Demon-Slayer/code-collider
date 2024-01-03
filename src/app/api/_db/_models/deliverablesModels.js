@@ -1,9 +1,7 @@
 // const db = require("../index.js");
-const { previousMonday, nextMonday } = require("date-fns");
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { previousMonday, nextMonday } from "date-fns";
 
-const {
-  createClientComponentClient,
-} = require("@supabase/auth-helpers-nextjs");
 
 const supabase = createClientComponentClient();
 
