@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import truncateString from "../_utils/truncateString.js";
 import "../_stylesheets/carouselStyle.css";
-// import Card from "./Card.jsx";
 
 export default function Carousel({ projects, getProject, header }) {
   const [display, setDisplay] = useState(null);
@@ -77,24 +76,26 @@ export default function Carousel({ projects, getProject, header }) {
 
         {display.map((project) => {
           const text = truncateString(project.description, 50);
-          const openSpots = project.max_size - project.team;
+          const openSpots = project.max_developers - project.users.length;
           return (
             <div
-              key={project.project_id}
+              key={project.id}
               className="carousel-item-main"
               onClick={() => getProject(project)}
             >
               <div className="carousel-header">{header}</div>
 
               <div className="carousel-item-title">{project.title}</div>
-              <div className="carousel-item-owner">@{project.owner}</div>
+              <div className="carousel-item-owner">
+                @{project.owner.username}
+              </div>
               <div className="carousel-item-languages">
                 {project.languages.map((language) => {
                   return (
                     <img
-                      src={language}
+                      src={`https://skillicons.dev/icons?i=${language.url}`}
                       className="carousel-language-icon"
-                      key={language}
+                      key={language.url}
                     />
                   );
                 })}
