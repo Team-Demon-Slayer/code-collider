@@ -61,20 +61,27 @@ export default function Carousel({ projects, getProject, header }) {
   };
 
   useEffect(() => {
-    const data = [
-      projects[firstPointer],
-      projects[secondPointer],
-      projects[thirdPointer],
-    ];
+    if (projects.length < 1) return;
+    let data;
+    if (projects.length >= 3) {
+      data = [
+        projects[firstPointer],
+        projects[secondPointer],
+        projects[thirdPointer],
+      ];
+    } else {
+      data = projects.slice(0, projects.length);
+    }
+
     setDisplay(data);
-  }, [firstPointer]);
+  }, [firstPointer, projects]);
 
   return (
     display && (
       <div className="carousel-main">
         <FaChevronLeft className="prev-project-btn" onClick={handlePrev} />
 
-        {display.map((project) => {
+        {display?.map((project) => {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
