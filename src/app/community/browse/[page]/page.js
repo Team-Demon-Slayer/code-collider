@@ -5,27 +5,18 @@ import { projects, query } from '../../temp-fake-data';
 import ProjectCard from '../../ProjectCard';
 
 export default function BrowsePage({ params: { page } }) {
-  const { keyword, language, spots, startDate, openMentor } =
+  const { keyword, language, spots, startDate, openMentor, user} =
     useCommunityContext();
   return (
     <div>
-      <div>
-        ---
-        <p>User requires page {page}</p>
-        <p>User requires keyword: {keyword}</p>
-        <p>User requires language {language}</p>
-        <p>User requires spots {spots}</p>
-        <p>User requires startDate {startDate?.toString()}</p>
-        <p>{openMentor ? 'Open Mentor' : 'Not Open Mentor'}</p>
-        ---
-      </div>
-      <div>
+      <div className="page-container">
         {query(projects, keyword, language, spots, openMentor).map(
           p => (
             <ProjectCard key={p.title} project={p} />
           )
         )}
       </div>
+      {JSON.stringify(user)}
     </div>
   );
 }

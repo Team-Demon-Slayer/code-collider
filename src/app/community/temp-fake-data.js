@@ -2,8 +2,8 @@ export const projects = [
   {
       title: "Code Harmony",
       languages: [
-          { name: "JavaScript", badge_url: "https://example.com/js_badge" },
-          { name: "Python", badge_url: "https://example.com/python_badge" }
+          { name: "JavaScript", badge_url: "https://skillicons.dev/icons?i=js" },
+          { name: "Python", badge_url: "https://skillicons.dev/icons?i=python" }
       ],
       content: "A platform for collaborative coding in multiple languages.",
       isOpenToRegister: true,
@@ -23,7 +23,7 @@ export const projects = [
   {
       title: "AI Explorer",
       languages: [
-          { name: "Python", badge_url: "https://example.com/python_badge" }
+          { name: "Python", badge_url: "https://skillicons.dev/icons?i=python" }
       ],
       content: "Exploring AI technologies with a focus on machine learning.",
       isOpenToRegister: false,
@@ -43,8 +43,8 @@ export const projects = [
   {
       title: "Virtual Reality World",
       languages: [
-          { name: "C#", badge_url: "https://example.com/csharp_badge" },
-          { name: "Unity", badge_url: "https://example.com/unity_badge" }
+          { name: "C#", badge_url: "https://skillicons.dev/icons?i=cs" },
+          { name: "Unity", badge_url: "https://skillicons.dev/icons?i=unity" }
       ],
       content: "Creating immersive virtual reality experiences.",
       isOpenToRegister: true,

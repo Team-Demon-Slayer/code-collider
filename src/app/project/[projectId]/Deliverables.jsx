@@ -22,8 +22,6 @@ export default function Deliverables({
   const [showModal, setShowModal] = useState(false);
   const [showAddTask, setShowAddTask] = useState(false);
 
-  console.log(deliverables);
-
   const handleShowModal = (value) => {
     setShowModal(value);
   };

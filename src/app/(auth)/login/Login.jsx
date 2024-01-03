@@ -27,9 +27,7 @@ export default function Login() {
       return;
     }
     if (!validatePassword(password)) {
-      alert(
-        "Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character."
-      );
+      alert("Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character(@$!%*?&).");
       return;
     }
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -51,9 +49,7 @@ export default function Login() {
       return;
     }
     if (!validatePassword(password)) {
-      alert(
-        "Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character."
-      );
+      alert("Please enter a valid password. Password must be at least 8 characters long, have one uppercase letter, one lowercase letter, one number, and one special character(@$!%*?&).");
       return;
     }
     setShowRegisterModal(true);

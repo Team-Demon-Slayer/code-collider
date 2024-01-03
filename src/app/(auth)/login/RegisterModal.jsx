@@ -60,19 +60,50 @@ const RegisterModal = ({
 
   const handleRegister = async () => {
     try {
-      const { user, error } = await supabase.auth.signUp({
-        email,
-        password,
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
       });
+      const user = data.user;
+      if (error) throw error;
 
-      if (error) {
-        console.error(error);
-      } else {
-        alert("Check your email for verification.");
-        setTimeout(() => {
-          router.push("/login");
-        }, 3000);
-      }
+      const { data: userData, error: userInsertError } = await supabase
+        .from("users")
+        .insert([
+          {
+            id: user.id,
+            username: email.split('@')[0],
+            email: email,
+            experience: experienceLevel,
+            reason_for_joining: reasonForJoining,
+            ...(reasonForJoining === "Mentoring" && { is_mentor: true }),
+          }
+        ]);
+
+      if (userInsertError) throw userInsertError;
+
+      const { data: languageData, error: languageError } = await supabase
+        .from("languages")
+        .select("id, name")
+        .in("name", selectedLanguages);
+
+      if (languageError) throw languageError;
+
+      const userLanguages = languageData.map((language) => ({
+        user_id: user.id,
+        language_id: language.id,
+      }));
+
+      const { error: userLanguagesError } = await supabase
+        .from("users_languages")
+        .insert(userLanguages);
+
+      if (userLanguagesError) throw userLanguagesError;
+
+      alert("Check your email for verification.");
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -115,7 +146,7 @@ const RegisterModal = ({
               <option value="Learning">Learning</option>
               <option value="Career Change">Career Change</option>
               <option value="Personal Interest">Personal Interest</option>
-              <option value="Personal Interest">Mentoring</option>
+              <option value="Mentoring">Mentoring</option>
             </select>
           </label>
         </div>
@@ -126,9 +157,8 @@ const RegisterModal = ({
             {codingLanguages.map((language) => (
               <label
                 key={language}
-                className={`language-label ${
-                  selectedLanguages.includes(language) ? "selected" : ""
-                }`}
+                className={`language-label ${selectedLanguages.includes(language) ? "selected" : ""
+                  }`}
                 onClick={() => handleLanguageSelection(language)}
               >
                 {language}
