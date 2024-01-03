@@ -23,6 +23,7 @@ export default function ProjectPage({ params }) {
   const [project_meta, setProject_meta] = useState(null);
   const [deliverables, setDeliverables] = useState(null);
   const [username, setUsername] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
@@ -87,6 +88,14 @@ export default function ProjectPage({ params }) {
       };
     });
 
+    const { data: sessionData, error: sessionError } =
+      await supabase.auth.getSession();
+
+    if (sessionError) {
+      console.log(sessionError);
+      return;
+    }
+    setUserId(sessionData.session.user.id);
     setDeliverables(structuredDeliverables);
     setMessages(messageData[0].messages);
     setProject_meta(projectData);
@@ -214,7 +223,7 @@ export default function ProjectPage({ params }) {
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "INSERT, UPDATE",
           schema: "public",
           table: "deliverables",
         },
@@ -257,16 +266,18 @@ export default function ProjectPage({ params }) {
             >
               LINK TO PROJECT REPO
             </a>
-            <div
-              className={
-                !project_meta.active
-                  ? "close-project-btn-false"
-                  : "close-project-btn"
-              }
-              onClick={() => handleCloseProject(project_meta.active)}
-            >
-              {!project_meta.active ? "Open Project" : "Close Project"}
-            </div>
+            {project_meta.owner.id === userId && (
+              <div
+                className={
+                  !project_meta.active
+                    ? "close-project-btn-false"
+                    : "close-project-btn"
+                }
+                onClick={() => handleCloseProject(project_meta.active)}
+              >
+                {!project_meta.active ? "Open Project" : "Close Project"}
+              </div>
+            )}
           </div>
         </div>
         <MessageBoard
