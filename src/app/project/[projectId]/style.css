@@ -17,7 +17,8 @@
   position: relative;
   cursor: default;
   width: 95%;
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
   height: 180px;
   border-radius: 60px;
   margin-top: 10px;
@@ -36,6 +37,7 @@
   padding-right: 20px;
   z-index: 5;
   background-color: var(--white-color);
+  color: var(--dark-color);
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
   top: -10px;
@@ -84,7 +86,7 @@
 }
 
 .project-details-description {
-  color: var(--white-color);
+  color: var(--dark-color);
   font-size: 13px;
   width: 92%;
   margin-left: 40px;
@@ -97,7 +99,7 @@
   width: 100%;
   margin-left: 40px;
   margin-top: 10px;
-  color: var(--white-color);
+  color: var(--dark-color);
   margin-bottom: 20px;
 }
 
@@ -117,7 +119,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 5px;
   padding-left: 10px;
@@ -146,14 +148,16 @@
   margin-left: 10px;
   cursor: default;
   height: 90% !important;
+  max-height: 90%;
   width: 18%;
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
   height: 180px;
   border-radius: 70px;
   margin-top: 10px;
   position: relative;
   padding: 10px;
   margin-bottom: 5px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .message-board-title {
@@ -169,6 +173,11 @@
   box-shadow: 2px 2px 0px 1px var(--red-color);
   top: -10px;
   user-select: none;
+}
+
+.end-of-messages {
+  height: 0px;
+  width: 0px;
 }
 
 .message-board-title h2 {
@@ -190,7 +199,7 @@
 }
 
 .no-messages {
-  color: var(--white-color);
+  color: var(--dark-color);
   margin-top: 30px;
 }
 
@@ -198,12 +207,13 @@
   display: none;
 }
 .message-bubble {
-  background-color: var(--white-color);
+  background-color: var(--dark-color);
   padding: 10px;
   border-radius: 20px;
   position: relative;
   width: 90.5%;
   margin-top: 35px;
+  color: var(--white-color);
 }
 
 .message-user {
@@ -217,7 +227,7 @@
   padding-right: 10px;
   z-index: 6;
   font-weight: bold;
-  background-color: var(--white-color);
+  background-color: var(--dark-color);
   border-radius: 40px;
   top: -25px;
   left: 0;
@@ -281,7 +291,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white-color);
+  color: #ffffff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   left: 88%;
   top: 25px;
@@ -294,9 +304,9 @@
 }
 
 .loader {
-  font-size: 2.5px;
-  width: 1.5em;
-  height: 1.5em;
+  font-size: 2.5px !important;
+  width: 1.5em !important;
+  height: 1.5em !important;
   border-radius: 50%;
   position: relative;
   text-indent: -9999em;
@@ -390,7 +400,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 10px;
   padding-left: 20px;

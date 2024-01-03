@@ -25,7 +25,7 @@
   border-radius: 20px;
   z-index: 20px;
   cursor: pointer;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
@@ -44,7 +44,7 @@
   border-radius: 20px;
   z-index: 20px;
   cursor: pointer;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
@@ -54,14 +54,15 @@
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  color: var(--dark-color);
   border-radius: 50px;
   padding: 25px;
   width: 190px;
   height: 190px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
   user-select: none;
 }
 .carousel-item-main:hover {

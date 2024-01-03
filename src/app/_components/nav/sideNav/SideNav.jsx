@@ -1,19 +1,18 @@
-
 "use client";
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import '../nav.css';
-import supabase from '../../../api/_db/index.js';
-import {useRouter} from 'next/navigation';
-// import { supabase } from './supabaseClient'; 
-// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-const SideNav = ( {updateTitle} ) => {
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import "../nav.css";
+import supabase from "../../../api/_db/index.js";
+import { useRouter } from "next/navigation";
+import { PiDiamondBold } from "react-icons/pi";
+import { PiDiamondFill } from "react-icons/pi";
+const SideNav = ({ updateTitle, pageTitle, handleSignOut }) => {
   const router = useRouter();
   // const [loggedIn, setLoggedIn] = useState(false);
   // const supabase = createClientComponentClient();
   const handleLinkClick = (title) => {
-    updateTitle(title); 
+    updateTitle(title);
   };
   // useEffect(() => {
   //   const checkUser = () => {
@@ -32,16 +31,13 @@ const SideNav = ( {updateTitle} ) => {
   //   };
   // }, []);
 
-  const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut();
-      router.push('/login')
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
-
-  const titles = ['HOME PAGE', 'MY PROJECTS', 'PROJECT PAGE', 'COMMUNITY SHOWCASE']
+  const titles = [
+    { title: "HOME PAGE", link: "/" },
+    { title: "MY PROJECTS", link: "/my-projects" },
+    { title: "PROJECT PAGE", link: "/project" },
+    { title: "COMMUNITY SHOWCASE", link: "/community/showcase" },
+    { title: "BROWSE PROJECTS", link: "/community/browse" },
+  ];
 
   return (
     <aside className="side-nav">
@@ -49,13 +45,23 @@ const SideNav = ( {updateTitle} ) => {
         <Image src="/logo.png" alt="Logo" layout="fill" objectFit="contain" />
       </div>
       <nav>
-        {titles.map((title, index) => (
-          <Link key={index} href={`/${title.replace(/ /g, '-').toLowerCase()}`}>  
-           <div className="nav-link" onClick={() => handleLinkClick(title)}>{title}</div>
-          </Link>
-        ))}
+        {titles.map((title, index) => {
+          const active = pageTitle === title.title;
+          return (
+            <Link
+              className="nav-link"
+              key={title.title}
+              href={`${title.link}`}
+              onClick={() => handleLinkClick(title.title)}
+            >
+              {active ? <PiDiamondFill /> : <PiDiamondBold />} {title.title}
+            </Link>
+          );
+        })}
       </nav>
-      <button className="sign-out" onClick={handleSignOut}>SIGN OUT</button>
+      <button className="sign-out" onClick={handleSignOut}>
+        SIGN OUT
+      </button>
     </aside>
   );
 };

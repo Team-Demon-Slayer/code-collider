@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import getUserColor from "../../_utils/getUserColor.js";
 import { IoMdSend } from "react-icons/io";
-// import supabase from "../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { v4 as uuidv4 } from "uuid";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -15,12 +15,14 @@ export default function MessageBoard({
   const [userMessage, setUserMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const messageEndRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
-  const supabase = createClientComponentClient();
+  const supabaseClient = createClientComponentClient();
 
   const scrollToBottom = () => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
   };
 
   const users = project_meta.users;
@@ -39,12 +41,12 @@ export default function MessageBoard({
     }
     console.log("get user", user);
 
-    const { data: userData, error: userError } = await supabase
+    const { data: userData, error: userError } = await supabaseClient
       .from("users")
       .select("username")
       .eq("email", user.email);
 
-    const { error } = await supabase.from("messages").insert({
+    const { error } = await supabaseClient.from("messages").insert({
       id: uuidv4(),
       project_id: project_meta.id,
       posted_by: userData[0].username,
@@ -85,7 +87,7 @@ export default function MessageBoard({
         <div className="message-board-title">
           <h2>Team Chat</h2>
         </div>
-        <div className="message-board-messages">
+        <div className="message-board-messages" ref={messagesEndRef}>
           {messages.length < 1 ? (
             <div className="no-messages">No messages yet...</div>
           ) : (
@@ -104,7 +106,6 @@ export default function MessageBoard({
                   </div>
                 );
               })}
-              <div ref={messageEndRef} />
             </>
           )}
         </div>

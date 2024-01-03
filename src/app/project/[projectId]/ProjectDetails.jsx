@@ -22,10 +22,6 @@ export default function ProjectDetails({ project_meta, username }) {
   //   checkUser();
   // }, [project_meta]);
 
-  if (isLoading) {
-    return <span className="loader"></span>;
-  }
-
   return (
     project_meta && (
       <div className="project-details-info">

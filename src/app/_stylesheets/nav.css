@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+}
+
+aside {
+  width: 250px;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+aside img {
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+aside a {
+  color: var(--white-color);
+  text-decoration: none;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+aside a:hover {
+  text-decoration: underline;
+}
+
+aside button {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+.new-message {
+  font-weight: bold;
+  color: var(--red-color);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.page-title {
+  font-size: 24px;
+}

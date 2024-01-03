@@ -1,6 +1,4 @@
-
 .my-projects-container {
-  margin-left: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +7,7 @@
   height: 100%;
 }
 
-#my-projects-split{
+#my-projects-split {
   display: flex;
   width: 82%;
   min-height: 10px;
