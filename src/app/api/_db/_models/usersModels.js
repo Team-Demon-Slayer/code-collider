@@ -2,7 +2,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const supabase = createClientComponentClient();
 
-module.exports.getMiniUser = async (userId) => {
+export const getMiniUser = async (userId) => {
   let { data, error } = await supabase
     .from("users")
     .select(
@@ -22,8 +22,8 @@ module.exports.getMiniUser = async (userId) => {
   return data[0];
 };
 
-exports.getExpandedUser = async (userId) => {
-  let { data, error } = await db
+export const getExpandedUser = async (userId) => {
+  let { data, error } = await supabase
     .from("users")
     .select(
       `
@@ -33,7 +33,8 @@ exports.getExpandedUser = async (userId) => {
       experience,
       is_mentor,
       profile_photo,
-      languages(name,url)
+      languages(name,url),
+      upvotes(project_id)
     `
     )
     .eq("id", userId);

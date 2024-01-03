@@ -19,8 +19,8 @@ export const getProject = async (projectId) => {
       finish_date,
       mentor(id,username),
       active,
-      upvotes
-    `
+      upvotes(count)
+      `
     )
     //For project scope, use differenceInDays(start_date, finish_date) from date-fns
     .eq("id", projectId);
@@ -55,8 +55,8 @@ export const getProjectPage = async (
       finish_date,
       mentor(id,username),
       active,
-      upvotes,
-      repo_link
+      repo_link,
+      upvotes(count)
     `
     )
     .eq("active", active === undefined ? true || false : active)
