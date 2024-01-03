@@ -9,6 +9,7 @@ export default function Carousel({ projects, getProject, header }) {
   const [firstPointer, setFirstPointer] = useState(0);
   const [secondPointer, setSecondPointer] = useState(1);
   const [thirdPointer, setThirdPointer] = useState(2);
+  const [onProject, setOnProject] = useState(false);
 
   const handleNext = () => {
     if (!projects[thirdPointer + 1]) {
@@ -72,7 +73,7 @@ export default function Carousel({ projects, getProject, header }) {
     } else {
       data = projects.slice(0, projects.length);
     }
-
+    console.log("data", data);
     setDisplay(data);
   }, [firstPointer, projects]);
 
@@ -85,7 +86,9 @@ export default function Carousel({ projects, getProject, header }) {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
-            openSpots > 0 && (
+            (openSpots > 0 ||
+              !project.active ||
+              header === "Current Projects") && (
               <div
                 key={project.id}
                 className="carousel-item-main"
