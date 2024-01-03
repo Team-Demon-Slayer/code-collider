@@ -42,13 +42,15 @@ const codingLanguagesAndFrameworks = [
   { name: "Laravel", url: "laravel" },
   { name: "Spring", url: "spring" },
   { name: "Ruby on Rails", url: "rails" }
-].sort((a, b) => {a.name < b.name ? -1 : 1});
+].sort(
+  (a, b) => { a.name < b.name ? -1 : 1 }
+);
 
 export default function searchLanguages(input) {
   if (!input) {
     return [];
   }
   return codingLanguagesAndFrameworks.filter((language) => {
-    return language.name.toLowerCase().includes(input.toLowerCase());
+    return language.name.slice(0, input.length).toLowerCase() === input.toLowerCase();
   });
 }

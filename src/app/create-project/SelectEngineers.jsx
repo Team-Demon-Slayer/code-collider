@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function ProjectEngineers({ updateEngineers }) {
+export default function SelectEngineers({ updateEngineers }) {
   return (
     <div className='project-engineers'>
       <select name="engineers" id="engineers" onChange={(e) => updateEngineers(e.target.value)}>
@@ -10,7 +10,7 @@ export default function ProjectEngineers({ updateEngineers }) {
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        <option value="5">5</option>
+        <option default value="5">5</option>
       </select>
     </div>
   );
