@@ -2,7 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
-import supabaseServer from "../../api/_db/index.js";
+import supabaseServer from "../api/_db/index.js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import React, { useState, useEffect } from "react";
 import searchLanguages from './helper-funcs/searchLanguages.js';
@@ -37,7 +37,7 @@ export default function CreateProject() {
 
   const onSubmit = async () => {
     console.log([title, engineers, languages, description, Date.parse(startDate), Date.parse(endDate)]);
-    if (title && engineers && languages && description && startDate && endDate && startDate <= endDate) {
+    if (title && engineers && languages.length > 0 && description && startDate && endDate && startDate <= endDate) {
       const { data: userId, error: idError } = await supabaseServer.auth.getSession();
       let newId = uuidv4();
       if (idError) {
