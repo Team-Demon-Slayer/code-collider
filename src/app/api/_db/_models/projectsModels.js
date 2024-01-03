@@ -19,7 +19,7 @@ export const getProject = async (projectId) => {
       finish_date,
       mentor(id,username),
       active,
-      upvotes(user_id)
+      upvotes(count)
       `
     )
     //For project scope, use differenceInDays(start_date, finish_date) from date-fns
