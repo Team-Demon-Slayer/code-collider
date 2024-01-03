@@ -17,6 +17,7 @@ export default function AddTaskModal({
   date,
   handleShowAddModal,
   handleAddTask,
+  projectId,
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,36 +32,37 @@ export default function AddTaskModal({
       title,
       description,
       date,
-      task_id: uuidv4(),
+      id: uuidv4(),
       owner: null,
       complete: false,
+      project_id: projectId,
     };
     await handleAddTask(newTask);
     handleShowAddModal(false);
   };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const {
-        data: { user },
-      } = await supabseClient.auth.getUser();
-      if (!user) {
-        console.log(user);
-        return;
-      }
-      if (user) {
-        const { data: profile } = await supabseClient
-          .from("users")
-          .select("username")
-          .eq("email", user.email)
-          .single();
-        if (profile) {
-          setUsername(profile[0].username);
-        }
-      }
-    };
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     const {
+  //       data: { user },
+  //     } = await supabseClient.auth.getUser();
+  //     if (!user) {
+  //       console.log(user);
+  //       return;
+  //     }
+  //     if (user) {
+  //       const { data: profile } = await supabseClient
+  //         .from("users")
+  //         .select("username")
+  //         .eq("email", user.email)
+  //         .single();
+  //       if (profile) {
+  //         setUsername(profile[0].username);
+  //       }
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, []);
 
   return (
     <div className="modal-overlay">

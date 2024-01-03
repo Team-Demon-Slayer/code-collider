@@ -36,17 +36,17 @@ export default function TaskModal({
 
   const sendUpdate = async () => {
     const newTask = {
-      ...task,
       title,
       description,
     };
-    await handleEditTask(task.task_id, newTask);
+    await handleEditTask(task.id, newTask);
     setEdit(false);
     setChanges(false);
+    handleShowModal(false);
   };
 
   const deleteAndClose = async () => {
-    await handleDeleteTask(task.task_id, date);
+    await handleDeleteTask(task.id);
     handleShowModal(false);
   };
 
