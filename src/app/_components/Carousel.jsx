@@ -85,35 +85,37 @@ export default function Carousel({ projects, getProject, header }) {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
-            <div
-              key={project.id}
-              className="carousel-item-main"
-              onClick={() => getProject(project)}
-            >
-              <div className="carousel-header">{header}</div>
+            openSpots > 0 && (
+              <div
+                key={project.id}
+                className="carousel-item-main"
+                onClick={() => getProject(project)}
+              >
+                <div className="carousel-header">{header}</div>
 
-              <div className="carousel-item-title">{project.title}</div>
-              <div className="carousel-item-owner">
-                @{project.owner.username}
-              </div>
-              <div className="carousel-item-languages">
-                {project.languages.map((language) => {
-                  return (
-                    <img
-                      src={`https://skillicons.dev/icons?i=${language.url}`}
-                      className="carousel-language-icon"
-                      key={language.url}
-                    />
-                  );
-                })}
-              </div>
-              <div className="carousel-item-description">{text}</div>
-              {project.active && (
-                <div className="carousel-item-status">
-                  {openSpots} spots available
+                <div className="carousel-item-title">{project.title}</div>
+                <div className="carousel-item-owner">
+                  @{project.owner.username}
                 </div>
-              )}
-            </div>
+                <div className="carousel-item-languages">
+                  {project.languages.map((language) => {
+                    return (
+                      <img
+                        src={`https://skillicons.dev/icons?i=${language.url}`}
+                        className="carousel-language-icon"
+                        key={language.url}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="carousel-item-description">{text}</div>
+                {project.active && (
+                  <div className="carousel-item-status">
+                    {openSpots} spots available
+                  </div>
+                )}
+              </div>
+            )
           );
         })}
 
