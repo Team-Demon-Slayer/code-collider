@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import useCommunityContext from './useCommunityContext';
 import '../_stylesheets/currentProjectStyle.css';
 
+
 export default function ProjectCard({ project }) {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -20,7 +21,7 @@ export default function ProjectCard({ project }) {
             {project.title} - @{project.owner.username}
           </div>
         </div>
-        <div className="project-spot">{project.upvotes} upvotes</div>
+        <div className="project-spot">{project.upvotes[0].count} upvotes</div>
       </div>
       <div className="languages-current">
         {project.languages.map(({ url, name }) => {

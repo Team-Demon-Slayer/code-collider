@@ -18,7 +18,7 @@ export default function ShowcasePage({ params: { page } }) {
     async function getprojects() {
       setIsLoading(true);
       console.log({page}); // FIXME: test
-      const projects = await getProjectPage(page, 10, true);
+      const projects = await getProjectPage(page, 10, false);
       console.log(projects); // FIXME: test
       setProjects(projects);
       setIsLoading(false);
