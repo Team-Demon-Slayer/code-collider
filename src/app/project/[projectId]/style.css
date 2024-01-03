@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: 90%;
+  height: 95%;
   position: relative;
   overflow: hidden;
 }
@@ -12,12 +12,13 @@
 .project-details-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   position: relative;
   cursor: default;
   width: 95%;
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
   height: 180px;
   border-radius: 60px;
   margin-top: 10px;
@@ -36,6 +37,7 @@
   padding-right: 20px;
   z-index: 5;
   background-color: var(--white-color);
+  color: var(--dark-color);
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
   top: -10px;
@@ -84,7 +86,7 @@
 }
 
 .project-details-description {
-  color: var(--white-color);
+  color: var(--dark-color);
   font-size: 13px;
   width: 92%;
   margin-left: 40px;
@@ -97,7 +99,7 @@
   width: 100%;
   margin-left: 40px;
   margin-top: 10px;
-  color: var(--white-color);
+  color: var(--dark-color);
   margin-bottom: 20px;
 }
 
@@ -117,7 +119,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 5px;
   padding-left: 10px;
@@ -146,14 +148,16 @@
   margin-left: 10px;
   cursor: default;
   height: 90% !important;
+  max-height: 90%;
   width: 18%;
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
   height: 180px;
   border-radius: 70px;
   margin-top: 10px;
   position: relative;
   padding: 10px;
   margin-bottom: 5px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .message-board-title {
@@ -171,8 +175,14 @@
   user-select: none;
 }
 
+.end-of-messages {
+  height: 0px;
+  width: 0px;
+}
+
 .message-board-title h2 {
   margin: 0px;
+  color: var(--dark-color);
 }
 
 .message-board-messages {
@@ -181,23 +191,29 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 90%;
-  height: 100%;
+  max-height: 100%;
   margin-top: 30px;
   margin-bottom: 20px;
   margin-left: 10px;
   overflow-y: scroll;
 }
 
+.no-messages {
+  color: var(--dark-color);
+  margin-top: 30px;
+}
+
 .message-board-messages::-webkit-scrollbar {
   display: none;
 }
 .message-bubble {
-  background-color: var(--white-color);
+  background-color: var(--dark-color);
   padding: 10px;
   border-radius: 20px;
   position: relative;
   width: 90.5%;
   margin-top: 35px;
+  color: var(--white-color);
 }
 
 .message-user {
@@ -211,7 +227,7 @@
   padding-right: 10px;
   z-index: 6;
   font-weight: bold;
-  background-color: var(--white-color);
+  background-color: var(--dark-color);
   border-radius: 40px;
   top: -25px;
   left: 0;
@@ -256,6 +272,8 @@
   padding: 10px;
   resize: none;
   border-radius: 15px 15px 35px 35px;
+  background-color: var(--white-color);
+  color: var(--dark-color);
 }
 
 .send-message-input::-webkit-scrollbar {
@@ -273,7 +291,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white-color);
+  color: #ffffff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   left: 88%;
   top: 25px;
@@ -286,9 +304,9 @@
 }
 
 .loader {
-  font-size: 2.5px;
-  width: 1.5em;
-  height: 1.5em;
+  font-size: 2.5px !important;
+  width: 1.5em !important;
+  height: 1.5em !important;
   border-radius: 50%;
   position: relative;
   text-indent: -9999em;
@@ -382,7 +400,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 10px;
   padding-left: 20px;
@@ -400,15 +418,16 @@
 }
 
 .deliverables-main {
-  background-color: var(--dark-color);
+  background-color: var(--white-color);
   width: 95%;
-  height: 450px;
+  height: 370px;
   border-radius: 25px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-left: 25px;
+  margin-left: 23px;
   position: relative;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .deliverables-header {
@@ -417,6 +436,7 @@
   left: 0;
   z-index: 20px;
   background-color: var(--white-color);
+  color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--red-color);
   padding: 10px;
   border-radius: 20px;
@@ -430,8 +450,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 10%;
-  height: 62%;
+  height: 60%;
   background-color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
   border-radius: 15px;
   padding: 10px;
   padding-top: 50px;
@@ -451,23 +472,25 @@
   background-color: var(--white-color);
   color: var(--dark-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  width: 8%;
+  width: 6%;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  top: 36%;
+  font-size: 15px;
+  top: 45%;
 }
 
 .deliverables-day-add-task {
-  background-color: var(--white-color);
+  background-color: var(--teal-color);
+  color: #fff;
   border-radius: 10px;
-  width: 6.5%;
+  width: 5.5%;
   height: 20px;
   padding: 5px 10px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  top: 73%;
+  top: 75%;
   position: fixed;
   cursor: pointer;
   z-index: 10;
@@ -489,8 +512,8 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  color: var(--dark-color);
   border-radius: 10px;
   width: 100%;
   min-height: 70px;
@@ -499,6 +522,7 @@
   font-size: 14px;
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 .day-task-title {
   flex-wrap: wrap;
@@ -532,7 +556,7 @@
 .deliverables-left-arrow {
   position: absolute;
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 20px 10px;
   height: 45px;
@@ -546,7 +570,7 @@
 .deliverables-right-arrow {
   position: absolute;
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 20px 10px;
   height: 45px;
@@ -570,8 +594,8 @@
   justify-content: space-between;
   align-items: flex-start;
   position: absolute;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border-radius: 60px;
   width: 450px;
   height: 450px;
@@ -586,7 +610,7 @@
 
 .close-modal-btn {
   position: absolute;
-  color: var(--white-color);
+  color: #fff;
   padding: 10px;
   height: 30px;
   width: 30px;
@@ -610,6 +634,7 @@
   width: 90%;
   margin-bottom: 20px;
   position: relative;
+  background-color: #0c0f0a;
 }
 
 .task-title {
@@ -620,6 +645,7 @@
   text-align: left;
   align-items: flex-start;
   flex-direction: column;
+  background-color: #0c0f0a;
 }
 
 .task-due {
@@ -647,6 +673,7 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  background-color: #0c0f0a;
 }
 
 .edit-task-btn {
@@ -663,16 +690,16 @@
 }
 
 .task-title-input {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border: none;
   outline: none;
   font-size: 20px;
   width: 100%;
 }
 .add-task-title-input {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   border: none;
   outline: none;
   font-size: 20px;
@@ -682,8 +709,8 @@
   padding: 5px 10px;
 }
 .task-title-input-true {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   font-size: 20px;
   width: 100%;
   border-radius: 10px;
@@ -721,11 +748,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
+  color: #fff;
   width: 100%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
   resize: none;
   border: 0px;
   padding: 5px;
@@ -736,11 +762,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
   width: 96%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   resize: none;
   border: 0px;
   border-radius: 10px;
@@ -754,11 +779,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: var(--white-color);
   width: 100%;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
   resize: none;
   padding: 8px;
   border-radius: 15px;
@@ -783,7 +807,7 @@
   border: none;
   width: 45%;
   background-color: var(--yellow-color);
-  color: var(--dark-color);
+  color: #0c0f0a;
   border-radius: 20px;
   font-size: 22px;
   font-weight: bold;

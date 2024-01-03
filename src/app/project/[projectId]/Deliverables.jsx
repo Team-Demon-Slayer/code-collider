@@ -42,65 +42,69 @@ export default function Deliverables({
   };
 
   return (
-    <div className="deliverables-main">
-      {showModal && (
-        <TaskModal
-          task={selectedTask}
-          handleShowModal={handleShowModal}
-          handleMarkComplete={handleMarkComplete}
-          handleClaimTask={handleClaimTask}
-          handleEditTask={handleEditTask}
-          project_meta={project_meta}
-          handleDeleteTask={handleDeleteTask}
-          date={selectedDate}
-        />
-      )}
-      {showAddTask && (
-        <AddTaskModal
-          handleAddTask={handleAddTask}
-          date={selectedDate}
-          handleShowAddModal={handleShowAddModal}
-        />
-      )}
-      <div className="deliverables-header">Deliverables & Deadlines</div>
-      {deliverables.map((day) => {
-        const date = formatDate(day.date);
-        return (
-          <div className="deliverables-day" key={day.date}>
-            <h3>{date}</h3>
-            {day.tasks.map((task) => {
-              const { complete } = task;
-              const title = truncateString(task.title, 20);
-              const userIndex = project_meta.team.indexOf(task.owner);
-              const color = getUserColor(userIndex);
-              return (
-                <div
-                  key={task.task_id}
-                  className="day-task-main"
-                  onClick={() => handleSelectTask(task, day.date)}
-                  style={{
-                    justifyContent: task.owner ? "flex-start" : "center",
-                  }}
-                >
-                  {complete && <FaCheck className="task-complete" />}
-                  {task.owner && (
-                    <div className={`task-owner-name-${color}`}>
-                      @{task.owner}
-                    </div>
-                  )}
-                  <p className="day-task-title">{title}</p>
-                </div>
-              );
-            })}
-            <FaPlus
-              className="deliverables-day-add-task"
-              onClick={() => handleAddTaskClick(day.date)}
-            />
-          </div>
-        );
-      })}
-      <FaChevronLeft className="deliverables-left-arrow" />
-      <FaChevronRight className="deliverables-right-arrow" />
-    </div>
+    deliverables.length > 0 && (
+      <div className="deliverables-main">
+        {showModal && (
+          <TaskModal
+            task={selectedTask}
+            handleShowModal={handleShowModal}
+            handleMarkComplete={handleMarkComplete}
+            handleClaimTask={handleClaimTask}
+            handleEditTask={handleEditTask}
+            project_meta={project_meta}
+            handleDeleteTask={handleDeleteTask}
+            date={selectedDate}
+          />
+        )}
+        {showAddTask && (
+          <AddTaskModal
+            handleAddTask={handleAddTask}
+            date={selectedDate}
+            handleShowAddModal={handleShowAddModal}
+          />
+        )}
+        <div className="deliverables-header">Deliverables & Deadlines</div>
+        {deliverables.map((day) => {
+          const date = formatDate(day.date);
+          return (
+            <div className="deliverables-day" key={day.date}>
+              <h3>{date}</h3>
+              {day.tasks.map((task) => {
+                const { complete } = task;
+                const title = truncateString(task.title, 20);
+                const userIndex = project_meta.users.findIndex(
+                  (user) => user.username === task.owner
+                );
+                const color = getUserColor(userIndex);
+                return (
+                  <div
+                    key={task.id}
+                    className="day-task-main"
+                    onClick={() => handleSelectTask(task, day.date)}
+                    style={{
+                      justifyContent: task.owner ? "flex-start" : "center",
+                    }}
+                  >
+                    {complete && <FaCheck className="task-complete" />}
+                    {task.owner && (
+                      <div className={`task-owner-name-${color}`}>
+                        @{task.owner}
+                      </div>
+                    )}
+                    <p className="day-task-title">{title}</p>
+                  </div>
+                );
+              })}
+              <FaPlus
+                className="deliverables-day-add-task"
+                onClick={() => handleAddTaskClick(day.date)}
+              />
+            </div>
+          );
+        })}
+        <FaChevronLeft className="deliverables-left-arrow" />
+        <FaChevronRight className="deliverables-right-arrow" />
+      </div>
+    )
   );
 }

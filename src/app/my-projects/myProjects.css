@@ -1,4 +1,3 @@
-
 .my-projects-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +7,7 @@
   height: 100%;
 }
 
-#my-projects-split{
+#my-projects-split {
   display: flex;
   width: 82%;
   min-height: 10px;

@@ -5,25 +5,13 @@ import Carousel from "./Carousel.jsx";
 import CurrentProject from "./CurrentProject.jsx";
 import ProjectModal from "./ProjectModal.jsx";
 
-export default function HomePage({ data, currentProject }) {
-  const [recentProjects, setRecentProjects] = useState(null);
-  const [spotlightProjects, setSpotlightProjects] = useState(null);
+export default function HomePage({
+  recentProjects,
+  spotlightProjects,
+  currentProject,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [selectProject, setSelectProject] = useState(null);
-
-  const getRecent = () => {
-    const recent = data.filter((project) => {
-      return project.active && project.max_size - project.team > 0;
-    });
-    setRecentProjects(recent);
-  };
-
-  const getSpotlight = () => {
-    const spotlight = data.filter((project) => {
-      return !project.active;
-    });
-    setSpotlightProjects(spotlight);
-  };
 
   const getProject = (obj) => {
     setSelectProject(obj);
@@ -34,17 +22,12 @@ export default function HomePage({ data, currentProject }) {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    getRecent();
-    getSpotlight();
-  }, [data]);
-
   return (
     recentProjects &&
     spotlightProjects && (
       <div className="home-container">
         <div className="hp-banner">
-          <CurrentProject project_meta={currentProject} />
+          {/* <CurrentProject project_meta={currentProject} /> */}
         </div>
         {showModal && (
           <ProjectModal project={selectProject} closeModal={closeModal} />
