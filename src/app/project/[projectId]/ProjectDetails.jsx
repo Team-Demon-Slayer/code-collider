@@ -1,10 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import "./style.css";
 
-export default function ProjectDetails({ project_meta }) {
-  console.log("in component", project_meta);
+export default function ProjectDetails({ project_meta, username }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      if (
+        project_meta.users.findIndex((user) => user.username === username) ===
+        -1
+      ) {
+        router.push("/");
+      }
+      setIsLoading(false);
+    };
+    checkUser();
+  }, [project_meta]);
+
+  if (isLoading) {
+    return <span className="loader"></span>;
+  }
+
   return (
     project_meta && (
       <div className="project-details-info">

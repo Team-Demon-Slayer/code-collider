@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import getUserColor from "../../_utils/getUserColor.js";
 import { IoMdSend } from "react-icons/io";
-import supabase from "../../api/_db/index.js";
+// import supabase from "../../api/_db/index.js";
 import { v4 as uuidv4 } from "uuid";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function MessageBoard({
   messages,
@@ -15,6 +16,8 @@ export default function MessageBoard({
   const [isLoading, setIsLoading] = useState(false);
 
   const messageEndRef = useRef(null);
+
+  const supabase = createClientComponentClient();
 
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -34,6 +37,7 @@ export default function MessageBoard({
       console.log(user);
       return;
     }
+    console.log("get user", user);
 
     const { data: userData, error: userError } = await supabase
       .from("users")
@@ -60,7 +64,6 @@ export default function MessageBoard({
           table: "messages",
         },
         (payload) => {
-          console.log("Change received!", payload);
           handleUpdateMessages(payload.new);
         }
       )
@@ -76,7 +79,7 @@ export default function MessageBoard({
   }, [messages]);
 
   return (
-    messages.length > 0 &&
+    messages &&
     project_meta && (
       <div className="message-board-main">
         <div className="message-board-title">
