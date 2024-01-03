@@ -4,7 +4,7 @@ import './style.css';
 
 export default function CommunityLayout({ children }) {
   return (
-    <div style={{height: '90%'}}>
+    <div className="community-container">
       <CommunityProvider>
         <CommunityHeader />
         {children}

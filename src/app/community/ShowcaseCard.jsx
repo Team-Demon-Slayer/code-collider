@@ -7,28 +7,9 @@ import '../_stylesheets/currentProjectStyle.css';
 
 export default function ProjectCard({ project }) {
   const router = useRouter();
-  const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
-  const avaliableSpots =project.max_developers -  project.users.length;
 
-  const getUserIdWithEmail = async email => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('email', email);
-    if (error) {
-      console.log(error);
-    }
-    return data[0].id;
-  };
-
-  const handleJoinProject = async () => {
-    const userId = await getUserIdWithEmail(user.email);
-    console.log(userId);
-    // alert(`Should join project ${project.id} with user ${userId}`)
-    await supabase
-      .from('projects_users')
-      .insert({ project_id: project.id, user_id: userId });
+  const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
   };
   return (
@@ -39,7 +20,7 @@ export default function ProjectCard({ project }) {
             {project.title} - @{project.owner.username}
           </div>
         </div>
-        <div className="project-spot">{avaliableSpots} spots avaliable</div>
+        <div className="project-spot">{project.upvotes} upvotes</div>
       </div>
       <div className="languages-current">
         {project.languages.map(({ url, name }) => {
@@ -67,27 +48,14 @@ export default function ProjectCard({ project }) {
             );
           })}
         </div>
-      </div>
-      <div className="project-join-buttons">
-        {project.mentor === null ? (
-          <button className="project-mentor-button">Mentor Project</button>
-        ) : (
-          <button className="project-mentor-button" disabled>
-            No Mentor
-          </button>
-        )}
-        {avaliableSpots > 0 ? (
+        <div className="project-showcase-buttons">
           <button
-            onClick={handleJoinProject}
+            onClick={handleViewProject}
             className="project-details-page-btn"
           >
-            Join Project
+            View Project
           </button>
-        ) : (
-          <button className="project-details-page-btn" disabled>
-            Spots Full
-          </button>
-        )}
+        </div>
       </div>
     </div>
   );

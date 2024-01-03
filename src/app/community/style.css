@@ -1,9 +1,47 @@
+.community-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+  max-height: 90%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 30px;
+  padding-top: 30px;
+  position: relative;
+  overflow-y: hidden;
+  margin-top: 90px;
+}
+
+.current-project-details-info {
+  min-height: 250px;
+}
+
 .page-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
   overflow-y: scroll;
   height: 90%;
+}
+
+.project-card-head{
+  display: flex;
+}
+
+.project-spot {
+/* make it absolute to the right */
+  position: absolute;
+  right: 6%;
+  top: 6%;
+  background-color: var(--dark-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--white-color);
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .project-join-buttons {
@@ -13,6 +51,13 @@
   gap: 10px;
   width: 95%;
   margin-left: 40px;
+}
+
+.project-showcase-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 .project-mentor-button {
@@ -39,6 +84,11 @@
 
 .project-mentor-button:disabled {
   cursor: not-allowed;
+}
+
+.project-details-page-btn:disabled {
+  cursor: not-allowed;
+  background-color: #444;
 }
 
 .search-header {

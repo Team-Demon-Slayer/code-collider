@@ -7,7 +7,7 @@ import {
 } from '@/app/api/_db/_models/projectsModels';
 import useCommunityContext from '../../useCommunityContext';
 // import { projects, query } from '../../temp-fake-data';
-import ProjectCard from '../../ProjectCard';
+import ShowcaseCard from '../../ShowcaseCard';
 
 export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,7 @@ export default function ShowcasePage({ params: { page } }) {
       setIsLoading(true);
       console.log({page}); // FIXME: test
       const projects = await getProjectPage(page, 10, true);
+      console.log(projects); // FIXME: test
       setProjects(projects);
       setIsLoading(false);
     }
@@ -30,7 +31,7 @@ export default function ShowcasePage({ params: { page } }) {
         {isLoading ? (
           <span className="loader"></span>
         ) : (
-          projects.map(p => <ProjectCard key={p.if} project={p} />)
+          projects.map(p => <ShowcaseCard key={p.if} project={p} />)
         )}
       </div>
     </>
