@@ -173,6 +173,7 @@
 
 .message-board-title h2 {
   margin: 0px;
+  color: var(--dark-color);
 }
 
 .message-board-messages {
@@ -261,6 +262,8 @@
   padding: 10px;
   resize: none;
   border-radius: 15px 15px 35px 35px;
+  background-color: var(--white-color);
+  color: var(--dark-color);
 }
 
 .send-message-input::-webkit-scrollbar {

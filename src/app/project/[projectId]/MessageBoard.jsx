@@ -104,9 +104,9 @@ export default function MessageBoard({
                   </div>
                 );
               })}
+              <div ref={messageEndRef} />
             </>
           )}
-          <div ref={messageEndRef} />
         </div>
         <form className="message-input-field" onSubmit={handleSendMessage}>
           <textarea
