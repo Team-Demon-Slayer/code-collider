@@ -8,6 +8,7 @@ import {
 import useCommunityContext from '../../useCommunityContext';
 import { getExpandedUser } from '@/app/api/_db/_models/usersModels';
 import ShowcaseCard from '../../ShowcaseCard';
+import Pagination from '../../Pagination';
 
 export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,6 +47,7 @@ export default function ShowcasePage({ params: { page } }) {
           projects.map(p => <ShowcaseCard key={p.id} project={p} userUpvotes={userUpvotes} />)
         )}
       </div>
+      <Pagination pages={5} />
     </>
   );
 }

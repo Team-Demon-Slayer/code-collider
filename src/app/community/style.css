@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 90%;
 }
 
@@ -124,8 +124,8 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 50px;
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 .search-input{
@@ -142,6 +142,33 @@
   border-radius: 20px;
   box-shadow: 2px 2px 1px 1px var(--red-color);
   top: -10px;
+}
+
+/* a page containter that show pagination at bottom horizontally */
+.pages-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  padding-top: 10px;
+}
+
+.page-number {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd; /* Optional */
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.active-page-number {
+  background-color: var(--red-color);
+  color: white;
+  border: 1px solid var(--red-color);
 }
 
 .loader {
