@@ -36,17 +36,17 @@ export default function TaskModal({
 
   const sendUpdate = async () => {
     const newTask = {
-      ...task,
       title,
       description,
     };
-    await handleEditTask(task.task_id, newTask);
+    await handleEditTask(task.id, newTask);
     setEdit(false);
     setChanges(false);
+    handleShowModal(false);
   };
 
   const deleteAndClose = async () => {
-    await handleDeleteTask(task.task_id, date);
+    await handleDeleteTask(task.id);
     handleShowModal(false);
   };
 
@@ -125,7 +125,7 @@ export default function TaskModal({
         </div>
         <div className="task-modal-footer">
           <button
-            onClick={() => handleMarkComplete(task.task_id)}
+            onClick={() => handleMarkComplete(task.id)}
             className={
               task.complete
                 ? "task-modal-complete-btn task-modal-complete-btn-completed"

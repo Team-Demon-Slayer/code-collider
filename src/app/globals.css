@@ -1,10 +1,18 @@
+:root {
+  --dark-color: #ffffff;
+  --red-color: #ff206e;
+  --yellow-color: #fbff12;
+  --teal-color: #41ead4;
+  --white-color: #0c0f0a;
+  --grey-color: #161a12;
+}
 [data-theme="dark"] {
   --dark-color: #ffffff;
   --red-color: #ff206e;
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
   --white-color: #0c0f0a;
-  --bg-color: #0c0f0afb;
+  --grey-color: #161a12;
 }
 
 body {
@@ -17,7 +25,7 @@ body {
   align-items: flex-start;
   position: relative;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
-  background-color: var(--bg-color);
+  background-color: var(--white-color);
 }
 body section {
   margin: 0px;
@@ -49,7 +57,7 @@ body section {
   --yellow-color: #fbff12;
   --teal-color: #41ead4;
   --dark-color: #0c0f0a;
-  --bg-color: #f3f3f3f7;
+  --grey-color: #f3f3f3f7;
 }
 
 .modal-overlay {

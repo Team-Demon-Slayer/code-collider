@@ -8,6 +8,7 @@
   overflow-y: hidden;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
   user-select: none;
+  border-right: 1px solid #ffffff1a;
 }
 .side-nav .logo {
   width: 100%;
@@ -69,6 +70,7 @@
   z-index: 10000;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
   user-select: none;
+  /* border-bottom: 1px solid #ffffff1a; */
 }
 
 .top-nav .page-title {

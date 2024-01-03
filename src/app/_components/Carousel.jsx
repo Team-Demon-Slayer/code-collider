@@ -9,6 +9,7 @@ export default function Carousel({ projects, getProject, header }) {
   const [firstPointer, setFirstPointer] = useState(0);
   const [secondPointer, setSecondPointer] = useState(1);
   const [thirdPointer, setThirdPointer] = useState(2);
+  const [onProject, setOnProject] = useState(false);
 
   const handleNext = () => {
     if (!projects[thirdPointer + 1]) {
@@ -61,52 +62,63 @@ export default function Carousel({ projects, getProject, header }) {
   };
 
   useEffect(() => {
-    const data = [
-      projects[firstPointer],
-      projects[secondPointer],
-      projects[thirdPointer],
-    ];
+    if (projects.length < 1) return;
+    let data;
+    if (projects.length >= 3) {
+      data = [
+        projects[firstPointer],
+        projects[secondPointer],
+        projects[thirdPointer],
+      ];
+    } else {
+      data = projects.slice(0, projects.length);
+    }
+    console.log("data", data);
     setDisplay(data);
-  }, [firstPointer]);
+  }, [firstPointer, projects]);
 
   return (
     display && (
       <div className="carousel-main">
         <FaChevronLeft className="prev-project-btn" onClick={handlePrev} />
 
-        {display.map((project) => {
+        {display?.map((project) => {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
-            <div
-              key={project.id}
-              className="carousel-item-main"
-              onClick={() => getProject(project)}
-            >
-              <div className="carousel-header">{header}</div>
+            (openSpots > 0 ||
+              !project.active ||
+              header === "Current Projects") && (
+              <div
+                key={project.id}
+                className="carousel-item-main"
+                onClick={() => getProject(project)}
+              >
+                <div className="carousel-header">{header}</div>
 
-              <div className="carousel-item-title">{project.title}</div>
-              <div className="carousel-item-owner">
-                @{project.owner.username}
-              </div>
-              <div className="carousel-item-languages">
-                {project.languages.map((language) => {
-                  return (
-                    <img
-                      src={`https://skillicons.dev/icons?i=${language.url}`}
-                      className="carousel-language-icon"
-                      key={language.url}
-                    />
-                  );
-                })}
-              </div>
-              <div className="carousel-item-description">{text}</div>
-              {project.active && (
-                <div className="carousel-item-status">
-                  {openSpots} spots available
+                <div className="carousel-item-title">{project.title}</div>
+                <div className="carousel-item-owner">
+                  @{project.owner.username}
                 </div>
-              )}
-            </div>
+                <div className="carousel-item-languages">
+                  {project.languages.map((language) => {
+                    return (
+                      <img
+                        src={`https://skillicons.dev/icons?i=${language.url}`}
+                        className="carousel-language-icon"
+                        key={language.url}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="carousel-item-description">{text}</div>
+                {project.active && (
+                  <div className="carousel-item-status">
+                    {openSpots} spots available
+                  </div>
+                )}
+              </div>
+            )
           );
         })}
 

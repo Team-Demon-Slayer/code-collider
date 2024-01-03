@@ -3,33 +3,39 @@
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import useCommunityContext from './useCommunityContext';
+import { useState, useEffect } from 'react';
 import '../_stylesheets/currentProjectStyle.css';
 
-export default function ProjectCard({ project }) {
+const testIfUpvoted = (userUpvotes, projectId) => {
+  if (!userUpvotes) return false;
+  return userUpvotes.some(({ project_id }) => project_id === projectId);
+};
+
+export default function ProjectCard({ project, userUpvotes }) {
   const router = useRouter();
   const { user } = useCommunityContext();
   const supabase = createClientComponentClient();
-  const avaliableSpots =project.max_developers -  project.users.length;
+  const [upvoted, setUpvoted] = useState(true);
+  const [isUpvoteLoading, setIsUpvoteLoading] = useState(true);
 
-  const getUserIdWithEmail = async email => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('email', email);
-    if (error) {
-      console.log(error);
+  useEffect(() => {
+    setUpvoted(testIfUpvoted(userUpvotes, project.id));
+    if (userUpvotes && project) {
+      setIsUpvoteLoading(false);
     }
-    return data[0].id;
-  };
+  }, [userUpvotes, project]);
 
-  const handleJoinProject = async () => {
-    const userId = await getUserIdWithEmail(user.email);
-    console.log(userId);
-    await supabase
-      .from('projects_users')
-      .insert({ project_id: project.id, user_id: userId });
+  const handleViewProject = async () => {
     router.push(`/project/${project.id}`);
   };
+
+  const handleUpvoteProject = async () => {
+    await supabase
+      .from('upvotes')
+      .insert({ project_id: project.id, user_id: user.id });
+    setUpvoted(true);
+  };
+
   return (
     <div className="current-project-details-info">
       <div className="project-card-head">
@@ -38,7 +44,7 @@ export default function ProjectCard({ project }) {
             {project.title} - @{project.owner.username}
           </div>
         </div>
-        <div className="project-spot">{avaliableSpots} spots avaliable</div>
+        <div className="project-spot">{project.upvotes[0].count} upvotes</div>
       </div>
       <div className="languages-current">
         {project.languages.map(({ url, name }) => {
@@ -66,27 +72,27 @@ export default function ProjectCard({ project }) {
             );
           })}
         </div>
-      </div>
-      <div className="project-join-buttons">
-        {project.mentor === null ? (
-          <button className="project-mentor-button">Mentor Project</button>
-        ) : (
-          <button className="project-mentor-button" disabled>
-            No Mentor
-          </button>
-        )}
-        {avaliableSpots > 0 ? (
+        <div className="project-showcase-buttons">
           <button
-            onClick={handleJoinProject}
+            onClick={handleViewProject}
             className="project-details-page-btn"
           >
-            Join Project
+            View Project
           </button>
-        ) : (
-          <button className="project-details-page-btn" disabled>
-            Spots Full
-          </button>
-        )}
+          {!isUpvoteLoading &&
+            (upvoted ? (
+              <button className="project-upvote-button" disabled>
+                ✅
+              </button>
+            ) : (
+              <button
+                onClick={handleUpvoteProject}
+                className="project-upvote-button"
+              >
+                Upvote
+              </button>
+            ))}
+        </div>
       </div>
     </div>
   );
