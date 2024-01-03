@@ -248,7 +248,11 @@ export default function ProjectPage({ params }) {
     messages && (
       <div className="main-container">
         <div className="project-deliverables-link">
-          <ProjectDetails project_meta={project_meta} username={username} />
+          <ProjectDetails
+            project_meta={project_meta}
+            username={username}
+            userId={userId}
+          />
           <Deliverables
             deliverables={deliverables}
             handleMarkComplete={handleMarkComplete}

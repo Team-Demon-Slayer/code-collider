@@ -103,6 +103,62 @@
   margin-bottom: 20px;
 }
 
+.team-member {
+  margin-right: 15px;
+  position: relative;
+}
+
+.online-indicator-user-1 {
+  background-color: var(--red-color);
+  position: absolute;
+  top: -10px;
+  left: 90%;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--dark-color);
+}
+.online-indicator-user-2 {
+  background-color: var(--yellow-color);
+  position: absolute;
+  top: -3px;
+  left: 89%;
+  border-radius: 50px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--dark-color);
+}
+.online-indicator-user-3 {
+  background-color: var(--teal-color);
+  position: absolute;
+  top: 0;
+  left: 90%;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--dark-color);
+}
+.online-indicator-user-4 {
+  background-color: var(--dark-color);
+  position: absolute;
+  top: 0;
+  left: 90%;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--dark-color);
+}
+.online-indicator-user-5 {
+  background-color: var(--white-color);
+  position: absolute;
+  top: 0;
+  left: 90%;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--dark-color);
+}
+
 .project-details-footer {
   display: flex;
   width: 100%;
@@ -134,10 +190,6 @@
 .project-details-header-repo-btn:hover {
   scale: 0.97;
   opacity: 0.7;
-}
-
-.team-member {
-  margin-right: 5px;
 }
 
 .message-board-main {
