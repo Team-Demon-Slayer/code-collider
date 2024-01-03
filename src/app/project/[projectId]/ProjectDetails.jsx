@@ -19,10 +19,19 @@ export default function ProjectDetails({ project_meta, username, userId }) {
     const roomOne = supabase.channel(`${project_meta.id}online`, {
       config: {
         presence: {
-          key: userId, // This assumes 'userId' is a unique identifier for each user
+          key: userId,
         },
       },
     });
+
+    const updateOnlineMembers = (newState) => {
+      if (mounted) {
+        setOnlineMember((prevMembers) => {
+          // Create a new object to ensure React recognizes the state change
+          return { ...prevMembers, ...newState };
+        });
+      }
+    };
 
     const subscribeToPresence = async () => {
       await roomOne.subscribe((status) => {
@@ -42,23 +51,32 @@ export default function ProjectDetails({ project_meta, username, userId }) {
         .on("presence", { event: "sync" }, () => {
           const newState = roomOne.presenceState();
           console.log("sync", newState);
-          setOnlineMember(newState); // You should update the state here
+          updateOnlineMembers(newState);
         })
         .on("presence", { event: "join" }, ({ key, newPresences }) => {
           console.log("join", key, newPresences);
+          updateOnlineMembers(newPresences);
         })
         .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
           console.log("leave", key, leftPresences);
+          setOnlineMember((prevMembers) => {
+            const updatedMembers = { ...prevMembers };
+            delete updatedMembers[key];
+            return updatedMembers;
+          });
         });
+
+      await subscribeToPresence().catch(console.error);
     };
 
-    subscribeToPresence().catch(console.error);
+    // Subscribe when the component mounts
+    subscribeToPresence();
 
     return () => {
       mounted = false;
       roomOne.unsubscribe().catch(console.error);
     };
-  }, [project_meta.id, userId]);
+  }, [project_meta.id, userId, username]);
 
   return (
     project_meta && (

@@ -222,12 +222,17 @@ export default function ProjectPage({ params }) {
       .channel(`${project_meta?.project_id}tasks`)
       .on(
         "postgres_changes",
-        {
-          event: "INSERT, UPDATE",
-          schema: "public",
-          table: "deliverables",
-        },
+        { event: "INSERT", schema: "public", table: "deliverables" },
         (payload) => {
+          console.log("INSERT payload:", payload);
+          getData();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "deliverables" },
+        (payload) => {
+          console.log("UPDATE payload:", payload);
           getData();
         }
       )
@@ -236,7 +241,7 @@ export default function ProjectPage({ params }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [project_meta, getData]); // Add dependencies here
 
   if (isLoading) {
     return <span className="loader"></span>;

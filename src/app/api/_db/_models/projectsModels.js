@@ -114,3 +114,72 @@ export const getProjectPageByLanguage = async (
   console.log(rangeStart, rangeEnd);
   return data;
 };
+
+export const getMyProjects = async (userId) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select(`
+      projects!projects_users(
+        id,
+        title,
+        owner(id,username),
+        languages(name,url),
+        description,
+        max_developers,
+        users!projects_users(id,username),
+        start_date,
+        finish_date,
+        mentor(id,username),
+        active,
+        upvotes
+      )
+    `)
+    .eq('id', userId)
+    .order(
+      "start_date",
+      { referencedTable: "projects", ascending: false },
+    );
+
+    if (error) {
+      console.error(error);
+    }
+
+    return data;
+}
+
+export const getMyMentorProjects = async (userId) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select(`
+      projects!projects_mentor_fkey(
+        id,
+        title,
+        owner(id,username),
+        languages(name,url),
+        description,
+        max_developers,
+        users!projects_users(id,username),
+        start_date,
+        finish_date,
+        mentor(id,username),
+        active,
+        upvotes
+      )
+    `)
+    .eq('id', userId)
+    .order(
+      "start_date",
+      { referencedTable: "projects", ascending: false },
+    );
+
+    if (error) {
+      console.error(error);
+    }
+
+    return data;
+}
+
+export const joinProject = async (projectId) => {
+  const {data, error} = await supabase.auth.getUser();
+  return user;
+}
