@@ -72,7 +72,7 @@ export default function Carousel({ projects, getProject, header }) {
     } else {
       data = projects.slice(0, projects.length);
     }
-
+    console.log("data", data);
     setDisplay(data);
   }, [firstPointer, projects]);
 
@@ -85,7 +85,7 @@ export default function Carousel({ projects, getProject, header }) {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
-            openSpots > 0 || !project.active && (
+            (openSpots > 0 || !project.active) && (
               <div
                 key={project.id}
                 className="carousel-item-main"
