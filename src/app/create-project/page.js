@@ -1,7 +1,12 @@
 "use client"
 
+import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation';
+import supabaseServer from "../../api/_db/index.js";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import React, { useState, useEffect } from "react";
-import searchLanguages from './helper-funcs/searchLanguages';
+import searchLanguages from './helper-funcs/searchLanguages.js';
+import isALanguageIn from './helper-funcs/isALanguageIn.js';
 import Image from 'next/image';
 import formatDate from '../_utils/formatDate.js';
 import '../_stylesheets/createProject.css'
@@ -17,6 +22,9 @@ export default function CreateProject() {
   const [description, setDescription] = useState('My Project Description');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const supabase = createClientComponentClient();
+
+  const router = useRouter();
 
   const update = {
     title: applyFunc.bind(null, setTitle),
@@ -27,10 +35,39 @@ export default function CreateProject() {
     endDate: applyFunc.bind(null, setEndDate),
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log([title, engineers, languages, description, Date.parse(startDate), Date.parse(endDate)]);
     if (title && engineers && languages && description && startDate && endDate && startDate <= endDate) {
-      alert('Project Created!');
+      const { data: userId, error: idError } = await supabaseServer.auth.getSession();
+      let newId = uuidv4();
+      if (idError) {
+        console.error(idError);
+        return;
+      }
+      const { error } = supabase.from('projects').insert({
+        id: newId,
+        title,
+        owner: userId.session.user.id,
+        description,
+        max_developers: engineers,
+        repo_link: '',
+        start_date: Date.parse(startDate),
+        finish_date: Date.parse(endDate),
+        mentor: null,
+      });
+      if (error) {
+        console.error(error);
+        return;
+      }
+      const { error: projectError } = supabase.from('projects_users').insert({
+        project_id: newId,
+        user_id: userId.session.user.id,
+      })
+      if (projectError) {
+        console.error(projectError);
+        return;
+      }
+      router.push(`/project/${newId}`);
     } else if (startDate > endDate) {
       alert('Start date cannot be after end date!');
     } else {
@@ -52,7 +89,7 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-engineers'>
-      <p className='create-project-text'>Engineers</p>
+        <p className='create-project-text'>Engineers</p>
         <select defaultValue={5} name='engineers' onChange={(e) => update.engineers(e.target.value)}>
           <option value={1}>1</option>
           <option value={2}>2</option>
@@ -63,7 +100,7 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-start-date'>
-      <p className='create-project-text'>Start Date</p>
+        <p className='create-project-text'>Start Date</p>
         <input
           value={String(startDate.getFullYear()) + '-' + String(startDate.getMonth() + 1).padStart(2, '0') + '-' + String(startDate.getDate()).padStart(2, '0')}
           onChange={(e) => {
@@ -78,7 +115,7 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-end-date'>
-      <p className='create-project-text'>End Date</p>
+        <p className='create-project-text'>End Date</p>
         <input
           value={String(endDate.getFullYear()) + '-' + String(endDate.getMonth() + 1).padStart(2, '0') + '-' + String(endDate.getDate()).padStart(2, '0')}
           onChange={(e) => {
@@ -92,7 +129,7 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-description'>
-      <p className='create-project-text'>Project Description</p>
+        <p className='create-project-text'>Project Description</p>
         <textarea
           value={description}
           onChange={(e) => update.description(e.target.value)}
@@ -102,24 +139,28 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-languages'>
-      <p className='create-project-text'>Languages</p>
+        <p className='create-project-text'>Languages</p>
         <input type="text" id="searchBar" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
         <ul className='languageSearchResults'>
           {searchLanguages(searchInput.slice(0, maximumSearchResults)).map(({ name, url }) => (
-            <li key={name} onClick={() => update.languages([...languages, name])}>{name}</li>
+            <li key={name} onClick={() => {
+              if (isALanguageIn({ name, url }, languages)) {
+                update.languages(languages.filter((l) => l.name !== name))
+              } else {
+                update.languages([...languages, { name, url }])
+              }
+            }}>{name}</li>
           ))}
         </ul>
         <ul className='create-project-languages-icons'>
           {languages.map((language) => (
-            <li key={language} onClick={() => update.languages(languages.filter((l) => l !== language))}>
-              <Image alt={language} src={`https://skillicons.dev/icons?i=${language}`} />
-            </li>
+            <img className='create-project-language-icon' alt={language.name} src={`https://skillicons.dev/icons?i=${language.url}`} key={language.url} onClick={() => update.languages(languages.filter((l) => l !== language))} />
           ))}
         </ul>
       </div>
 
       <div className='create-project-submit'>
-        <button onClick={onSubmit}>Submit</button>
+        <button onClick={onSubmit}>Create Project</button>
       </div>
     </div>
   );

@@ -37,6 +37,7 @@ const SideNav = ({ updateTitle, pageTitle, handleSignOut }) => {
     { title: "PROJECT PAGE", link: "/project" },
     { title: "COMMUNITY SHOWCASE", link: "/community/showcase" },
     { title: "BROWSE PROJECTS", link: "/community/browse" },
+    { title: "CREATE PROJECT", link: "/create-project" },
   ];
 
   return (

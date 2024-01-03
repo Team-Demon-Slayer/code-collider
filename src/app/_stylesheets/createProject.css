@@ -133,8 +133,14 @@
   border-radius: 5px;
   margin-bottom: -12vh;
   margin-left: 2vw;
-  padding-left: 0;
-  height: 10vh;
+  padding-left: 0.25vw;
+  height: 12vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.create-project-languages-icon {
+  transform: scale(0.45);
 }
 
 /* Submit */
