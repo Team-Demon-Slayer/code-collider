@@ -22,6 +22,7 @@ export default function CreateProject() {
   const [description, setDescription] = useState('My Project Description');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [hours, setHours] = useState(4)
   const supabase = createClientComponentClient();
 
   const router = useRouter();
@@ -56,7 +57,7 @@ export default function CreateProject() {
         repo_link: 'www.github.com',
         start_date: start,
         finish_date: end,
-        estimated_hours: 4,
+        estimated_hours: hours,
         // mentor: null,
         // upvotes: 0,
       });
@@ -105,7 +106,7 @@ export default function CreateProject() {
       </div>
 
       <div className='create-project-start-date'>
-        <p className='create-project-text'>Start Date</p>
+        <p className='create-project-text'>Scope</p>
         <input
           value={String(startDate.getFullYear()) + '-' + String(startDate.getMonth() + 1).padStart(2, '0') + '-' + String(startDate.getDate()).padStart(2, '0')}
           onChange={(e) => {
@@ -117,10 +118,6 @@ export default function CreateProject() {
           id='start-date-input'
           type='date'
           placeholder='Start Date' />
-      </div>
-
-      <div className='create-project-end-date'>
-        <p className='create-project-text'>End Date</p>
         <input
           value={String(endDate.getFullYear()) + '-' + String(endDate.getMonth() + 1).padStart(2, '0') + '-' + String(endDate.getDate()).padStart(2, '0')}
           onChange={(e) => {
@@ -131,6 +128,16 @@ export default function CreateProject() {
           className='create-project-end-date-input'
           type='date'
           placeholder='End Date' />
+        <input
+          value={hours}
+          onChange={(e) => update.hours(e.target.value)}
+          className='create-project-hours-input'
+          type='number'
+          placeholder='Estimated Hours' />
+      </div>
+
+      <div className='create-project-end-date'>
+        <p className='create-project-text'>End Date</p>
       </div>
 
       <div className='create-project-description'>
