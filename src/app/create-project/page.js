@@ -5,12 +5,21 @@ import { useRouter } from "next/navigation";
 import supabaseServer from "../api/_db/index.js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import React, { useState, useEffect } from "react";
-import searchLanguages from "./helper-funcs/searchLanguages.js";
 import isALanguageIn from "./helper-funcs/isALanguageIn.js";
 import Image from "next/image";
 import formatDate from "../_utils/formatDate.js";
 import "../_stylesheets/createProject.css";
 import { MdOutlineDateRange } from "react-icons/md";
+
+const supabase = createClientComponentClient();
+
+const getLanguages = async () => {
+  const allLanguages = await supabase.from("languages").select();
+  console.log(allLanguages.data);
+  return allLanguages.data.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+};
 
 const applyFunc = (func, newValue) => {
   func(newValue);
@@ -19,13 +28,25 @@ const applyFunc = (func, newValue) => {
 export default function CreateProject() {
   const [title, setTitle] = useState("My Project");
   const [engineers, setEngineers] = useState(5);
+  const [allLanguages, setAllLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [description, setDescription] = useState("My Project Description");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const supabase = createClientComponentClient();
-
+  const [hours, setHours] = useState(4);
   const router = useRouter();
+
+  useEffect(() => {
+    getLanguages().then((data) => {
+      setAllLanguages(data);
+    });
+  }, []);
+
+  const searchLanguages = (input) => {
+    return allLanguages.filter((language) => {
+      return language.name.toLowerCase().includes(input.toLowerCase());
+    });
+  }
 
   const update = {
     title: applyFunc.bind(null, setTitle),
@@ -202,18 +223,19 @@ export default function CreateProject() {
             {searchInput !== "" && (
               <div className="languageSearchResults">
                 {searchLanguages(
-                  searchInput.slice(0, maximumSearchResults)
-                ).map(({ name, url }) => (
+                  searchInput
+                ).slice(0, maximumSearchResults).map(({ id, name, url }) => (
                   <div
                     key={name}
                     className="create-project-single-language"
                     onClick={() => {
-                      if (isALanguageIn({ name, url }, languages)) {
+                      if (isALanguageIn({id, name, url}, languages)) {
                         update.languages(
                           languages.filter((l) => l.name !== name)
                         );
                       } else {
-                        update.languages([...languages, { name, url }]);
+                        update.languages([...languages, { id, name, url }]);
+                        console.log(languages)
                       }
                     }}
                   >
