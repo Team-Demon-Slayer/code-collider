@@ -1,8 +1,9 @@
 "use client";
+
+import "../_stylesheets/carouselStyle.css";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import truncateString from "../_utils/truncateString.js";
-import "../_stylesheets/carouselStyle.css";
 
 export default function Carousel({ projects, getProject, header }) {
   const [display, setDisplay] = useState(null);
@@ -11,6 +12,7 @@ export default function Carousel({ projects, getProject, header }) {
   const [thirdPointer, setThirdPointer] = useState(2);
   const [onProject, setOnProject] = useState(false);
 
+  // next button
   const handleNext = () => {
     if (!projects[thirdPointer + 1]) {
       setFirstPointer(firstPointer + 1);
@@ -35,8 +37,7 @@ export default function Carousel({ projects, getProject, header }) {
     return;
   };
 
-  // previous
-
+  // previous button
   const handlePrev = () => {
     if (!projects[thirdPointer - 1]) {
       setFirstPointer(firstPointer - 1);
@@ -71,9 +72,8 @@ export default function Carousel({ projects, getProject, header }) {
         projects[thirdPointer],
       ];
     } else {
-      data = projects.slice(0, projects.length);
+      data = projects;
     }
-    console.log("data", data);
     setDisplay(data);
   }, [firstPointer, projects]);
 

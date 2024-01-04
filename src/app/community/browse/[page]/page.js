@@ -18,7 +18,6 @@ export default function BrowsePage({ params: { page } }) {
   useEffect(() => {
     async function getprojects() {
       setIsLoading(true);
-      console.log({page}); // FIXME: test
       const projects = await getProjectPage(page, 10, true);
       setProjects(projects);
       setIsLoading(false);

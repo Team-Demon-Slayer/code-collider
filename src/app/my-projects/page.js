@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import UserProjects from "../my-projects/UserProjects.jsx";
-import { getMyProjects } from '../api/_db/_models/projectsModels.js';
 import supabase from '../api/_db/index.js';
+import { getMyProjects } from '../api/_db/_models/projectsModels.js';
+import UserProjects from "../my-projects/UserProjects.jsx";
 
 export default function MyProjectsPage() {
   const [data, setData] = useState(null);
-  const [currentProjects, setCurrentProjects] = useState(null);
-  const [pastProjects, setPastProjects] = useState(null);
+  const [currentProjects, setCurrentProjects] = useState([]);
+  const [pastProjects, setPastProjects] = useState([]);
 
   const getSelectedProject = async (userId) => {
     const data = await getMyProjects(userId);
