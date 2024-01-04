@@ -77,7 +77,7 @@ export default function ProjectCard({ project, userUpvotes }) {
         <div className="project-showcase-buttons">
           <button
             onClick={handleViewProject}
-            className="project-details-page-btn"
+            className="project-join-btn"
           >
             View Project
           </button>

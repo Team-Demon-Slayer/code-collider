@@ -71,12 +71,12 @@ export default function ProjectCard({ project }) {
         {avaliableSpots > 0 && !joindisabled ? (
           <button
             onClick={handleJoinProject}
-            className="project-details-page-btn"
+            className="project-join-btn"
           >
             Join Project
           </button>
         ) : (
-          <button className="project-details-page-btn" disabled>
+          <button className="project-join-btn" disabled>
             Unalbe to Join
           </button>
         )}
