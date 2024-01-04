@@ -1,0 +1,56 @@
+.overlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000054;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.modal {
+  display: flex;
+  position:relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border-radius: 50px;
+  padding: 25px;
+  min-width: 50vw;
+  min-height: 50vh;
+}
+.modal-header {
+  display: flex;
+  padding: 10px;
+  position: absolute;
+  font-weight:600;
+  font-size: x-large;
+  top: 0;
+}
+.save-button {
+  display: flex;
+  bottom:0;
+}
+.close-modal {
+  display:flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  font-size: 30px;
+  color: var(--white-color);
+  cursor: pointer;
+}
+.close-modal:hover {
+  color: var(--red-color);
+}
+.textarea {
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
+  width:30vw;
+  height:20vh;
+}

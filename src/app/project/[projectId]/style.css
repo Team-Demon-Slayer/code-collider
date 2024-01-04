@@ -589,7 +589,7 @@
   align-items: center;
   border-radius: 10px;
   font-size: 15px;
-  top: 40.5%;
+  top: 42.5%;
 }
 
 .deliverables-day-add-task {
@@ -600,7 +600,7 @@
   height: 20px;
   padding: 5px 10px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  top: 76%;
+  top: 78%;
   position: fixed;
   cursor: pointer;
   z-index: 10;
