@@ -44,22 +44,27 @@ export default function CreateProject() {
         console.error(idError);
         return;
       }
-      const { error } = supabase.from('projects').insert({
+      const start = new Date(startDate).toISOString().split('T')[0];
+      const end = new Date(endDate).toISOString().split('T')[0];
+      const { error } = await supabase.from('projects').insert({
         id: newId,
         title,
+        active: true,
         owner: userId.session.user.id,
         description,
         max_developers: engineers,
-        repo_link: '',
-        start_date: Date.parse(startDate),
-        finish_date: Date.parse(endDate),
-        mentor: null,
+        repo_link: 'www.github.com',
+        start_date: start,
+        finish_date: end,
+        estimated_hours: 4,
+        // mentor: null,
+        // upvotes: 0,
       });
       if (error) {
         console.error(error);
         return;
       }
-      const { error: projectError } = supabase.from('projects_users').insert({
+      const { error: projectError } = await supabase.from('projects_users').insert({
         project_id: newId,
         user_id: userId.session.user.id,
       })
@@ -67,7 +72,7 @@ export default function CreateProject() {
         console.error(projectError);
         return;
       }
-      router.push(`/project/${newId}`);
+      router.push(`/my-projects`);
     } else if (startDate > endDate) {
       alert('Start date cannot be after end date!');
     } else {
