@@ -69,9 +69,9 @@ export default function Login() {
   return (
     <div className="container">
       <h1>
-        CODE <br /> COLLIDER{" "}
+        <img className="logo" src="/logo.png" alt="Logo" />
+        {/* {" "} ODE <br /> COLLIDER{" "} */}
       </h1>
-      <h2>Collide. Collab. Create.</h2>
       <div className="login-container">
         <h1 className="login-header">Login</h1>
         <form>
@@ -115,6 +115,7 @@ export default function Login() {
           password={password}
         />
       )}
+      <h2>Collide. Collab. Create.</h2>
     </div>
   );
 }
