@@ -8,6 +8,7 @@ import {
 import useCommunityContext from '../../useCommunityContext';
 // import { projects, query } from '../../temp-fake-data';
 import ProjectCard from '../../ProjectCard';
+import Pagination from '../../Pagination';
 
 export default function BrowsePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +18,6 @@ export default function BrowsePage({ params: { page } }) {
   useEffect(() => {
     async function getprojects() {
       setIsLoading(true);
-      console.log({page}); // FIXME: test
       const projects = await getProjectPage(page, 10, true);
       setProjects(projects);
       setIsLoading(false);
@@ -33,6 +33,7 @@ export default function BrowsePage({ params: { page } }) {
           projects.map(p => <ProjectCard key={p.if} project={p} />)
         )}
       </div>
+      <Pagination pages={5} />
     </>
   );
 }
