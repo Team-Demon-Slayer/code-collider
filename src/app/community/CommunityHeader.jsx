@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import useCommunityContext from './useCommunityContext';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import useDebounce from './hooks/useDebounce';
 
 const filteredLanguages = (languages, language) => {
   if (!language) return [];
@@ -28,9 +27,7 @@ export default function CommunityHeader() {
     languageSelected,
     setLanguageSelected
   } = useCommunityContext();
-  const debouncedKeyword = useDebounce(keyword, 1000);
 
-  useEffect(() => {console.log(debouncedKeyword)}, [debouncedKeyword]); // FIXME: remove
 
   // GET endpoint from URL
   const pathname = usePathname();
