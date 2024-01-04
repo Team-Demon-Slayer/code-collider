@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { Switch } from 'react-icons/ai';
 import { RxSwitch } from "react-icons/rx";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "../nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +13,7 @@ export default function TopNav({ theme, toggleTheme, avatar, pageTitle }) {
   const getToggleIcon = () => {
     return theme === "dark" ? faToggleOn : faToggleOff;
   };
+  console.log( avatar );
   // const [avatar, setAvatar] = useState('');
   // const supabase = createClientComponentClient();
   // const router = useRouter();
@@ -57,8 +58,11 @@ export default function TopNav({ theme, toggleTheme, avatar, pageTitle }) {
         />
       </div>
       <div className="user-info">
-        {avatar && <Image src={avatar} alt="Avatar" className="avatar" />}
-        {newMessage && <div className="new-message"></div>}
+        {avatar && (
+        <img className="avatar" src={avatar} alt="avatar"/>
+        )}
+        {/* {avatar && <p style={{color:"white"}}>{avatar}</p>} */}
+        {/* {newMessage && <div className="new-message"></div>} */}
       </div>
     </header>
   );
