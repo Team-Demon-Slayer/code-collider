@@ -1,9 +1,7 @@
-// const db = require("../index.js");
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { previousMonday, nextMonday } from "date-fns";
-
-
+const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
 const supabase = createClientComponentClient();
+
+const { previousMonday, nextMonday } = require("date-fns");
 
 export const getDeliverables = async (projectId, curDate) => {
   curDate = curDate || new Date();

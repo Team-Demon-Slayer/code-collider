@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { getDeliverables } from './_db/_models/deliverablesModels.js';
 import { getExpandedUser } from './_db/_models/usersModels.js';
-import { getProjectPage, joinProject, getMyProjects, getMyMentorProjects } from './_db/_models/projectsModels.js';
+import { getProjectPage, joinProject, getMyProjects, getMyMentorProjects, getCurrentProject } from './_db/_models/projectsModels.js';
 
 export default function Api() {
 
@@ -55,6 +55,15 @@ export default function Api() {
     getMyMentorProjects('9c202e1c-2ad3-403e-b0ee-62310138aa88')
     .then((res) => {
       console.log('Get My Mentor Projects');
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+    getCurrentProject('9c202e1c-2ad3-403e-b0ee-62310138aa88')
+    .then((res) => {
+      console.log('Get My Current Project');
       console.log(res);
     })
     .catch((err) => {
