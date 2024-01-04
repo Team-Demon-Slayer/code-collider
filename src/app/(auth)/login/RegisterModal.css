@@ -2,8 +2,8 @@
   width: 750px;
   height: 630px;
   border-radius: 50px;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: #0c0f0a;
+  color: #fff;
 }
 
 .register-modal__title {
@@ -31,8 +31,8 @@
   border-radius: 15px;
   padding: 10px;
   background-image: none;
-  background-color: var(--white-color);
-  color: var(--dark-color);
+  background-color: #fff;
+  color: #0c0f0a;
 }
 
 .register-modal-select option:first-child {
@@ -46,8 +46,8 @@
 .language-label {
   margin: 2px;
   padding: 10px;
-  background-color: var(--white-color);
-  color: var(--dark-color);
+  background-color: #fff;
+  color: #0c0f0a;
   border-radius: 15px;
   cursor: pointer;
   user-select: none;
@@ -58,7 +58,7 @@
 
 .language-label.selected {
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
 }
 
 .hidden-checkbox {
@@ -79,7 +79,7 @@
   font-size: 20px;
   width: 55%;
   background-color: var(--teal-color);
-  color: var(--white-color);
+  color: #fff;
   margin-bottom: 40px;
   padding: 10px;
   border-radius: 15px;
@@ -90,6 +90,6 @@ a {
   margin: 15px;
   margin-bottom: 25px;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   cursor: pointer;
 }

@@ -6,7 +6,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import supabase from "../../api/_db/index.js";
 import { useRouter } from "next/navigation";
 import "../../globals.css";
-
+import { getMiniUser }  from "../../api/_db/_models/usersModels.js";
 export default function Nav() {
   const [avatar, setAvatar] = useState("");
   const [currentNavTheme, setCurrentNavTheme] = useState("light");
@@ -14,6 +14,8 @@ export default function Nav() {
   const [validUser, setValidUser] = useState(false);
   const [triggerSignout, setTriggerSignout] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentURL, setCurrentURL] = useState("");
+  const [validPath, setValidPath] = useState(false);
 
   const router = useRouter();
   const supabaseClient = createClientComponentClient();
@@ -39,6 +41,11 @@ export default function Nav() {
   };
 
   useEffect(() => {
+    setCurrentURL(window.location.pathname);
+    console.log('path:', window.location.pathname)
+  }, [router]);
+
+  useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN") setCurrentUser(session.user.email);
     });
@@ -47,6 +54,7 @@ export default function Nav() {
   useEffect(() => {
     const fetchUserData = async () => {
       const { data, error } = await supabase.auth.getSession();
+      console.log(data.session);
       if (error || !data.session) {
         setValidUser(false);
         router.push("/login");
@@ -59,9 +67,13 @@ export default function Nav() {
           .eq("id", data.session.user.id)
           .single();
 
-        /* if (profile) {
-          setAvatar("");
-        } */
+          if (data.session) {
+            const userwithavatar = await getMiniUser(data.session.user.id);
+            // const avatarUrl = users.github_username
+            //   ? `https://github.com/${users.github_username}.png`
+            //   : users.photo_url;
+            setAvatar(userwithavatar.profile_photo);
+          }
         setValidUser(true);
       }
     };
@@ -73,8 +85,16 @@ export default function Nav() {
     toggleTheme();
   }, []);
 
+  useEffect(() => {
+    if (currentURL === "/login" || currentURL === "/forgot-password" || currentURL === "/reset-password") {
+      setValidPath(false);
+    } else {
+      setValidPath(true)
+    }
+  }, [currentURL])
+
   return (
-    validUser && (
+    (validUser && validPath) && (
       <div className={`app`}>
         <SideNav
           updateTitle={updateTitle}
