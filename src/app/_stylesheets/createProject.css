@@ -1,19 +1,26 @@
 /* General */
-
-.create-project {
+.create-project-main-container {
   display: flex;
   width: 100%;
-  height: 90%;
-  max-height: 90%;
-  justify-content: flex-start;
-  align-items: flex-start;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 0px 30px;
   padding-top: 30px;
   position: relative;
   overflow-y: hidden;
   margin-top: 90px;
-  margin-left: 50px;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
+  user-select: none;
+}
+.create-project {
+  display: flex;
+  width: 100%;
+  height: 90%;
+  max-height: 90%;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-project-left-container {
@@ -39,7 +46,7 @@
   width: fit-content;
   min-width: 150px;
   height: 70px;
-  padding: 10px 10px;
+  padding: 20px;
   border-radius: 20px;
   position: relative;
   align-items: flex-end;
@@ -78,11 +85,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 30px;
+  height: 40px;
   margin-top: 20px;
   border: none;
   outline: none;
-  border-radius: 20px;
+  border-radius: 12px;
   text-align: center;
   background-color: var(--dark-color);
   color: var(--white-color);
@@ -91,9 +98,9 @@
 .create-project-description {
   display: flex;
   background-color: var(--white-color);
-  width: 460px;
-  height: 300px;
-  padding: 10px 10px;
+  width: 475px;
+  height: 255px;
+  padding: 20px;
   border-radius: 20px;
   position: relative;
   align-items: flex-end;
@@ -104,7 +111,7 @@
 
 .create-project-description-text {
   width: 100%;
-  height: 250px;
+  height: 225px;
   border: none;
   resize: none;
   border-radius: 10px;
@@ -112,6 +119,7 @@
   padding: 10px 20px;
   background-color: var(--dark-color);
   color: var(--white-color);
+  box-sizing: border-box;
 }
 
 .select-dates-start-end {
@@ -126,7 +134,7 @@
   background-color: var(--white-color);
   width: fit-content;
   min-width: 200px;
-  height: 200px;
+  height: 70px;
   padding: 10px 10px;
   border-radius: 20px;
   position: relative;
@@ -141,7 +149,7 @@
   border: none;
   outline: none;
   width: 100%;
-  height: 150px;
+  height: 40px;
   padding: 10px 20px;
   border-radius: 12px;
   background-color: var(--white-color);
@@ -155,7 +163,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 35%;
+  width: 20%;
   height: 100%;
 }
 
@@ -165,10 +173,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  height: 440px;
+  height: 455px;
   margin-top: 50px;
   background-color: var(--white-color);
-  padding: 10px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   position: relative;
@@ -177,14 +185,17 @@
 
 .create-project-search-bar {
   width: 100%;
-  margin-top: 40px;
-  padding: 10px 20px;
+  height: 40px;
+  margin-top: 30px;
+  padding: 10px 30px;
   box-sizing: border-box;
   border-radius: 10px;
   border: none;
   outline: none;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   position: relative;
+  background-color: var(--dark-color);
+  color: var(--white-color);
 }
 
 .languageSearchResults {
@@ -208,4 +219,48 @@
 .create-project-single-language:hover {
   opacity: 0.8;
   scale: 0.97;
+}
+
+.create-project-languages-icons {
+  padding: 0px;
+}
+
+.create-project-language-icon {
+  margin-right: 10px;
+}
+
+.create-project-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90px;
+  margin-top: 50px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  text-align: center;
+  background-color: var(--teal-color);
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.create-project-submit:hover {
+  opacity: 0.8;
+  scale: 0.97;
+}
+
+.create-a-project-header {
+  font-size: 50px;
+  margin: 0px;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  padding: 10px 130px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
+  margin-top: 30px;
 }

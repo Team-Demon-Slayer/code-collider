@@ -102,105 +102,108 @@ export default function CreateProject() {
   const [searchInput, setSearchInput] = useState("");
   const maximumSearchResults = 8;
   return (
-    <div className="create-project">
-      <div className="create-project-left-container">
-        <div className="project-title-engineers">
-          <div className="create-project-title">
-            <p className="create-project-text">Project Title</p>
-            <input
-              className="project-title-input"
-              value={title}
-              onChange={(e) => update.title(e.target.value)}
+    <div className="create-project-main-container">
+      <h1 className="create-a-project-header">CREATE A NEW PROJECT</h1>
+      <div className="create-project">
+        <div className="create-project-left-container">
+          <div className="project-title-engineers">
+            <div className="create-project-title">
+              <p className="create-project-text">Project Title</p>
+              <input
+                className="project-title-input"
+                value={title}
+                onChange={(e) => update.title(e.target.value)}
+                type="text"
+                placeholder="Project Title"
+              />
+            </div>
+
+            <div className="create-project-engineers">
+              <p className="create-project-text">Engineers</p>
+              <select
+                className="select-engineers"
+                defaultValue={5}
+                name="engineers"
+                onChange={(e) => update.engineers(e.target.value)}
+              >
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </select>
+            </div>
+          </div>
+          <div className="create-project-description">
+            <p className="create-project-text">Project Description</p>
+            <textarea
+              value={description}
+              onChange={(e) => update.description(e.target.value)}
+              className="create-project-description-text"
               type="text"
-              placeholder="Project Title"
+              placeholder="Project Description"
             />
           </div>
+          <div className="select-dates-start-end">
+            <div className="create-project-start-date">
+              <p className="create-project-text">Start Date</p>
+              <input
+                value={
+                  String(startDate.getFullYear()) +
+                  "-" +
+                  String(startDate.getMonth() + 1).padStart(2, "0") +
+                  "-" +
+                  String(startDate.getDate()).padStart(2, "0")
+                }
+                onChange={(e) => {
+                  const chosenDate = new Date(e.target.value);
+                  chosenDate.setDate(chosenDate.getDate() + 1);
+                  update.startDate(chosenDate);
+                }}
+                className="create-project-start-date-input"
+                id="start-date-input"
+                type="date"
+                placeholder="Start Date"
+              />
+            </div>
 
-          <div className="create-project-engineers">
-            <p className="create-project-text">Engineers</p>
-            <select
-              className="select-engineers"
-              defaultValue={5}
-              name="engineers"
-              onChange={(e) => update.engineers(e.target.value)}
-            >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-            </select>
+            <div className="create-project-end-date">
+              <p className="create-project-text">End Date</p>
+              <input
+                value={
+                  String(endDate.getFullYear()) +
+                  "-" +
+                  String(endDate.getMonth() + 1).padStart(2, "0") +
+                  "-" +
+                  String(endDate.getDate()).padStart(2, "0")
+                }
+                onChange={(e) => {
+                  const chosenDate = new Date(e.target.value);
+                  chosenDate.setDate(chosenDate.getDate() - 1);
+                  update.endDate(chosenDate);
+                }}
+                className="create-project-end-date-input"
+                type="date"
+                placeholder="End Date"
+              />
+            </div>
           </div>
         </div>
-        <div className="create-project-description">
-          <p className="create-project-text">Project Description</p>
-          <textarea
-            value={description}
-            onChange={(e) => update.description(e.target.value)}
-            className="create-project-description-text"
-            type="text"
-            placeholder="Project Description"
-          />
-        </div>
-        <div className="select-dates-start-end">
-          <div className="create-project-start-date">
-            <p className="create-project-text">Start Date</p>
+        <div className="create-project-right-container">
+          <div className="create-project-languages">
+            <p className="create-project-text">Languages</p>
             <input
-              value={
-                String(startDate.getFullYear()) +
-                "-" +
-                String(startDate.getMonth() + 1).padStart(2, "0") +
-                "-" +
-                String(startDate.getDate()).padStart(2, "0")
-              }
-              onChange={(e) => {
-                const chosenDate = new Date(e.target.value);
-                chosenDate.setDate(chosenDate.getDate() + 1);
-                update.startDate(chosenDate);
-              }}
-              className="create-project-start-date-input"
-              id="start-date-input"
-              type="date"
-              placeholder="Start Date"
+              type="text"
+              className="create-project-search-bar"
+              id="searchBar"
+              placeholder="Search..."
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-          </div>
-
-          <div className="create-project-end-date">
-            <p className="create-project-text">End Date</p>
-            <input
-              value={
-                String(endDate.getFullYear()) +
-                "-" +
-                String(endDate.getMonth() + 1).padStart(2, "0") +
-                "-" +
-                String(endDate.getDate()).padStart(2, "0")
-              }
-              onChange={(e) => {
-                const chosenDate = new Date(e.target.value);
-                chosenDate.setDate(chosenDate.getDate() - 1);
-                update.endDate(chosenDate);
-              }}
-              className="create-project-end-date-input"
-              type="date"
-              placeholder="End Date"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="create-project-right-container">
-        <div className="create-project-languages">
-          <p className="create-project-text">Languages</p>
-          <input
-            type="text"
-            className="create-project-search-bar"
-            id="searchBar"
-            placeholder="Search..."
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          {searchInput !== "" && (
-            <div className="languageSearchResults">
-              {searchLanguages(searchInput.slice(0, maximumSearchResults)).map(
-                ({ name, url }) => (
+            {searchInput !== "" && (
+              <div className="languageSearchResults">
+                {searchLanguages(
+                  searchInput.slice(0, maximumSearchResults)
+                ).map(({ name, url }) => (
                   <div
                     key={name}
                     className="create-project-single-language"
@@ -216,27 +219,27 @@ export default function CreateProject() {
                   >
                     {name}
                   </div>
-                )
-              )}
-            </div>
-          )}
-          <ul className="create-project-languages-icons">
-            {languages.map((language) => (
-              <img
-                className="create-project-language-icon"
-                alt={language.name}
-                src={`https://skillicons.dev/icons?i=${language.url}`}
-                key={language.url}
-                onClick={() =>
-                  update.languages(languages.filter((l) => l !== language))
-                }
-              />
-            ))}
-          </ul>
+                ))}
+              </div>
+            )}
+            <ul className="create-project-languages-icons">
+              {languages.map((language) => (
+                <img
+                  className="create-project-language-icon"
+                  alt={language.name}
+                  src={`https://skillicons.dev/icons?i=${language.url}`}
+                  key={language.url}
+                  onClick={() =>
+                    update.languages(languages.filter((l) => l !== language))
+                  }
+                />
+              ))}
+            </ul>
+          </div>
+          <button className="create-project-submit" onClick={onSubmit}>
+            Create Project
+          </button>
         </div>
-        <button className="create-project-submit" onClick={onSubmit}>
-          Create Project
-        </button>
       </div>
     </div>
   );
