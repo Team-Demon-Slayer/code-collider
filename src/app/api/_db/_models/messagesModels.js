@@ -1,6 +1,6 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
+const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
 const supabase = createClientComponentClient();
+
 
 export const getMessages = async (projectId) => {
   let { data, error } = await supabase

@@ -1,6 +1,8 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
+const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
 const supabase = createClientComponentClient();
+
+const supabaseAuth = require('../');
+import { format, addDays, eachDayOfInterval, interval } from 'date-fns';
 
 export const getProject = async (projectId) => {
   let { data, error } = await supabase
@@ -180,6 +182,69 @@ export const getMyMentorProjects = async (userId) => {
 }
 
 export const joinProject = async (projectId) => {
-  const {data, error} = await supabase.auth.getUser();
-  return user;
+  const {data: user, error: err1} = await supabaseAuth.auth.getUser();
+
+  if(err1) {
+    console.error(err1);
+  }
+
+  const user_id = user?.user?.id;
+
+  const {data: project, error: err2} = await supabase
+    .from('projects')
+    .select()
+    .eq('id', projectId);
+
+  if(err2) {
+    console.error(err2);
+  }
+
+  const project_id = project[0]?.id;
+
+  const start = addDays(project[0].start_date, 1);
+  const finish = addDays(project[0].finish_date, 1);
+  console.log('Dates: ' + start, finish);
+
+  const formatted = eachDayOfInterval(interval(start, finish))
+    .map((date) => format(date, "yyyy'-'LL'-'dd"));
+
+  console.log('Formatted: ' + formatted)
+
+  const {data: isBusy, error: err3} = await supabase
+    .from('busy_dates')
+    .select()
+    .eq('user_id', user_id)
+    .in('date', formatted);
+
+  const activeDates = formatted.map((date) => {return {date, project_id, user_id}});
+
+  if(isBusy.length) {
+    throw new Error('User is busy during this project.');
+    return;
+  }
+
+  console.log('Active Dates: ', activeDates)
+
+  const { error: err4 } = await supabase
+    .from('busy_dates')
+    .insert(activeDates);
+
+  if(err4) {
+    console.error(err4);
+    throw new Error('Could not insert busy days.');
+    return;
+  }
+
+  const { error: err5 } = await supabase
+    .from('projects_users')
+    .insert({project_id, user_id});
+
+  if(err5) {
+    console.error(err5);
+    throw new Error('Could not add user to project.');
+    return;
+  }
+
+
+  return {user, project};
 }
