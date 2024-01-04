@@ -14,6 +14,8 @@ export default function Nav() {
   const [validUser, setValidUser] = useState(false);
   const [triggerSignout, setTriggerSignout] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentURL, setCurrentURL] = useState("");
+  const [validPath, setValidPath] = useState(false);
 
   const router = useRouter();
   const supabaseClient = createClientComponentClient();
@@ -37,6 +39,11 @@ export default function Nav() {
   const updateTitle = (newTitle) => {
     setPageTitle(newTitle);
   };
+
+  useEffect(() => {
+    setCurrentURL(window.location.pathname);
+    console.log('path:', window.location.pathname)
+  }, [router]);
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -73,8 +80,16 @@ export default function Nav() {
     toggleTheme();
   }, []);
 
+  useEffect(() => {
+    if (currentURL === "/login" || currentURL === "/forgot-password" || currentURL === "/reset-password") {
+      setValidPath(false);
+    } else {
+      setValidPath(true)
+    }
+  }, [currentURL])
+
   return (
-    validUser && (
+    (validUser && validPath) && (
       <div className={`app`}>
         <SideNav
           updateTitle={updateTitle}
