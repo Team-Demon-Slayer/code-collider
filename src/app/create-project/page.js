@@ -23,7 +23,6 @@ export default function CreateProject() {
   const [description, setDescription] = useState("My Project Description");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [hours, setHours] = useState(4)
   const supabase = createClientComponentClient();
 
   const router = useRouter();
@@ -74,7 +73,7 @@ export default function CreateProject() {
         repo_link: "www.github.com",
         start_date: start,
         finish_date: end,
-        estimated_hours: hours,
+        estimated_hours: 4,
         // mentor: null,
         // upvotes: 0,
       });
@@ -168,76 +167,6 @@ export default function CreateProject() {
               />
             </div>
 
-<<<<<<< HEAD
-      <div className='create-project-start-date'>
-        <p className='create-project-text'>Scope</p>
-        <input
-          value={String(startDate.getFullYear()) + '-' + String(startDate.getMonth() + 1).padStart(2, '0') + '-' + String(startDate.getDate()).padStart(2, '0')}
-          onChange={(e) => {
-            const chosenDate = new Date(e.target.value);
-            chosenDate.setDate(chosenDate.getDate() + 1);
-            update.startDate(chosenDate);
-          }}
-          className='create-project-start-date-input'
-          id='start-date-input'
-          type='date'
-          placeholder='Start Date' />
-        <input
-          value={String(endDate.getFullYear()) + '-' + String(endDate.getMonth() + 1).padStart(2, '0') + '-' + String(endDate.getDate()).padStart(2, '0')}
-          onChange={(e) => {
-            const chosenDate = new Date(e.target.value);
-            chosenDate.setDate(chosenDate.getDate() - 1);
-            update.endDate(chosenDate);
-          }}
-          className='create-project-end-date-input'
-          type='date'
-          placeholder='End Date' />
-        <input
-          value={hours}
-          onChange={(e) => update.hours(e.target.value)}
-          className='create-project-hours-input'
-          type='number'
-          placeholder='Estimated Hours' />
-      </div>
-
-      <div className='create-project-end-date'>
-        <p className='create-project-text'>End Date</p>
-      </div>
-
-      <div className='create-project-description'>
-        <p className='create-project-text'>Project Description</p>
-        <textarea
-          value={description}
-          onChange={(e) => update.description(e.target.value)}
-          className='create-project-description'
-          type='text'
-          placeholder='Project Description' />
-      </div>
-
-      <div className='create-project-languages'>
-        <p className='create-project-text'>Languages</p>
-        <input type="text" id="searchBar" placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
-        <ul className='languageSearchResults'>
-          {searchLanguages(searchInput.slice(0, maximumSearchResults)).map(({ name, url }) => (
-            <li key={name} onClick={() => {
-              if (isALanguageIn({ name, url }, languages)) {
-                update.languages(languages.filter((l) => l.name !== name))
-              } else {
-                update.languages([...languages, { name, url }])
-              }
-            }}>{name}</li>
-          ))}
-        </ul>
-        <ul className='create-project-languages-icons'>
-          {languages.map((language) => (
-            <img className='create-project-language-icon' alt={language.name} src={`https://skillicons.dev/icons?i=${language.url}`} key={language.url} onClick={() => update.languages(languages.filter((l) => l !== language))} />
-          ))}
-        </ul>
-      </div>
-
-      <div className='create-project-submit'>
-        <button onClick={onSubmit}>Create Project</button>
-=======
             <div className="create-project-end-date">
               <p className="create-project-text">End Date</p>
               <input
@@ -311,7 +240,6 @@ export default function CreateProject() {
             Create Project
           </button>
         </div>
->>>>>>> origin
       </div>
     </div>
   );
