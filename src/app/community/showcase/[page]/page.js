@@ -36,8 +36,6 @@ export default function ShowcasePage({ params: { page } }) {
     getUserUpvotes();
   }, [user]);
 
-  console.log({userUpvotes}); //FIXME: test
-  console.log(user?.id); //FIXME: test
   return (
     <>
       <div className="page-container">
