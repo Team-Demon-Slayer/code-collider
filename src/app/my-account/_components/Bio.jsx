@@ -1,7 +1,8 @@
 "use client";
 import "../page.css";
 import React, { useState, useEffect } from "react";
-import supabase from '../../api/_db/index.js';
+import supabase from "../../api/_db/index.js";
+import BioModal from "./BioModal.jsx";
 import { FaPencil } from "react-icons/fa6";
 export default function Bio({user,handleUpdate}) {
   const [editState, setEditState] = useState(false);
@@ -33,17 +34,14 @@ export default function Bio({user,handleUpdate}) {
     setChanged(false);
     setEditState(!editState);
   };
-  return <main>
+  return
     <div className= "bio-info">
       <div className="bio-header" onClick={handleEdit}>
-        Bio
-        &nbsp;
-        <FaPencil className="edit-icon"/>
+        Bio &nbsp;
+        <FaPencil className="edit-icon-bio"/>
       </div>
       <div className="bio-content">
       <textarea className={!editState ? "bio-textarea":"bio-textarea-edit"} placeholder="Write a short bio about yourself..." onChange={(e)=>handleTextChange(e)} disabled={!editState}>{user.bio}</textarea>
        { changed && <button className="save-button" onClick={handleUpdateBio}>Save</button> }
-      </div>
-    </div>
-  </main>;
+  ;
 }
