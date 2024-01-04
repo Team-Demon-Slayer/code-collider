@@ -83,6 +83,14 @@
   box-shadow: 2px 2px 0px 1px var(--red-color);
 }
 
+.carousel-main-header {
+  position: absolute;
+  left: 0px;
+  font-weight: bold;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+}
+
 .carousel-item-title {
   font-size: 20px;
   font-weight: bold;

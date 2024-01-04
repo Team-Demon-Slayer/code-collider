@@ -73,13 +73,13 @@ export default function Carousel({ projects, getProject, header }) {
     } else {
       data = projects.slice(0, projects.length);
     }
-    console.log("data", data);
     setDisplay(data);
   }, [firstPointer, projects]);
 
   return (
     display && (
       <div className="carousel-main">
+        <div className="carousel-main-header">{header}</div>
         <FaChevronLeft className="prev-project-btn" onClick={handlePrev} />
 
         {display?.map((project) => {
