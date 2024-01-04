@@ -9,11 +9,11 @@ export const metadata = {
     "Code Collider is a platform for finding collaborators for coding projects. Learn and grow together with other engineers, uplevel skills, and build your project portfolio.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, showNav = true }) {
   return (
     <html lang="en">
       <body>
-        <Nav />
+        {showNav && <Nav />}
         <section className={inter.className}>{children}</section>
       </body>
     </html>
