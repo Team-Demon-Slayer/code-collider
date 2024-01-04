@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import RegisterModal from "./RegisterModal";
 import { supabase } from "../supabase";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -66,6 +68,51 @@ export default function Login() {
     return passwordRegex.test(password);
   };
 
+  const userExists = async (userId) => {
+    const { data, error } = await supabase
+      .from('users')
+      .select('id')
+      .eq('id', userId)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return false;
+    }
+
+    return data !== null;
+  };
+
+  const handleGoogleLogin = async () => {
+    const { user, session, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+
+    if (error) {
+      alert(error.message);
+    } else if (user && !(await userExists(user.id))) {
+      router.push("/login");
+      setShowRegisterModal(true);
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    const { user, session, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+
+    if (error) {
+      alert(error.message);
+    } else if (user && !(await userExists(user.id))) {
+      router.push("/login");
+      setShowRegisterModal(true);
+    } else {
+      router.push("/");
+    }
+  };
+
   return (
     <div className="container">
       <h1>
@@ -104,8 +151,19 @@ export default function Login() {
           >
             Sign Up
           </button>
-          <Link href="/forgot-password"> Forgot Password</Link>
+          <Link className="forgot-password" href="/forgot-password"> Forgot Password</Link>
         </form>
+        <div className="other-login-container">
+          <h3 className="other-login-text">or login with</h3>
+          <div className="other-login-buttons">
+            <div className="google-login">
+              <FontAwesomeIcon icon={faGoogle} onClick={handleGoogleLogin} />
+            </div>
+            <div className="github-login">
+              <FontAwesomeIcon icon={faGithub} onClick={handleGithubLogin} />
+            </div>
+          </div>
+        </div>
       </div>
       {showRegisterModal && (
         <RegisterModal
