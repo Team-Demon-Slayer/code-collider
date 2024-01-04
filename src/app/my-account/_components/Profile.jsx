@@ -1,8 +1,13 @@
 "use client";
-import "../styles.css";
+import "../page.css";
 import React, { useState, useEffect } from "react";
+import supabase from '../../api/_db/index.js';
 import { FaPencil, FaGraduationCap} from "react-icons/fa6";
 export default function Profile({user}) {
+  const [modalState, setModalState] = useState(false);
+  const handleModal = () => {
+    setModalState(!modalState);
+  };
   return <main>
     <div className= "profile-info">
       <div className="profile-header">
