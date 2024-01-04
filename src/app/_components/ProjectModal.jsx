@@ -1,9 +1,8 @@
 "use client";
-import { FaTimes } from "react-icons/fa";
-import formatDate from "../_utils/formatDate.js";
+
 import "../_stylesheets/projectModalStyle.css";
-import supabase from "../api/_db/index.js";
-// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import formatDate from "../_utils/formatDate.js";
+import { FaTimes } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { joinProject } from "../api/_db/_models/projectsModels.js";
 

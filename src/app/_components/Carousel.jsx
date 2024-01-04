@@ -1,8 +1,9 @@
 "use client";
+
+import "../_stylesheets/carouselStyle.css";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import truncateString from "../_utils/truncateString.js";
-import "../_stylesheets/carouselStyle.css";
 
 export default function Carousel({ projects, getProject, header }) {
   const [display, setDisplay] = useState(null);
@@ -79,13 +80,6 @@ export default function Carousel({ projects, getProject, header }) {
   return (
     display && (
       <div className="carousel-main">
-        <div className="carousel-main-header">
-          {header === "Spotlight Project" ||
-          header === "Current Project" ||
-          header === "Past Project"
-            ? header + "s"
-            : header}
-        </div>
         <FaChevronLeft className="prev-project-btn" onClick={handlePrev} />
 
         {display?.map((project) => {

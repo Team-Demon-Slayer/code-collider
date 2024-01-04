@@ -1,11 +1,10 @@
 "use client";
+
 import "./globals.css";
-import hpMockData from "./my-projects/hpMockData.js";
-import mockData from "./project/[projectId]/mock-data";
-import HomePage from "./_components/HomePage.jsx";
 import { getProjectPage, getCurrentProject } from "./api/_db/_models/projectsModels.js";
 import { useState, useEffect } from "react"
 import supabase from "./api/_db/index.js";
+import HomePage from "./_components/HomePage.jsx";
 
 export default function Home() {
   const [recentProjects, setRecentProjects] = useState(null);
@@ -28,7 +27,7 @@ export default function Home() {
     console.log(user.id);
     const data = await getCurrentProject(user.id);
     console.log(data);
-    setCurrentProject(data[0].busy_dates[0]);
+    setCurrentProject(data[0]?.busy_dates[0]?.projects);
   };
 
   useEffect(() => {
