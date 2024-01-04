@@ -267,7 +267,8 @@ export const getCurrentProject = async (userId) => {
           finish_date,
           mentor(id,username),
           active,
-          upvotes(count)
+          upvotes(count),
+          repo_link
         )
       )
     `)
