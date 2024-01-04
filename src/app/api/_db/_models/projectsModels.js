@@ -101,7 +101,7 @@ export const getProjectPageByLanguage = async (
         finish_date,
         mentor(id,username),
         active,
-        upvotes
+        upvotes(count)
       )
     `
     )
@@ -133,7 +133,7 @@ export const getMyProjects = async (userId) => {
         finish_date,
         mentor(id,username),
         active,
-        upvotes
+        upvotes(count)
       )
     `)
     .eq('id', userId)
@@ -165,7 +165,7 @@ export const getMyMentorProjects = async (userId) => {
         finish_date,
         mentor(id,username),
         active,
-        upvotes
+        upvotes(count)
       )
     `)
     .eq('id', userId)
@@ -247,4 +247,37 @@ export const joinProject = async (projectId) => {
 
 
   return {user, project};
+}
+
+export const getCurrentProject = async (userId) => {
+  const today = format(new Date(), "yyyy'-'LL'-'dd");
+  const { data, error } = await supabase
+    .from('users')
+    .select(`
+      busy_dates(
+        projects(
+          id,
+          title,
+          owner(id,username),
+          languages(name,url),
+          description,
+          max_developers,
+          users!projects_users(id,username),
+          start_date,
+          finish_date,
+          mentor(id,username),
+          active,
+          upvotes(count)
+        )
+      )
+    `)
+    .eq('id', userId)
+    .eq('busy_dates.date', today);
+
+  if(error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
 }
