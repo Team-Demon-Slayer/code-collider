@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import useCommunityContext from './useCommunityContext';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import useDebounce from './hooks/useDebounce';
 
 const filteredLanguages = (languages, language) => {
   if (!language) return [];
@@ -26,8 +28,15 @@ export default function CommunityHeader() {
     languageSelected,
     setLanguageSelected
   } = useCommunityContext();
+  const debouncedKeyword = useDebounce(keyword, 1000);
 
+  useEffect(() => {console.log(debouncedKeyword)}, [debouncedKeyword]); // FIXME: remove
+
+  // GET endpoint from URL
+  const pathname = usePathname();
   const languageInputRef = useRef(null);
+  const pathnameArr = pathname.split('/');
+  const endpoint = pathnameArr[2];
 
   const supabase = createClientComponentClient();
 
@@ -54,7 +63,7 @@ export default function CommunityHeader() {
 
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [languageInputRef]);
+  }, [languageInputRef, setLanguageSelected]);
 
   return (
     <div className="search-header">
@@ -94,26 +103,30 @@ export default function CommunityHeader() {
           </ul>
         )}
       </div>
-      <input
-        className="search-input"
-        type="number"
-        value={spots}
-        onChange={e => setSpots(e.target.value)}
-      />
-      <input
-        className="search-input"
-        type="date"
-        value={startDate}
-        onChange={e => setStartDate(e.target.value)}
-      />
-      <label>
-        <input
-          type="checkbox"
-          checked={openMentor}
-          onChange={e => setOpenMentor(e.target.checked)}
-        />
-        openMentor
-      </label>
+      {endpoint === 'browse' && (
+        <>
+          <input
+            className="search-input"
+            type="number"
+            value={spots}
+            onChange={e => setSpots(e.target.value)}
+          />
+          <input
+            className="search-input"
+            type="date"
+            value={startDate}
+            onChange={e => setStartDate(e.target.value)}
+          />
+          <label>
+            <input
+              type="checkbox"
+              checked={openMentor}
+              onChange={e => setOpenMentor(e.target.checked)}
+            />
+            openMentor
+          </label>
+        </>
+      )}
     </div>
   );
 }
