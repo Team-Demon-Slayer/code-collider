@@ -15,7 +15,6 @@ const supabase = createClientComponentClient();
 
 const getLanguages = async () => {
   const allLanguages = await supabase.from("languages").select();
-  console.log(allLanguages.data);
   return allLanguages.data.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
@@ -44,7 +43,7 @@ export default function CreateProject() {
 
   const searchLanguages = (input) => {
     return allLanguages.filter((language) => {
-      return language.name.toLowerCase().includes(input.toLowerCase());
+      return language.name.slice(0, input.length).toLowerCase() === (input.toLowerCase());
     });
   }
 
@@ -58,14 +57,6 @@ export default function CreateProject() {
   };
 
   const onSubmit = async () => {
-    console.log([
-      title,
-      engineers,
-      languages,
-      description,
-      Date.parse(startDate),
-      Date.parse(endDate),
-    ]);
     if (
       title &&
       engineers &&
@@ -244,7 +235,6 @@ export default function CreateProject() {
                         );
                       } else {
                         update.languages([...languages, { id, name, url }]);
-                        console.log(languages)
                       }
                     }}
                   >
