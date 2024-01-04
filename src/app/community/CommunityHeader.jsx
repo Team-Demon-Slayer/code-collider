@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import useCommunityContext from './useCommunityContext';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
@@ -25,6 +25,8 @@ export default function CommunityHeader() {
     setOpenMentor
   } = useCommunityContext();
 
+  const languageInputRef = useRef(null);
+
   const supabase = createClientComponentClient();
 
   const getAllLanguages = useCallback(async () => {
@@ -33,13 +35,25 @@ export default function CommunityHeader() {
   }, [supabase]);
 
   const [languages, setLanguages] = useState([]);
-  const [languageSelected, setLanguageSelected] = useState(false);
+  const [languageSelected, setLanguageSelected] = useState(true);
 
   useEffect(() => {
     getAllLanguages().then(languages => {
       setLanguages(languages.data);
     });
   }, [getAllLanguages]);
+
+  // Close language selection when user clicks outside of it
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (!languageInputRef.current.contains(e.target)) {
+        setLanguageSelected(true);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [languageInputRef]);
 
   return (
     <div className="search-header">
@@ -60,16 +74,24 @@ export default function CommunityHeader() {
             setLanguageSelected(false);
           }}
           placeholder="language"
+          ref={languageInputRef}
         />
-        <ul className="languages-selection">
-          {!languageSelected &&
-            filteredLanguages(languages, language).map(({ name }) => (
-              <li onClick={() => {
-                setLanguage(name);
-                setLanguageSelected(true);
-              }} key={name}>{name}</li>
+        {!languageSelected && (
+          <ul className="languages-selection">
+            {filteredLanguages(languages, language).map(({ name }) => (
+              <li
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLanguage(name);
+                  setLanguageSelected(true);
+                }}
+                key={name}
+              >
+                {name}
+              </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </div>
       <input
         className="search-input"
