@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import useCommunityContext from './useCommunityContext';
-import { useState, useEffect } from 'react';
-import '../_stylesheets/currentProjectStyle.css';
+import { useRouter } from "next/navigation";
+import supabase from "../api/_db/index.js";
+import useCommunityContext from "./useCommunityContext";
+import { useState, useEffect } from "react";
+import "../_stylesheets/currentProjectStyle.css";
 
 const testIfUpvoted = (userUpvotes, projectId) => {
   if (!userUpvotes) return false;
@@ -14,7 +14,6 @@ const testIfUpvoted = (userUpvotes, projectId) => {
 export default function ProjectCard({ project, userUpvotes }) {
   const router = useRouter();
   const { user } = useCommunityContext();
-  const supabase = createClientComponentClient();
   const [upvoted, setUpvoted] = useState(true);
   const [upvoteCount, setUpvoteCount] = useState(project.upvotes[0].count);
   const [isUpvoteLoading, setIsUpvoteLoading] = useState(true);
@@ -32,7 +31,7 @@ export default function ProjectCard({ project, userUpvotes }) {
 
   const handleUpvoteProject = async () => {
     await supabase
-      .from('upvotes')
+      .from("upvotes")
       .insert({ project_id: project.id, user_id: user.id });
     setUpvoted(true);
     setUpvoteCount(upvoteCount + 1);
@@ -69,16 +68,13 @@ export default function ProjectCard({ project, userUpvotes }) {
             return (
               <div className="team-member" key={id}>
                 @{username}
-                {index === project.registeredDevelopers - 1 ? '' : ' |'}
+                {index === project.registeredDevelopers - 1 ? "" : " |"}
               </div>
             );
           })}
         </div>
         <div className="project-showcase-buttons">
-          <button
-            onClick={handleViewProject}
-            className="project-join-btn"
-          >
+          <button onClick={handleViewProject} className="project-join-btn">
             View Project
           </button>
           {!isUpvoteLoading &&
