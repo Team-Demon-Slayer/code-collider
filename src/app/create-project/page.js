@@ -112,6 +112,15 @@ export default function CreateProject() {
         console.error(projectError);
         return;
       }
+      await languages.forEach(async (language) => {
+        const { error: insertError } = await supabase
+          .from("projects_languages")
+          .insert({ project_id: newId, language_id: language.id });
+        if (insertError) {
+          console.error(insertError);
+          return;
+        }
+      })
       router.push(`/my-projects`);
     } else if (startDate > endDate) {
       alert("Start date cannot be after end date!");
