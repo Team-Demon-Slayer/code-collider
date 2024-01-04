@@ -176,3 +176,24 @@
 .bio-content {
   margin: 40px;
 }
+.bio-textarea{
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
+  width:100%;
+  height:10vh;
+  border:0;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+.bio-textarea-edit{
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
+  width:100%;
+  height:10vh;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+.save-button {
+  display: flex;
+  position: absolute;
+  bottom:2vh;
+  left:3vw;
+}

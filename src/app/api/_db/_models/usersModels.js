@@ -32,7 +32,7 @@ export const getExpandedUser = async (userId) => {
       experience,
       is_mentor,
       profile_photo,
-      languages(name,url),
+      languages(id,name,url),
       upvotes(project_id)
     `
     )
