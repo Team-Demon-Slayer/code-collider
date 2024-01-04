@@ -70,8 +70,9 @@ export default function Carousel({ projects, getProject, header }) {
         projects[secondPointer],
         projects[thirdPointer],
       ];
-    } else {
-      data = projects.slice(0, projects.length);
+    }
+    else {
+      data = projects;
     }
     setDisplay(data);
   }, [firstPointer, projects]);

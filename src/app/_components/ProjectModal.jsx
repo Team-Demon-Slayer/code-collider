@@ -5,6 +5,7 @@ import "../_stylesheets/projectModalStyle.css";
 import supabase from "../api/_db/index.js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { joinProject } from "../api/_db/_models/projectsModels.js";
 
 export default function ProjectModal({ project, closeModal }) {
   const handleCloseModal = () => {
@@ -13,35 +14,39 @@ export default function ProjectModal({ project, closeModal }) {
 
   const router = useRouter();
 
-  const supabaseClient = createClientComponentClient();
-  const getUser = async () => {
-    const { data, error } = await supabase.auth.getSession();
-    if (error) {
-      console.error(error);
-      return;
-    }
+  // const supabaseClient = createClientComponentClient();
 
-    const { data: userData, error: errorData } = await supabaseClient
-      .from("users")
-      .select("id")
-      .eq("email", data.session.user.email);
-    if (errorData) {
-      console.error(errorData);
-      return;
-    }
-    return userData[0].id;
-  };
+  // const getUser = async () => {
+  //   const { data, error } = await supabase.auth.getSession();
+  //   if (error) {
+  //     console.error(error);
+  //     return;
+  //   }
+
+  //   const { data: userData, error: errorData } = await supabaseClient
+  //     .from("users")
+  //     .select("id")
+  //     .eq("email", data.session.user.email);
+  //   if (errorData) {
+  //     console.error(errorData);
+  //     return;
+  //   }
+  //   return userData[0].id;
+  // };
 
   const handleJoinProject = async () => {
-    const userId = await getUser();
-    const { data, error } = await supabaseClient
-      .from("projects_users")
-      .insert({ user_id: userId, project_id: project.id });
-    if (error) {
-      console.error(error);
-      return;
-    }
-    router.push(`/project/${project.id}`);
+    // const userId = await getUser();
+    joinProject(project.id)
+      .then(() => router.push(`/project/${project.id}`))
+      .catch((err) => console.error(err));
+    // const { data, error } = await supabaseClient
+    //   .from("projects_users")
+    //   .insert({ user_id: userId, project_id: project.id });
+    // if (error) {
+    //   console.error(error);
+    //   return;
+    // }
+    // router.push(`/project/${project.id}`);
   };
 
   const spotsLeft = project.max_developers - project.users.length;

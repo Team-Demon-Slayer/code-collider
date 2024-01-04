@@ -88,7 +88,8 @@
   left: 0px;
   font-weight: bold;
   background-color: var(--grey-color);
-  color: var(--dark-color);
+  color: var(--dark-color)
+
 }
 
 .carousel-item-title {
