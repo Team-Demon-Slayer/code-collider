@@ -2,8 +2,7 @@
 
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import supabaseServer from "../api/_db/index.js";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import supabase from "../api/_db/index.js";
 import React, { useState, useEffect } from "react";
 import searchLanguages from "./helper-funcs/searchLanguages.js";
 import isALanguageIn from "./helper-funcs/isALanguageIn.js";
@@ -23,7 +22,6 @@ export default function CreateProject() {
   const [description, setDescription] = useState("My Project Description");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const supabase = createClientComponentClient();
 
   const router = useRouter();
 
@@ -54,8 +52,7 @@ export default function CreateProject() {
       endDate &&
       startDate <= endDate
     ) {
-      const { data: userId, error: idError } =
-        await supabaseServer.auth.getSession();
+      const { data: userId, error: idError } = await supabase.auth.getSession();
       let newId = uuidv4();
       if (idError) {
         console.error(idError);

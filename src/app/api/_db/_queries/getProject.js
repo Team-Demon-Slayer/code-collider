@@ -1,9 +1,5 @@
 // const db = require("../index.js");
-const {
-  createClientComponentClient,
-} = require("@supabase/auth-helpers-nextjs");
-
-const supabase = createClientComponentClient();
+import supabase from "../index.js";
 
 export const getProjects = async (projectId) => {
   let { data, error } = await supabase
