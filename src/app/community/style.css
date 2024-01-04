@@ -36,14 +36,12 @@
   position: absolute;
   right: 6%;
   top: 6%;
-  background-color: var(--dark-color);
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 12px;
-  color: var(--white-color);
-  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  font-size: 14px;
+  color: var(--dark-color);
 }
 
 .project-join-buttons {
