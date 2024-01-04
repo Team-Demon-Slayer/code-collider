@@ -196,7 +196,7 @@ export default function CreateProject() {
                   "-" +
                   String(endDate.getMonth() + 1).padStart(2, "0") +
                   "-" +
-                  String(endDate.getDate()).padStart(2, "0")
+                  String(endDate.getDate() + 2).padStart(2, "0")
                 }
                 onChange={(e) => {
                   const chosenDate = new Date(e.target.value);
