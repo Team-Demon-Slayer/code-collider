@@ -216,11 +216,35 @@ export const joinProject = async (projectId) => {
     .eq('user_id', user_id)
     .in('date', formatted);
 
-  const activeDates = formatted.map((date) => {date, project_id, user_id})
+  const activeDates = formatted.map((date) => {return {date, project_id, user_id}});
 
+  if(isBusy.length) {
+    throw new Error('User is busy during this project.');
+    return;
+  }
 
-  console.log(activeDates);
-  console.log(isBusy);
+  console.log('Active Dates: ', activeDates)
+
+  const { error: err4 } = await supabase
+    .from('busy_dates')
+    .insert(activeDates);
+
+  if(err4) {
+    console.error(err4);
+    throw new Error('Could not insert busy days.');
+    return;
+  }
+
+  const { error: err5 } = await supabase
+    .from('projects_users')
+    .insert({project_id, user_id});
+
+  if(err5) {
+    console.error(err5);
+    throw new Error('Could not add user to project.');
+    return;
+  }
+
 
   return {user, project};
 }
