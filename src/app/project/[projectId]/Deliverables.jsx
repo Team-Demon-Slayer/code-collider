@@ -61,6 +61,7 @@ export default function Deliverables({
             handleAddTask={handleAddTask}
             date={selectedDate}
             handleShowAddModal={handleShowAddModal}
+            projectId={project_meta.id}
           />
         )}
         <div className="deliverables-header">Deliverables & Deadlines</div>
@@ -87,9 +88,7 @@ export default function Deliverables({
                   >
                     {complete && <FaCheck className="task-complete" />}
                     {task.owner && (
-                      <div className={`task-owner-name-${color}`}>
-                        @{task.owner}
-                      </div>
+                      <div className={`task-owner-name-${color}`}></div>
                     )}
                     <p className="day-task-title">{title}</p>
                   </div>

@@ -15,12 +15,15 @@ import { getMessages } from "../../api/_db/_models/messagesModels.js";
 import { getProject } from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
+import { v4 as uuidv4 } from "uuid";
+
 import "./style.css";
 
 export default function ProjectPage({ params }) {
   const [project_meta, setProject_meta] = useState(null);
   const [deliverables, setDeliverables] = useState(null);
   const [username, setUsername] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [messages, setMessages] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
@@ -28,15 +31,26 @@ export default function ProjectPage({ params }) {
 
   const supabaseClient = createClientComponentClient();
 
-  const handleMarkComplete = (task_id) => {
-    deliverables.forEach((deliverable) => {
-      deliverable.tasks.forEach((task) => {
-        if (task.task_id === task_id) {
-          const toggleValue = task.complete === false ? true : false;
-          task.complete = toggleValue;
-        }
-      });
-    });
+  const handleMarkComplete = async (taskId) => {
+    const { data, error } = await supabase
+      .from("deliverables")
+      .select("complete")
+      .eq("id", taskId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    const { error: completeError } = await supabase
+      .from("deliverables")
+      .update({ complete: !data[0].complete })
+      .eq("id", taskId);
+
+    if (completeError) {
+      console.log(completeError);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
@@ -55,17 +69,33 @@ export default function ProjectPage({ params }) {
   const getData = async () => {
     const projectData = await getProject(params.projectId);
     const messageData = await getMessages(params.projectId);
-    const deliverablesData = await getDeliverables(params.projectId);
-
+    const deliverablesData = await getDeliverables(
+      params.projectId,
+      projectData.start_date
+    );
     const dates = generateDates(projectData.start_date, 7);
-    const structuredDeliverables = dates.map((date) => ({
-      date: date.toISOString().split("T")[0], // Format date as 'YYYY-MM-DD'
-      tasks: deliverablesData.filter(
-        (deliverable) =>
-          new Date(deliverable.date).toISOString().split("T")[0] ===
-          date.toISOString().split("T")[0]
-      ),
-    }));
+    const structuredDeliverables = dates.map((generatedDate) => {
+      const formattedGeneratedDate = generatedDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
+      const tasksForDate = deliverablesData.filter((deliverable) => {
+        const deliverableDateWithoutTime = new Date(deliverable.date)
+          .toISOString()
+          .split("T")[0]; // Also 'YYYY-MM-DD'
+        return deliverableDateWithoutTime === formattedGeneratedDate;
+      });
+      return {
+        date: formattedGeneratedDate,
+        tasks: tasksForDate,
+      };
+    });
+
+    const { data: sessionData, error: sessionError } =
+      await supabase.auth.getSession();
+
+    if (sessionError) {
+      console.log(sessionError);
+      return;
+    }
+    setUserId(sessionData.session.user.id);
     setDeliverables(structuredDeliverables);
     setMessages(messageData[0].messages);
     setProject_meta(projectData);
@@ -98,44 +128,60 @@ export default function ProjectPage({ params }) {
     }
   };
 
-  const handleEditTask = async (task_id, newTask) => {
-    await deliverables.forEach((deliverable) => {
-      deliverable.tasks.forEach((task) => {
-        if (task.task_id === task_id) {
-          task.title = newTask.title;
-          task.description = newTask.description;
-        }
-      });
-    });
+  const handleEditTask = async (taskId, newTask) => {
+    const { error } = await supabase
+      .from("deliverables")
+      .update({ title: newTask.title, description: newTask.description })
+      .eq("id", taskId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
   const handleAddTask = async (newTask) => {
-    await deliverables.forEach((deliverable) => {
-      if (deliverable.date === newTask.date) {
-        deliverable.tasks.push(newTask);
-      }
-    });
+    const { error } = await supabase.from("deliverables").insert(newTask);
+    if (error) {
+      console.log(error);
+      return;
+    }
     setTriggerUpdate(!triggerUpdate);
   };
 
-  const handleDeleteTask = async (task_id, date) => {
+  const handleDeleteTask = async (task_id) => {
     // Assuming deliverables is an array of deliverables, each containing a date and an array of tasks
-    deliverables.forEach((deliverable) => {
-      // Check if the deliverable matches the specified date
-      if (deliverable.date === date) {
-        // Filter out the task with the specified task_id
-        deliverable.tasks = deliverable.tasks.filter(
-          (task) => task.task_id !== task_id
-        );
-      }
-    });
+
+    const { error } = await supabaseClient
+      .from("deliverables")
+      .delete()
+      .eq("id", task_id);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
 
     setTriggerUpdate(!triggerUpdate);
   };
 
   const handleUpdateMessages = (newMessages) => {
     setMessages((prevMessages) => [...prevMessages, newMessages]);
+    setTriggerUpdate(!triggerUpdate);
+  };
+
+  const handleCloseProject = async (complete) => {
+    const { error } = await supabase
+      .from("projects")
+      .update({ active: !complete })
+      .eq("id", params.projectId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
     setTriggerUpdate(!triggerUpdate);
   };
 
@@ -176,12 +222,17 @@ export default function ProjectPage({ params }) {
       .channel(`${project_meta?.project_id}tasks`)
       .on(
         "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "deliverables",
-        },
+        { event: "INSERT", schema: "public", table: "deliverables" },
         (payload) => {
+          console.log("INSERT payload:", payload);
+          getData();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "deliverables" },
+        (payload) => {
+          console.log("UPDATE payload:", payload);
           getData();
         }
       )
@@ -190,7 +241,7 @@ export default function ProjectPage({ params }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [project_meta, getData]); // Add dependencies here
 
   if (isLoading) {
     return <span className="loader"></span>;
@@ -202,7 +253,11 @@ export default function ProjectPage({ params }) {
     messages && (
       <div className="main-container">
         <div className="project-deliverables-link">
-          <ProjectDetails project_meta={project_meta} username={username} />
+          <ProjectDetails
+            project_meta={project_meta}
+            username={username}
+            userId={userId}
+          />
           <Deliverables
             deliverables={deliverables}
             handleMarkComplete={handleMarkComplete}
@@ -212,13 +267,27 @@ export default function ProjectPage({ params }) {
             handleDeleteTask={handleDeleteTask}
             project_meta={project_meta}
           />
-          <a
-            href={project_meta.repo_link}
-            className="link-project"
-            target="_blank"
-          >
-            LINK TO PROJECT REPO
-          </a>
+          <div className="project-footer-btns">
+            <a
+              href={project_meta.repo_link}
+              className="link-project"
+              target="_blank"
+            >
+              LINK TO PROJECT REPO
+            </a>
+            {project_meta.owner.id === userId && (
+              <div
+                className={
+                  !project_meta.active
+                    ? "close-project-btn-false"
+                    : "close-project-btn"
+                }
+                onClick={() => handleCloseProject(project_meta.active)}
+              >
+                {!project_meta.active ? "Open Project" : "Close Project"}
+              </div>
+            )}
+          </div>
         </div>
         <MessageBoard
           messages={messages}

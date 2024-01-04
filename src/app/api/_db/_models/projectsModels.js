@@ -61,7 +61,7 @@ export const getProjectPage = async (
       upvotes(count)
     `
     )
-    .eq("active", active === undefined ? true || false : active)
+    .eq("active", active === undefined ? (true || false) : active)
     .order(sortingMethod[0], sortingMethod[1])
     .range(rangeStart, rangeEnd);
 
