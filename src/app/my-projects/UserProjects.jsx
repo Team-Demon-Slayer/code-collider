@@ -20,7 +20,7 @@ export default function UserProjects({ currentProjects, pastProjects }) {
         <Carousel
           projects={currentProjects}
           getProject={navToProject}
-          header="Current Projects"
+          header="Current Project"
         />
       )}
 
@@ -30,7 +30,7 @@ export default function UserProjects({ currentProjects, pastProjects }) {
         <Carousel
           projects={pastProjects}
           getProject={navToProject}
-          header="Past Projects"
+          header="Past Project"
         />
       )}
     </div>

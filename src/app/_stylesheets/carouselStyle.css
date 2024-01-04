@@ -85,6 +85,7 @@
 
 .carousel-main-header {
   position: absolute;
+  top: -60px;
   left: 0px;
   font-weight: bold;
   background-color: var(--grey-color);

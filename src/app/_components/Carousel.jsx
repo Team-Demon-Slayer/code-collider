@@ -70,8 +70,7 @@ export default function Carousel({ projects, getProject, header }) {
         projects[secondPointer],
         projects[thirdPointer],
       ];
-    }
-    else {
+    } else {
       data = projects;
     }
     setDisplay(data);
@@ -80,7 +79,13 @@ export default function Carousel({ projects, getProject, header }) {
   return (
     display && (
       <div className="carousel-main">
-        <div className="carousel-main-header">{header}</div>
+        <div className="carousel-main-header">
+          {header === "Spotlight Project" ||
+          header === "Current Project" ||
+          header === "Past Project"
+            ? header + "s"
+            : header}
+        </div>
         <FaChevronLeft className="prev-project-btn" onClick={handlePrev} />
 
         {display?.map((project) => {
