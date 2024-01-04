@@ -55,13 +55,13 @@ export default function Nav() {
       if (data.session.user) {
         const { data: profile } = await supabaseClient
           .from("users")
-          .select("profile_photo")
-          .eq("email", data.session.user.email)
+          .select()
+          .eq("id", data.session.user.id)
           .single();
 
-        if (profile) {
+        /* if (profile) {
           setAvatar("");
-        }
+        } */
         setValidUser(true);
       }
     };
