@@ -1,13 +1,14 @@
 "use client";
 import "./styles.css";
-// import {createClientComponentClient} from "@supabase/supabase-js";
-// import {v4 as uuidv4} from "uuid";
-// import { supabase } from "../../supabaseClient.js";
+import { v4 as uuidv4 } from "uuid";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import React, { useState, useEffect } from "react";
 import Profile from "./_components/Profile.jsx";
 import Languages from "./_components/Languages.jsx";
 import Experience from "./_components/Experience.jsx";
 import Bio from "./_components/Bio.jsx";
+
+const supabase = createClientComponentClient();
 
 export default function Account() {
   const [user, setUser] = useState(null);

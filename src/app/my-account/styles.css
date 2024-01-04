@@ -1,5 +1,6 @@
 .account-page {
   overflow: hidden;
+  position:relative;
 }
 .main-container {
   margin-bottom:30px;
@@ -12,6 +13,7 @@
   width:35vw;
   justify-content: center;
 }
+
 .column2{
   position: relative;
   width:50vw;

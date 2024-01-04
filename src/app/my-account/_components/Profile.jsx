@@ -9,7 +9,7 @@ export default function Profile({user}) {
         Profile
       </div>
       <div className="image-container">
-        <img src={user.profile_photo} className="profile-image"/>
+        {user.profile_photo?<img src={user.profile_photo} className="profile-image"/>: <img src="https://i.imgur.com/6VBx3io.jpg" className="profile-image"/>}
         <FaPencil className="profile-edit-icon"/>
       </div>
       <div className="profile-username">
