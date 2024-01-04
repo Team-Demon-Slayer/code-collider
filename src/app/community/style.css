@@ -144,6 +144,22 @@
   top: -10px;
 }
 
+.languages-selection {
+  position: absolute;
+  z-index: 999;
+  background-color: var(--white-color);
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+.languages-selection li {
+  cursor: pointer;
+}
+
 /* a page containter that show pagination at bottom horizontally */
 .pages-container {
   width: 100%;
