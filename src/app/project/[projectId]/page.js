@@ -9,8 +9,6 @@ import ProjectDetails from "./ProjectDetails.jsx";
 // import projectsModels from "../../api/_db/_models/projectsModels";
 // import deliverablesModels from "../../api/_db/_models/deliverablesModels";
 import supabase from "../../api/_db/index";
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { getMessages } from "../../api/_db/_models/messagesModels.js";
 import { getProject } from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
@@ -28,8 +26,6 @@ export default function ProjectPage({ params }) {
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [user, setUser] = useState(null);
-
-  const supabaseClient = createClientComponentClient();
 
   const handleMarkComplete = async (taskId) => {
     const { data, error } = await supabase
@@ -104,7 +100,7 @@ export default function ProjectPage({ params }) {
   const handleClaimTask = async (task) => {
     console.log(task);
     if (!task.owner) {
-      const { error } = await supabaseClient
+      const { error } = await supabase
         .from("deliverables")
         .update({ owner: username })
         .eq("id", task.id);
@@ -115,7 +111,7 @@ export default function ProjectPage({ params }) {
 
       setTriggerUpdate(!triggerUpdate);
     } else {
-      const { error } = await supabaseClient
+      const { error } = await supabase
         .from("deliverables")
         .update({ owner: null })
         .eq("id", task.id);
@@ -153,7 +149,7 @@ export default function ProjectPage({ params }) {
   const handleDeleteTask = async (task_id) => {
     // Assuming deliverables is an array of deliverables, each containing a date and an array of tasks
 
-    const { error } = await supabaseClient
+    const { error } = await supabase
       .from("deliverables")
       .delete()
       .eq("id", task_id);
@@ -205,7 +201,7 @@ export default function ProjectPage({ params }) {
         console.log(error);
         return;
       }
-      const { data: profile } = await supabaseClient
+      const { data: profile } = await supabase
         .from("users")
         .select("username")
         .eq("email", data.session.user.email)

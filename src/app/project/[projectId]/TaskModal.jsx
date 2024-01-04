@@ -8,7 +8,6 @@ import getUserColor from "../../_utils/getUserColor.js";
 import formatDate from "../../_utils/formatDate.js";
 
 import supabase from "../../api/_db/index.js";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function TaskModal({
   task,
@@ -31,8 +30,6 @@ export default function TaskModal({
   );
   const color = getUserColor(userIndex);
   const dateFormatted = formatDate(date);
-
-  const supabseClient = createClientComponentClient();
 
   const sendUpdate = async () => {
     const newTask = {

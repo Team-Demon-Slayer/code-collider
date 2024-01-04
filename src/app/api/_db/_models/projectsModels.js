@@ -1,8 +1,7 @@
-const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
-const supabase = createClientComponentClient();
+import supabase from "../index.js";
 
-const supabaseAuth = require('../');
-import { format, addDays, eachDayOfInterval, interval } from 'date-fns';
+const supabaseAuth = require("../");
+import { format, addDays, eachDayOfInterval, interval } from "date-fns";
 
 export const getProject = async (projectId) => {
   let { data, error } = await supabase
@@ -61,7 +60,7 @@ export const getProjectPage = async (
       upvotes(count)
     `
     )
-    .eq("active", active === undefined ? (true || false) : active)
+    .eq("active", active === undefined ? true || false : active)
     .order(sortingMethod[0], sortingMethod[1])
     .range(rangeStart, rangeEnd);
 
@@ -119,8 +118,9 @@ export const getProjectPageByLanguage = async (
 
 export const getMyProjects = async (userId) => {
   const { data, error } = await supabase
-    .from('users')
-    .select(`
+    .from("users")
+    .select(
+      `
       projects!projects_users(
         id,
         title,
@@ -135,24 +135,23 @@ export const getMyProjects = async (userId) => {
         active,
         upvotes(count)
       )
-    `)
-    .eq('id', userId)
-    .order(
-      "start_date",
-      { referencedTable: "projects", ascending: false },
-    );
+    `
+    )
+    .eq("id", userId)
+    .order("start_date", { referencedTable: "projects", ascending: false });
 
-    if (error) {
-      console.error(error);
-    }
+  if (error) {
+    console.error(error);
+  }
 
-    return data;
-}
+  return data;
+};
 
 export const getMyMentorProjects = async (userId) => {
   const { data, error } = await supabase
-    .from('users')
-    .select(`
+    .from("users")
+    .select(
+      `
       projects!projects_mentor_fkey(
         id,
         title,
@@ -167,35 +166,33 @@ export const getMyMentorProjects = async (userId) => {
         active,
         upvotes(count)
       )
-    `)
-    .eq('id', userId)
-    .order(
-      "start_date",
-      { referencedTable: "projects", ascending: false },
-    );
+    `
+    )
+    .eq("id", userId)
+    .order("start_date", { referencedTable: "projects", ascending: false });
 
-    if (error) {
-      console.error(error);
-    }
+  if (error) {
+    console.error(error);
+  }
 
-    return data;
-}
+  return data;
+};
 
 export const joinProject = async (projectId) => {
-  const {data: user, error: err1} = await supabaseAuth.auth.getUser();
+  const { data: user, error: err1 } = await supabaseAuth.auth.getUser();
 
-  if(err1) {
+  if (err1) {
     console.error(err1);
   }
 
   const user_id = user?.user?.id;
 
-  const {data: project, error: err2} = await supabase
-    .from('projects')
+  const { data: project, error: err2 } = await supabase
+    .from("projects")
     .select()
-    .eq('id', projectId);
+    .eq("id", projectId);
 
-  if(err2) {
+  if (err2) {
     console.error(err2);
   }
 
@@ -203,57 +200,58 @@ export const joinProject = async (projectId) => {
 
   const start = addDays(project[0].start_date, 1);
   const finish = addDays(project[0].finish_date, 1);
-  console.log('Dates: ' + start, finish);
+  console.log("Dates: " + start, finish);
 
-  const formatted = eachDayOfInterval(interval(start, finish))
-    .map((date) => format(date, "yyyy'-'LL'-'dd"));
+  const formatted = eachDayOfInterval(interval(start, finish)).map((date) =>
+    format(date, "yyyy'-'LL'-'dd")
+  );
 
-  console.log('Formatted: ' + formatted)
+  console.log("Formatted: " + formatted);
 
-  const {data: isBusy, error: err3} = await supabase
-    .from('busy_dates')
+  const { data: isBusy, error: err3 } = await supabase
+    .from("busy_dates")
     .select()
-    .eq('user_id', user_id)
-    .in('date', formatted);
+    .eq("user_id", user_id)
+    .in("date", formatted);
 
-  const activeDates = formatted.map((date) => {return {date, project_id, user_id}});
+  const activeDates = formatted.map((date) => {
+    return { date, project_id, user_id };
+  });
 
-  if(isBusy.length) {
-    throw new Error('User is busy during this project.');
+  if (isBusy.length) {
+    throw new Error("User is busy during this project.");
     return;
   }
 
-  console.log('Active Dates: ', activeDates)
+  console.log("Active Dates: ", activeDates);
 
-  const { error: err4 } = await supabase
-    .from('busy_dates')
-    .insert(activeDates);
+  const { error: err4 } = await supabase.from("busy_dates").insert(activeDates);
 
-  if(err4) {
+  if (err4) {
     console.error(err4);
-    throw new Error('Could not insert busy days.');
+    throw new Error("Could not insert busy days.");
     return;
   }
 
   const { error: err5 } = await supabase
-    .from('projects_users')
-    .insert({project_id, user_id});
+    .from("projects_users")
+    .insert({ project_id, user_id });
 
-  if(err5) {
+  if (err5) {
     console.error(err5);
-    throw new Error('Could not add user to project.');
+    throw new Error("Could not add user to project.");
     return;
   }
 
-
-  return {user, project};
-}
+  return { user, project };
+};
 
 export const getCurrentProject = async (userId) => {
   const today = format(new Date(), "yyyy'-'LL'-'dd");
   const { data, error } = await supabase
-    .from('users')
-    .select(`
+    .from("users")
+    .select(
+      `
       busy_dates(
         projects(
           id,
@@ -271,14 +269,15 @@ export const getCurrentProject = async (userId) => {
           repo_link
         )
       )
-    `)
-    .eq('id', userId)
-    .eq('busy_dates.date', today);
+    `
+    )
+    .eq("id", userId)
+    .eq("busy_dates.date", today);
 
-  if(error) {
+  if (error) {
     console.error(error);
     return;
   }
 
   return data;
-}
+};
