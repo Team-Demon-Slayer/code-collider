@@ -24,9 +24,7 @@ export default function Home() {
 
   const selectCurrentProject = async () => {
     const { data: { user } } = await supabase.auth.getUser();
-    console.log(user.id);
     const data = await getCurrentProject(user.id);
-    console.log(data);
     setCurrentProject(data[0]?.busy_dates[0]?.projects);
   };
 

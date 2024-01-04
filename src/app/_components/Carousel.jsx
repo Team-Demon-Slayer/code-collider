@@ -12,6 +12,7 @@ export default function Carousel({ projects, getProject, header }) {
   const [thirdPointer, setThirdPointer] = useState(2);
   const [onProject, setOnProject] = useState(false);
 
+  // next button
   const handleNext = () => {
     if (!projects[thirdPointer + 1]) {
       setFirstPointer(firstPointer + 1);
@@ -36,8 +37,7 @@ export default function Carousel({ projects, getProject, header }) {
     return;
   };
 
-  // previous
-
+  // previous button
   const handlePrev = () => {
     if (!projects[thirdPointer - 1]) {
       setFirstPointer(firstPointer - 1);
