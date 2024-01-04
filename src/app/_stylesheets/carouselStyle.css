@@ -87,10 +87,13 @@
   position: absolute;
   top: -60px;
   left: 0px;
+  /* width:fit-content;
+  height: fit-content; */
   font-weight: bold;
+  border-radius: 20px;
+  color: var(--dark-color);
   background-color: var(--grey-color);
-  color: var(--dark-color)
-
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .carousel-item-title {

@@ -18,7 +18,7 @@ export default function CurrentProject({ project_meta }) {
           </div>
         </div>
         <div className="languages-current">
-          {project_meta.languages.map((language) => {
+          {project_meta.languages?.map((language) => {
             return (
               <img src={language} key={language} className="language-icon" />
             );
@@ -30,7 +30,7 @@ export default function CurrentProject({ project_meta }) {
 
         <div className="project-details-footer">
           <div className="project-details-team">
-            {project_meta.team.map((member, index) => {
+            {project_meta.users?.map((member, index) => {
               return (
                 <div className="team-member" key={member}>
                   @{member}

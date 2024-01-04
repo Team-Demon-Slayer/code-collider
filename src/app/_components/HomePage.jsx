@@ -27,7 +27,7 @@ export default function HomePage({
     spotlightProjects && (
       <div className="home-container">
         <div className="hp-banner">
-          {/* <CurrentProject project_meta={currentProject} /> */}
+          <CurrentProject project_meta={currentProject} />
         </div>
         {showModal && (
           <ProjectModal project={selectProject} closeModal={closeModal} />
