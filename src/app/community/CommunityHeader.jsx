@@ -114,13 +114,14 @@ export default function CommunityHeader() {
             value={startDate}
             onChange={e => setStartDate(e.target.value)}
           />
-          <label>
+          <label className="custom-toggle">
             <input
               type="checkbox"
               checked={openMentor}
               onChange={e => setOpenMentor(e.target.checked)}
             />
-            openMentor
+            <div></div>
+            <span>Open Mentor</span>
           </label>
         </>
       )}
