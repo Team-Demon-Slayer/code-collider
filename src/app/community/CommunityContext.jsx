@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  useState,
-  useMemo,
-  useEffect
-} from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 import supabase from '../api/_db/index.js';
 
 export const CommunityContext = createContext();
@@ -17,6 +12,7 @@ export function CommunityProvider({ children }) {
   const [startDate, setStartDate] = useState(new Date('2021-01-01'));
   const [openMentor, setOpenMentor] = useState(false);
   const [user, setUser] = useState(null);
+  const [languageSelected, setLanguageSelected] = useState(true);
 
   useEffect(() => {
     async function getUser() {
@@ -38,9 +34,11 @@ export function CommunityProvider({ children }) {
       setStartDate,
       openMentor,
       setOpenMentor,
-      user
+      user,
+      languageSelected,
+      setLanguageSelected
     }),
-    [keyword, language, spots, startDate, openMentor, user]
+    [keyword, language, spots, startDate, openMentor, user, languageSelected]
   );
 
   return (

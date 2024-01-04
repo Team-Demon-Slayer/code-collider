@@ -14,7 +14,7 @@ export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [userUpvotes, setUserUpvotes] = useState([]);
-  const { keyword, language, spots, startDate, openMentor, user } =
+  const { keyword, language, spots, startDate, openMentor, user, languageSelected } =
     useCommunityContext();
   useEffect(() => {
     async function getprojects() {

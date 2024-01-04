@@ -22,7 +22,9 @@ export default function CommunityHeader() {
     startDate,
     setStartDate,
     openMentor,
-    setOpenMentor
+    setOpenMentor,
+    languageSelected,
+    setLanguageSelected
   } = useCommunityContext();
 
   const languageInputRef = useRef(null);
@@ -35,7 +37,6 @@ export default function CommunityHeader() {
   }, [supabase]);
 
   const [languages, setLanguages] = useState([]);
-  const [languageSelected, setLanguageSelected] = useState(true);
 
   useEffect(() => {
     getAllLanguages().then(languages => {
@@ -80,7 +81,7 @@ export default function CommunityHeader() {
           <ul className="languages-selection">
             {filteredLanguages(languages, language).map(({ name }) => (
               <li
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation();
                   setLanguage(name);
                   setLanguageSelected(true);

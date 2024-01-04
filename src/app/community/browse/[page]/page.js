@@ -13,7 +13,7 @@ import Pagination from '../../Pagination';
 export default function BrowsePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
-  const { keyword, language, spots, startDate, openMentor, user } =
+  const { keyword, language, spots, startDate, openMentor, user, languageSelected } =
     useCommunityContext();
   useEffect(() => {
     async function getprojects() {
