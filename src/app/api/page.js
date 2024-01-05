@@ -78,7 +78,7 @@ export default function Api() {
       console.error(err);
     });
 
-    getFilteredProjectsPageByLanguage('react', false, 1, 1, null, null, null, true)
+    getFilteredProjectsPageByLanguage('rails', true, 1, 1, null, null, null, false, 'pax')
     .then((res) => {
       console.log('Filtered Projects Page By Language');
       console.log(res);
@@ -87,7 +87,7 @@ export default function Api() {
       console.error(err);
     })
 
-    getFilteredProjectsPage(true, 1, 5, null, null, null, false)
+    getFilteredProjectsPage(true, 1, 5, null, null, null, false, 'pix')
     .then((res) => {
       console.log('Filtered Projects Page');
       console.log(res);
