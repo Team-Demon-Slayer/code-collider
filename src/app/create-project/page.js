@@ -4,13 +4,19 @@ import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import supabase from "../api/_db/index.js";
 import React, { useState, useEffect } from "react";
-import searchLanguages from "./helper-funcs/searchLanguages.js";
 import isALanguageIn from "./helper-funcs/isALanguageIn.js";
 import Image from "next/image";
 import formatDate from "../_utils/formatDate.js";
 import "../_stylesheets/createProject.css";
 import { MdOutlineDateRange } from "react-icons/md";
 import { joinProject } from "../api/_db/_models/projectsModels.js";
+
+const getLanguages = async () => {
+  const allLanguages = await supabase.from("languages").select();
+  return allLanguages.data.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+};
 
 const applyFunc = (func, newValue) => {
   func(newValue);
@@ -19,12 +25,25 @@ const applyFunc = (func, newValue) => {
 export default function CreateProject() {
   const [title, setTitle] = useState("My Project");
   const [engineers, setEngineers] = useState(5);
+  const [allLanguages, setAllLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [description, setDescription] = useState("My Project Description");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [hours, setHours] = useState(4);
   const router = useRouter();
+
+  useEffect(() => {
+    getLanguages().then((data) => {
+      setAllLanguages(data);
+    });
+  }, []);
+
+  const searchLanguages = (input) => {
+    return allLanguages.filter((language) => {
+      return language.name.slice(0, input.length).toLowerCase() === (input.toLowerCase());
+    });
+  }
 
   const update = {
     title: applyFunc.bind(null, setTitle),
@@ -36,14 +55,6 @@ export default function CreateProject() {
   };
 
   const onSubmit = async () => {
-    console.log([
-      title,
-      engineers,
-      languages,
-      description,
-      Date.parse(startDate),
-      Date.parse(endDate),
-    ]);
     if (
       title &&
       engineers &&
@@ -77,6 +88,15 @@ export default function CreateProject() {
         console.error(error);
         return;
       }
+      await languages.forEach(async (language) => {
+        const { error: insertError } = await supabase
+          .from("projects_languages")
+          .insert({ project_id: newId, language_id: language.id });
+        if (insertError) {
+          console.error(insertError);
+          return;
+        }
+      })
       joinProject(newId)
         .then(() => {
           router.push(`/my-projects`);
@@ -168,7 +188,7 @@ export default function CreateProject() {
                   "-" +
                   String(endDate.getMonth() + 1).padStart(2, "0") +
                   "-" +
-                  String(endDate.getDate()).padStart(2, "0")
+                  String(endDate.getDate() + 2).padStart(2, "0")
                 }
                 onChange={(e) => {
                   const chosenDate = new Date(e.target.value);
@@ -195,18 +215,18 @@ export default function CreateProject() {
             {searchInput !== "" && (
               <div className="languageSearchResults">
                 {searchLanguages(
-                  searchInput.slice(0, maximumSearchResults)
-                ).map(({ name, url }) => (
+                  searchInput
+                ).slice(0, maximumSearchResults).map(({ id, name, url }) => (
                   <div
                     key={name}
                     className="create-project-single-language"
                     onClick={() => {
-                      if (isALanguageIn({ name, url }, languages)) {
+                      if (isALanguageIn({id, name, url}, languages)) {
                         update.languages(
                           languages.filter((l) => l.name !== name)
                         );
                       } else {
-                        update.languages([...languages, { name, url }]);
+                        update.languages([...languages, { id, name, url }]);
                       }
                     }}
                   >
