@@ -1,5 +1,4 @@
-const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
-const supabase = createClientComponentClient();
+import supabase from "../index.js";
 
 const { previousMonday, nextMonday } = require("date-fns");
 
