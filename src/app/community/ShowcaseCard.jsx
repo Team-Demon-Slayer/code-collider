@@ -5,7 +5,6 @@ import supabase from "../api/_db/index.js";
 import useCommunityContext from "./useCommunityContext";
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
-import "../_stylesheets/currentProjectStyle.css";
 
 const testIfUpvoted = (userUpvotes, projectId) => {
   if (!userUpvotes) return false;
@@ -39,7 +38,7 @@ export default function ProjectCard({ project, userUpvotes }) {
   };
 
   return (
-    <div className="current-project-details-info">
+    <div className="project-showcase-card-info">
       <div className="project-card-head">
         <div className="project-details-title">
           <div className="project-details-current-project">
