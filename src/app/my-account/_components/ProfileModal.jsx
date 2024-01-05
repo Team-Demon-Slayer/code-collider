@@ -37,7 +37,7 @@ export default function ProfileModal({user, handleModal, avatarList, handleUpdat
         })
       }
       </div>
-      { changed&& <button className="save-button" onClick={handleUpdateAvatar}>Save</button> }
+      { changed&& <button className="profile-photo-confirm" onClick={handleUpdateAvatar}>Save</button> }
         <AiOutlineClose className="close-modal" onClick={handleModal}/>
     </div>
 

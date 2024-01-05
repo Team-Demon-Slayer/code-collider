@@ -312,3 +312,24 @@
 .bio-cancel:hover {
   color: var(--yellow-color);
 }
+
+.bio-confirm {
+  color: var(--teal-color);
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.profile-photo-confirm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  width: 45%;
+  color: #0c0f0a;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  height: 50px;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
