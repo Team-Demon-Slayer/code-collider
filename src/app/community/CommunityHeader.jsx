@@ -53,6 +53,7 @@ export default function CommunityHeader() {
     const handleClickOutside = e => {
       if (!languageInputRef.current.contains(e.target)) {
         setLanguageSelected(true);
+        setSelectedLanguage('');
       }
     };
 
@@ -78,6 +79,7 @@ export default function CommunityHeader() {
             setLanguage(e.target.value);
             setLanguageSelected(false);
           }}
+          onClick={e => e.stopPropagation()}
           placeholder="language"
           ref={languageInputRef}
         />
