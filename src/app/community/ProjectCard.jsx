@@ -77,7 +77,7 @@ export default function ProjectCard({ project }) {
           </button>
         ) : (
           <button className="project-join-btn" disabled>
-            Unalbe to Join
+            Unable to Join
           </button>
         )}
       </div>
