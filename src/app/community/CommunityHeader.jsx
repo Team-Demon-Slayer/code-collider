@@ -82,7 +82,10 @@ export default function CommunityHeader() {
           ref={languageInputRef}
         />
         {!languageSelected && (
-          <ul className="languages-selection">
+          <ul
+            onClick={e => e.stopPropagation()}
+            className="languages-selection"
+          >
             {filteredLanguages(languages, language).map(({ name }) => (
               <li
                 onClick={e => {
@@ -106,7 +109,7 @@ export default function CommunityHeader() {
             type="number"
             min={1}
             max={5}
-            placeholder='number of spots'
+            placeholder="number of spots"
             value={spots ?? ''}
             onChange={e => setSpots(e.target.value)}
           />
