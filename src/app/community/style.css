@@ -171,6 +171,7 @@
   position: absolute;
   z-index: 999;
   background-color: var(--white-color);
+  color: var(--dark-color);
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -181,6 +182,7 @@
 
 .languages-selection li {
   cursor: pointer;
+  color: var(--dark-color);
 }
 
 /* a page containter that show pagination at bottom horizontally */
