@@ -41,7 +41,8 @@ export default function BrowsePage({ params: { page } }) {
           convertedSpot,
           convertedStartDate,
           null,
-          openMentor
+          openMentor,
+          debouncedKeyword,
         );
         setProjects(projects[0].projects);
       } else {
@@ -52,7 +53,8 @@ export default function BrowsePage({ params: { page } }) {
           convertedSpot,
           convertedStartDate,
           null,
-          openMentor
+          openMentor,
+          debouncedKeyword,
         );
         setProjects(projects);
       }
@@ -67,6 +69,7 @@ export default function BrowsePage({ params: { page } }) {
     startDate,
     openMentor,
     convertedStartDate,
+    debouncedKeyword
   ]);
 
   useEffect(() => {
