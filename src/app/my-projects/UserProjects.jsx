@@ -14,6 +14,8 @@ export default function UserProjects({ currentProjects, pastProjects }) {
     router.push(`/project/${obj.id}`);
   };
 
+  console.log(currentProjects)
+
   return (
     <div className="my-projects-container">
       <div className="my-current-projects">
