@@ -107,6 +107,7 @@ export default function CommunityHeader() {
             type="number"
             min={1}
             max={5}
+            placeholder='number of spots'
             value={spots ?? ''}
             onChange={e => setSpots(e.target.value)}
           />
