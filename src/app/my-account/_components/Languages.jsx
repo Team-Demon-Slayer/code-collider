@@ -2,9 +2,9 @@
 import "../page.css";
 import supabase from '../../api/_db/index.js';
 import React, { useState, useEffect } from "react";
-export default function Languages({user}) {
+export default function Languages({user, languages}) {
   const [modalState, setModalState] = useState(false);
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState(languages);
   const codingLanguages = [
     "JavaScript",
     "C#",
@@ -27,6 +27,7 @@ export default function Languages({user}) {
     setModalState(!modalState);
   };
   const handleLanguageSelection = (language) => {
+    console.log(user);
     setSelectedLanguages((prevSelectedLanguages) => {
       if (prevSelectedLanguages.includes(language)) {
         return prevSelectedLanguages.filter((lang) => lang !== language);
