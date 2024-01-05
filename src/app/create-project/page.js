@@ -23,14 +23,15 @@ const applyFunc = (func, newValue) => {
 };
 
 export default function CreateProject() {
-  const [title, setTitle] = useState("My Project");
+  const [title, setTitle] = useState("");
   const [engineers, setEngineers] = useState(5);
   const [allLanguages, setAllLanguages] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [description, setDescription] = useState("My Project Description");
+  const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [hours, setHours] = useState(4);
+  const [repo, setRepo] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -41,9 +42,12 @@ export default function CreateProject() {
 
   const searchLanguages = (input) => {
     return allLanguages.filter((language) => {
-      return language.name.slice(0, input.length).toLowerCase() === (input.toLowerCase());
+      return (
+        language.name.slice(0, input.length).toLowerCase() ===
+        input.toLowerCase()
+      );
     });
-  }
+  };
 
   const update = {
     title: applyFunc.bind(null, setTitle),
@@ -52,6 +56,7 @@ export default function CreateProject() {
     description: applyFunc.bind(null, setDescription),
     startDate: applyFunc.bind(null, setStartDate),
     endDate: applyFunc.bind(null, setEndDate),
+    repo: applyFunc.bind(null, setRepo),
   };
 
   const onSubmit = async () => {
@@ -96,7 +101,7 @@ export default function CreateProject() {
           console.error(insertError);
           return;
         }
-      })
+      });
       joinProject(newId)
         .then(() => {
           router.push(`/my-projects`);
@@ -214,25 +219,25 @@ export default function CreateProject() {
             />
             {searchInput !== "" && (
               <div className="languageSearchResults">
-                {searchLanguages(
-                  searchInput
-                ).slice(0, maximumSearchResults).map(({ id, name, url }) => (
-                  <div
-                    key={name}
-                    className="create-project-single-language"
-                    onClick={() => {
-                      if (isALanguageIn({id, name, url}, languages)) {
-                        update.languages(
-                          languages.filter((l) => l.name !== name)
-                        );
-                      } else {
-                        update.languages([...languages, { id, name, url }]);
-                      }
-                    }}
-                  >
-                    {name}
-                  </div>
-                ))}
+                {searchLanguages(searchInput)
+                  .slice(0, maximumSearchResults)
+                  .map(({ id, name, url }) => (
+                    <div
+                      key={name}
+                      className="create-project-single-language"
+                      onClick={() => {
+                        if (isALanguageIn({ id, name, url }, languages)) {
+                          update.languages(
+                            languages.filter((l) => l.name !== name)
+                          );
+                        } else {
+                          update.languages([...languages, { id, name, url }]);
+                        }
+                      }}
+                    >
+                      {name}
+                    </div>
+                  ))}
               </div>
             )}
             <ul className="create-project-languages-icons">
@@ -248,6 +253,16 @@ export default function CreateProject() {
                 />
               ))}
             </ul>
+          </div>
+          <div className="create-project-repo-link">
+            <p className="create-project-text">Project Repo</p>
+            <input
+              className="project-repo-input"
+              value={repo}
+              onChange={(e) => update.repo(e.target.value)}
+              type="text"
+              placeholder="Project Repo Link"
+            />
           </div>
           <button className="create-project-submit" onClick={onSubmit}>
             Create Project
