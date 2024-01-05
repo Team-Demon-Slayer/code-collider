@@ -42,7 +42,7 @@
 .create-project-title,
 .create-project-engineers {
   display: flex;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   width: fit-content;
   min-width: 150px;
   height: 70px;
@@ -60,7 +60,7 @@
   top: -35px;
   left: -10px;
   font-size: 20px;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   padding: 10px 20px;
   width: fit-content;
@@ -76,8 +76,9 @@
   height: 20px;
   padding: 10px 20px;
   border-radius: 12px;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
 }
 
 .select-engineers {
@@ -91,13 +92,14 @@
   outline: none;
   border-radius: 12px;
   text-align: center;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
 }
 
 .create-project-description {
   display: flex;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   width: 475px;
   height: 255px;
   padding: 20px;
@@ -117,8 +119,9 @@
   border-radius: 10px;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
   padding: 10px 20px;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
   box-sizing: border-box;
 }
 
@@ -131,7 +134,7 @@
 .create-project-start-date,
 .create-project-end-date {
   display: flex;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   width: fit-content;
   min-width: 200px;
   height: 70px;
@@ -152,7 +155,7 @@
   height: 40px;
   padding: 10px 20px;
   border-radius: 12px;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color) !important;
   font-size: 18px;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
@@ -173,9 +176,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  height: 455px;
+  height: 305px;
+  margin-bottom: 40px;
   margin-top: 50px;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
@@ -192,10 +196,10 @@
   border-radius: 10px;
   border: none;
   outline: none;
-  box-shadow: 2px 2px 0px 1px var(--dark-color);
   position: relative;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
 }
 
 .languageSearchResults {
@@ -257,10 +261,35 @@
 .create-a-project-header {
   font-size: 50px;
   margin: 0px;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   border-radius: 20px;
   padding: 10px 130px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   color: var(--dark-color);
   margin-top: 30px;
+}
+
+.create-project-repo-link {
+  display: flex;
+  background-color: var(--grey-color);
+  width: 280px;
+  height: 70px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+}
+
+.project-repo-input {
+  border: none;
+  outline: none;
+  width: 200px;
+  height: 20px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background-color: var(--white-color);
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
+  color: var(--dark-color);
 }
