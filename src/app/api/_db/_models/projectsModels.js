@@ -305,12 +305,12 @@ export const getFilteredProjectsPageByLanguage = async (
     throw new Error('Need a language for language based query!');
     return;
   }
-  const activeFilter = active === true ? ['projects.active', active] : [''];
+  const activeFilter = ['projects.active', active];
   const languageFilter = ['url', language];
   const spotsFilter = (spots === undefined || spots === null) ? [''] : ['projects.available_spots', spots];
   const spotsFilter2 = (active === true && !(mentor === true)) ? ['projects.available_spots', 0] : [''];
   const gtDateFilter = gtDate == null ? [''] : ['projects.start_date', gtDate];
-  const ltDateFilter = ltDate == null ? [''] : ['projects.start_date', ltDate];
+  const ltDateFilter = ltDate == null ? [''] : ['projects.finish_date', ltDate];
   const mentorFilter = mentor === true ? ['projects.mentor', null] : [''];
   const { data, error } = await supabase
     .from('languages')
@@ -366,11 +366,11 @@ export const getFilteredProjectsPage = async (
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
 
-  const activeFilter = active === true ? ['active', active] : [''];
+  const activeFilter = ['active', active];
   const spotsFilter = (spots === undefined || spots === null) ? [''] : ['available_spots', spots];
   const spotsFilter2 = (active === true && !(mentor === true)) ? ['available_spots', 0] : [''];
   const gtDateFilter = gtDate == null ? [''] : ['start_date', gtDate];
-  const ltDateFilter = ltDate == null ? [''] : ['start_date', ltDate];
+  const ltDateFilter = ltDate == null ? [''] : ['finish_date', ltDate];
   const mentorFilter = mentor === true ? ['mentor', null] : [''];
   const { data, error } = await supabase
     .from('projects')
