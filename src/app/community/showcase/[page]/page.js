@@ -14,7 +14,7 @@ export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [userUpvotes, setUserUpvotes] = useState([]);
-  const { keyword, language, spots, startDate, openMentor, user } =
+  const { keyword, language, user, languageSelected, debouncedKeyword } =
     useCommunityContext();
   useEffect(() => {
     async function getprojects() {
@@ -36,8 +36,8 @@ export default function ShowcasePage({ params: { page } }) {
     getUserUpvotes();
   }, [user]);
 
-  console.log({userUpvotes}); //FIXME: test
-  console.log(user?.id); //FIXME: test
+  useEffect( () => { console.log(debouncedKeyword); }, [debouncedKeyword])// FIXME: remove
+
   return (
     <>
       <div className="page-container">

@@ -1,35 +1,28 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import useCommunityContext from './useCommunityContext';
+import toast from 'react-hot-toast';
+import { joinProject } from '../api/_db/_models/projectsModels';
 import '../_stylesheets/currentProjectStyle.css';
 
 export default function ProjectCard({ project }) {
   const router = useRouter();
-  const { user } = useCommunityContext();
-  const supabase = createClientComponentClient();
   const avaliableSpots =project.max_developers -  project.users.length;
 
-  const getUserIdWithEmail = async email => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('email', email);
-    if (error) {
-      console.log(error);
-    }
-    return data[0].id;
-  };
+  const [joindisabled, setJoinDisabled] = useState(false);
+
 
   const handleJoinProject = async () => {
-    const userId = await getUserIdWithEmail(user.email);
-    console.log(userId);
-    await supabase
-      .from('projects_users')
-      .insert({ project_id: project.id, user_id: userId });
-    router.push(`/project/${project.id}`);
+    try {
+      await joinProject(project.id);
+      router.push(`/project/${project.id}`);
+    } catch (error) {
+      setJoinDisabled(true);
+      toast.error(error.message);
+    }
   };
+
   return (
     <div className="current-project-details-info">
       <div className="project-card-head">
@@ -75,16 +68,16 @@ export default function ProjectCard({ project }) {
             No Mentor
           </button>
         )}
-        {avaliableSpots > 0 ? (
+        {avaliableSpots > 0 && !joindisabled ? (
           <button
             onClick={handleJoinProject}
-            className="project-details-page-btn"
+            className="project-join-btn"
           >
             Join Project
           </button>
         ) : (
-          <button className="project-details-page-btn" disabled>
-            Spots Full
+          <button className="project-join-btn" disabled>
+            Unable to Join
           </button>
         )}
       </div>

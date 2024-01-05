@@ -21,7 +21,7 @@ export default function ForgotPassword() {
     }
 
     try {
-      await supabase.auth.resetPasswordForEmail(email, { redirectTo: 'http://localhost:3000/reset-password' });
+      await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${location.origin}/reset-password` });
     } catch (error) {
     }
   };

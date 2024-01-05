@@ -530,7 +530,7 @@
 .deliverables-main {
   background-color: var(--grey-color);
   width: 95%;
-  height: 370px;
+  height: 450px;
   border-radius: 25px;
   display: flex;
   justify-content: space-evenly;
@@ -560,13 +560,13 @@
   justify-content: flex-start;
   align-items: center;
   width: 10%;
-  height: 60%;
+  height: 270px;
   background-color: var(--grey-color);
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   border-radius: 15px;
   padding: 10px;
-  padding-top: 50px;
-  padding-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 80px;
   cursor: default;
   overflow-y: scroll;
   position: relative;
@@ -589,7 +589,7 @@
   align-items: center;
   border-radius: 10px;
   font-size: 15px;
-  top: 45%;
+  top: 42.5%;
 }
 
 .deliverables-day-add-task {
@@ -600,7 +600,7 @@
   height: 20px;
   padding: 5px 10px;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
-  top: 75%;
+  top: 78%;
   position: fixed;
   cursor: pointer;
   z-index: 10;

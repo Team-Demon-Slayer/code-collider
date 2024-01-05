@@ -1,4 +1,4 @@
-const supabase = require('../');
+import supabase from "../index.js";
 
 const { previousMonday, nextMonday } = require("date-fns");
 

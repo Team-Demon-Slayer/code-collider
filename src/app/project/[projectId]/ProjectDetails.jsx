@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { FaLock } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import getUserColor from "../../_utils/getUserColor.js";

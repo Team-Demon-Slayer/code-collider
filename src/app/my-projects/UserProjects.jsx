@@ -1,9 +1,9 @@
 "use client";
 
+import "./myProjects.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Carousel from "../_components/Carousel.jsx";
-import "./myProjects.css";
 
 export default function UserProjects({ currentProjects, pastProjects }) {
   const router = useRouter();
@@ -14,25 +14,36 @@ export default function UserProjects({ currentProjects, pastProjects }) {
     router.push(`/project/${obj.id}`);
   };
 
+  console.log(currentProjects)
+
   return (
     <div className="my-projects-container">
-      {currentProjects && (
-        <Carousel
-          projects={currentProjects}
-          getProject={navToProject}
-          header="Current Projects"
-        />
-      )}
+      <div className="my-current-projects">
+        <div className="my-current-projects-header">My Current Projects</div>
+        {currentProjects ? (
+          <Carousel
+            projects={currentProjects}
+            getProject={navToProject}
+            header="Current Project"
+          />
+        ) : (
+          <div className="no-my-projects">No Current Projects</div>
+        )}
+      </div>
 
       <div id="my-projects-split" />
-
-      {pastProjects && (
-        <Carousel
-          projects={pastProjects}
-          getProject={navToProject}
-          header="Past Projects"
-        />
-      )}
+      <div className="my-current-projects">
+        <div className="my-current-projects-header">My Past Projects</div>
+        {pastProjects.length > 0 ? (
+          <Carousel
+            projects={pastProjects}
+            getProject={navToProject}
+            header="Past Project"
+          />
+        ) : (
+          <div className="no-my-projects">No Past Projects</div>
+        )}
+      </div>
     </div>
   );
 }

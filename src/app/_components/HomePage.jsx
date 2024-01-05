@@ -1,4 +1,5 @@
 "use client";
+
 import "../globals.css";
 import { useState, useEffect } from "react";
 import Carousel from "./Carousel.jsx";
@@ -23,26 +24,30 @@ export default function HomePage({
   };
 
   return (
-    recentProjects &&
-    spotlightProjects && (
-      <div className="home-container">
-        <div className="hp-banner">
-          {/* <CurrentProject project_meta={currentProject} /> */}
-        </div>
-        {showModal && (
-          <ProjectModal project={selectProject} closeModal={closeModal} />
-        )}
+    <div className="home-container">
+      <CurrentProject currentProject={currentProject} />
+      {showModal && (
+        <ProjectModal project={selectProject} closeModal={closeModal} />
+      )}
+      {recentProjects ? (
         <Carousel
           projects={recentProjects}
           getProject={getProject}
           header="Recently Added"
         />
+      ) : (
+        <div className="no-projects">No Recent Projects</div>
+      )}
+
+      {spotlightProjects ? (
         <Carousel
           projects={spotlightProjects}
           getProject={getProject}
           header="Spotlight Project"
         />
-      </div>
-    )
+      ) : (
+        <div className="no-projects">No Spotlight Projects</div>
+      )}
+    </div>
   );
 }

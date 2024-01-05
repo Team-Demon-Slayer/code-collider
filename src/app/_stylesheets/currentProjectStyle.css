@@ -1,22 +1,36 @@
 .current-project-details-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   position: relative;
   cursor: default;
   width: 95%;
-  background-color: var(--dark-color);
-  height: 180px;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  height: 155px;
   border-radius: 60px;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
-/* .current-project-details-info:hover {
-  opacity: 0.7;
-  scale: 0.97;
-} */
+.no-current-project {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: default;
+  width: 95%;
+  background-color: var(--grey-color);
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--dark-color);
+  height: 155px;
+  border-radius: 60px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+}
 
 .project-details-title {
   display: flex;
@@ -24,13 +38,14 @@
   align-items: baseline;
   position: absolute;
   font-weight: bold;
+  color: var(--dark-color);
   width: fit-content;
   min-width: 230px;
   padding: 5px;
   padding-left: 10px;
   padding-right: 20px;
   z-index: 5;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   border-radius: 20px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
   top: -10px;
@@ -80,7 +95,7 @@
 }
 
 .project-details-description {
-  color: var(--white-color);
+  color: var(--dark-color);
   font-size: 13px;
   width: 92%;
   margin-left: 40px;
@@ -93,7 +108,7 @@
   width: 70%;
   margin-left: 40px;
   margin-top: 10px;
-  color: var(--white-color);
+  color: var(--dark-color);
   margin-bottom: 20px;
 }
 
@@ -115,7 +130,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 5px 10px;
   min-width: 150px;
@@ -135,7 +150,7 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--dark-color);
   padding: 5px 10px;
   min-width: 150px;

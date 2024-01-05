@@ -1,6 +1,4 @@
-const supabase = require('../');
-
-
+import supabase from "../index.js";
 
 export const getMessages = async (projectId) => {
   let { data, error } = await supabase
