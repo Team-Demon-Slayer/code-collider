@@ -15,24 +15,29 @@ export default function TopNav({ theme, toggleTheme, avatar, pageTitle }) {
     return theme === "dark" ? faToggleOn : faToggleOff;
   };
   const navigateToMyAccount = () => {
-    router.push('/my-account'); 
+    router.push("/my-account");
   };
   return (
     <header className={`top-nav`}>
       <h1 className="page-title">{pageTitle}</h1>
-      <div className="theme-switcher">
-        <span>{theme === "light" ? "Light Mode" : "Dark Mode"}</span>
-        <FontAwesomeIcon
-          icon={getToggleIcon()}
-          className="theme-switch"
-          checked={theme === "dark"}
-          onClick={toggleTheme}
-        />
-      </div>
-      <div className="user-info">
-        {avatar && <img className="avatar" src={avatar} alt="avatar" onClick={navigateToMyAccount}/>}
-        {/* {avatar && <p style={{color:"white"}}>{avatar}</p>} */}
-        {/* {newMessage && <div className="new-message"></div>} */}
+      <div className="nav-settings">
+        <div className="theme-switcher">
+          <span>{theme === "light" ? "Light Mode" : "Dark Mode"}</span>
+          <FontAwesomeIcon
+            icon={getToggleIcon()}
+            className="theme-switch"
+            checked={theme === "dark"}
+            onClick={toggleTheme}
+          />
+        </div>
+        {avatar && (
+          <img
+            className="nav-avatar"
+            src={avatar}
+            alt="avatar"
+            onClick={navigateToMyAccount}
+          />
+        )}
       </div>
     </header>
   );
