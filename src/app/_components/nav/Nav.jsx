@@ -6,11 +6,12 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import supabase from "../../api/_db/index.js";
 import { useRouter } from "next/navigation";
 import "../../globals.css";
-import { getMiniUser }  from "../../api/_db/_models/usersModels.js";
+import { getMiniUser } from "../../api/_db/_models/usersModels.js";
+
 export default function Nav() {
   const [avatar, setAvatar] = useState("");
   const [currentNavTheme, setCurrentNavTheme] = useState("light");
-  const [pageTitle, setPageTitle] = useState("HOME PAGE");
+  const [pageTitle, setPageTitle] = useState("/");
   const [validUser, setValidUser] = useState(false);
   const [triggerSignout, setTriggerSignout] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -40,9 +41,25 @@ export default function Nav() {
     setPageTitle(newTitle);
   };
 
+  const titles = [
+    { title: "HOME PAGE", link: "/" },
+    { title: "MY PROJECTS", link: "/my-projects" },
+    { title: "PROJECT PAGE", link: "/project" },
+    { title: "COMMUNITY SHOWCASE", link: "/community/showcase/1" },
+    { title: "BROWSE PROJECTS", link: "/community/browse/1" },
+    { title: "CREATE PROJECT", link: "/create-project" },
+    { title: "MY ACCOUNT", link: "/my-account" },
+  ];
+
   useEffect(() => {
-    setCurrentURL(window.location.pathname);
-    console.log('path:', window.location.pathname)
+    const currentPath = window.location.pathname;
+    const foundTitle = titles.find((titleObj) => titleObj.link === currentPath);
+
+    if (foundTitle) {
+      setPageTitle(foundTitle.title);
+    } else {
+      setPageTitle("/");
+    }
   }, [router]);
 
   useEffect(() => {
@@ -67,13 +84,13 @@ export default function Nav() {
           .eq("id", data.session.user.id)
           .single();
 
-          if (data.session) {
-            const userwithavatar = await getMiniUser(data.session.user.id);
-            // const avatarUrl = users.github_username
-            //   ? `https://github.com/${users.github_username}.png`
-            //   : users.photo_url;
-            setAvatar(userwithavatar.profile_photo);
-          }
+        if (data.session) {
+          const userwithavatar = await getMiniUser(data.session.user.id);
+          // const avatarUrl = users.github_username
+          //   ? `https://github.com/${users.github_username}.png`
+          //   : users.photo_url;
+          setAvatar(userwithavatar.profile_photo);
+        }
         setValidUser(true);
       }
     };
@@ -86,15 +103,20 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
-    if (currentURL === "/login" || currentURL === "/forgot-password" || currentURL === "/reset-password") {
+    if (
+      currentURL === "/login" ||
+      currentURL === "/forgot-password" ||
+      currentURL === "/reset-password"
+    ) {
       setValidPath(false);
     } else {
-      setValidPath(true)
+      setValidPath(true);
     }
-  }, [currentURL])
+  }, [currentURL]);
 
   return (
-    (validUser && validPath) && (
+    (validUser &&
+      validPath) && (
       <div className={`app`}>
         <SideNav
           updateTitle={updateTitle}

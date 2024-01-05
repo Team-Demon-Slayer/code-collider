@@ -1,7 +1,4 @@
-const {
-  createClientComponentClient,
-} = require("@supabase/auth-helpers-nextjs");
-const supabase = createClientComponentClient();
+import supabase from "../index.js";
 
 export const getMiniUser = async (userId) => {
   let { data, error } = await supabase
@@ -34,7 +31,7 @@ export const getExpandedUser = async (userId) => {
       experience,
       is_mentor,
       profile_photo,
-      languages(name,url),
+      languages(id,name,url),
       upvotes(project_id)
     `
     )

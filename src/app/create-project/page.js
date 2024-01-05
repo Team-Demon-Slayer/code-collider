@@ -2,16 +2,14 @@
 
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import supabaseServer from "../api/_db/index.js";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import supabase from "../api/_db/index.js";
 import React, { useState, useEffect } from "react";
 import isALanguageIn from "./helper-funcs/isALanguageIn.js";
 import Image from "next/image";
 import formatDate from "../_utils/formatDate.js";
 import "../_stylesheets/createProject.css";
 import { MdOutlineDateRange } from "react-icons/md";
-
-const supabase = createClientComponentClient();
+import { joinProject } from "../api/_db/_models/projectsModels.js";
 
 const getLanguages = async () => {
   const allLanguages = await supabase.from("languages").select();
@@ -66,8 +64,7 @@ export default function CreateProject() {
       endDate &&
       startDate <= endDate
     ) {
-      const { data: userId, error: idError } =
-        await supabaseServer.auth.getSession();
+      const { data: userId, error: idError } = await supabase.auth.getSession();
       let newId = uuidv4();
       if (idError) {
         console.error(idError);
@@ -86,21 +83,9 @@ export default function CreateProject() {
         start_date: start,
         finish_date: end,
         estimated_hours: 4,
-        // mentor: null,
-        // upvotes: 0,
       });
       if (error) {
         console.error(error);
-        return;
-      }
-      const { error: projectError } = await supabase
-        .from("projects_users")
-        .insert({
-          project_id: newId,
-          user_id: userId.session.user.id,
-        });
-      if (projectError) {
-        console.error(projectError);
         return;
       }
       await languages.forEach(async (language) => {
@@ -112,7 +97,14 @@ export default function CreateProject() {
           return;
         }
       })
-      router.push(`/my-projects`);
+      joinProject(newId)
+        .then(() => {
+          router.push(`/my-projects`);
+        })
+        .catch((err) => {
+          console.error(err);
+          return;
+        });
     } else if (startDate > endDate) {
       alert("Start date cannot be after end date!");
     } else {
