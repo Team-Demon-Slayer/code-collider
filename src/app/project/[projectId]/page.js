@@ -239,6 +239,27 @@ export default function ProjectPage({ params }) {
     };
   }, [project_meta, getData]); // Add dependencies here
 
+  useEffect(() => {
+    const channel = supabase
+      .channel(`${project_meta?.project_id}teammembers`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "projects_users",
+        },
+        (payload) => {
+          getData();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase, project_meta]);
+
   if (isLoading) {
     return <span className="loader"></span>;
   }
