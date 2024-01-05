@@ -8,6 +8,7 @@ import {
 } from "@/app/api/_db/_models/projectsModels";
 import useCommunityContext from "../../useCommunityContext";
 import { getExpandedUser } from "@/app/api/_db/_models/usersModels";
+import supabase from "../../../api/_db/index";
 import ShowcaseCard from "../../ShowcaseCard";
 import Pagination from "../../Pagination";
 
@@ -15,6 +16,7 @@ export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [userUpvotes, setUserUpvotes] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
   const {
     keyword,
     language,
@@ -54,7 +56,7 @@ export default function ShowcasePage({ params: { page } }) {
       setIsLoading(false);
     }
     getprojects();
-  }, [page, languageSelected]);
+  }, [page, languageSelected, selectedLanguage]);
 
   useEffect(() => {
     async function getUserUpvotes() {
@@ -65,6 +67,18 @@ export default function ShowcasePage({ params: { page } }) {
     }
     getUserUpvotes();
   }, [user]);
+
+  useEffect(() => {
+    async function getPageCount() {
+      const projectsCount = await supabase
+        .from("projects")
+        .select("id", { count: "exact", head: true })
+        .eq("active", true);
+      const pageCount = Math.ceil(projectsCount.count / 10);
+      setPageCount(pageCount);
+    }
+    getPageCount();
+  }, []);
 
   return (
     <>
@@ -77,7 +91,7 @@ export default function ShowcasePage({ params: { page } }) {
           ))
         )}
       </div>
-      <Pagination pages={5} />
+      <Pagination pages={pageCount} />
     </>
   );
 }
