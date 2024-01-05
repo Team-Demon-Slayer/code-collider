@@ -115,8 +115,8 @@ export default function Nav() {
   }, [currentURL]);
 
   return (
-    validUser &&
-    validPath && (
+    (validUser &&
+      validPath) && (
       <div className={`app`}>
         <SideNav
           updateTitle={updateTitle}
