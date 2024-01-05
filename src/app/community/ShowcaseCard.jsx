@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import supabase from "../api/_db/index.js";
 import useCommunityContext from "./useCommunityContext";
 import { useState, useEffect } from "react";
+import { FaCheck } from "react-icons/fa";
 import "../_stylesheets/currentProjectStyle.css";
 
 const testIfUpvoted = (userUpvotes, projectId) => {
@@ -80,7 +81,7 @@ export default function ProjectCard({ project, userUpvotes }) {
           {!isUpvoteLoading &&
             (upvoted ? (
               <button className="project-upvote-button" disabled>
-                ✅
+                <FaCheck />
               </button>
             ) : (
               <button

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { usePathname } from "next/navigation";
-import useCommunityContext from "./useCommunityContext";
-import supabase from "../api/_db/index.js";
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import useCommunityContext from './useCommunityContext';
+import supabase from '../api/_db/index.js';
 
 const filteredLanguages = (languages, language) => {
   if (!language) return [];
@@ -26,38 +26,40 @@ export default function CommunityHeader() {
     setOpenMentor,
     languageSelected,
     setLanguageSelected,
+    setSelectedLanguage
   } = useCommunityContext();
 
   // GET endpoint from URL
   const pathname = usePathname();
   const languageInputRef = useRef(null);
-  const pathnameArr = pathname.split("/");
+  const pathnameArr = pathname.split('/');
   const endpoint = pathnameArr[2];
 
   const getAllLanguages = useCallback(async () => {
-    const allLanguages = await supabase.from("languages").select();
+    const allLanguages = await supabase.from('languages').select();
     return allLanguages;
-  }, [supabase]);
+  }, []);
 
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    getAllLanguages().then((languages) => {
+    getAllLanguages().then(languages => {
       setLanguages(languages.data);
     });
   }, [getAllLanguages]);
 
   // Close language selection when user clicks outside of it
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = e => {
       if (!languageInputRef.current.contains(e.target)) {
         setLanguageSelected(true);
+        setSelectedLanguage('');
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [languageInputRef, setLanguageSelected]);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [languageInputRef, setLanguageSelected, setSelectedLanguage]);
 
   return (
     <div className="search-header">
@@ -65,7 +67,7 @@ export default function CommunityHeader() {
         className="search-input"
         type="text"
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={e => setKeyword(e.target.value)}
         placeholder="serch keyword"
       />
       <div>
@@ -73,7 +75,7 @@ export default function CommunityHeader() {
           className="search-input"
           type="text"
           value={language}
-          onChange={(e) => {
+          onChange={e => {
             setLanguage(e.target.value);
             setLanguageSelected(false);
           }}
@@ -84,9 +86,10 @@ export default function CommunityHeader() {
           <ul className="languages-selection">
             {filteredLanguages(languages, language).map(({ name }) => (
               <li
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation();
                   setLanguage(name);
+                  setSelectedLanguage(languages.find(l => l.name === name).url);
                   setLanguageSelected(true);
                 }}
                 key={name}
@@ -97,27 +100,27 @@ export default function CommunityHeader() {
           </ul>
         )}
       </div>
-      {endpoint === "browse" && (
+      {endpoint === 'browse' && (
         <>
           <input
             className="search-input"
             type="number"
             min={1}
             max={5}
-            value={spots}
-            onChange={(e) => setSpots(e.target.value)}
+            value={spots ?? ''}
+            onChange={e => setSpots(e.target.value)}
           />
           <input
             className="search-input"
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={e => setStartDate(e.target.value)}
           />
           <label className="custom-toggle">
             <input
               type="checkbox"
               checked={openMentor}
-              onChange={(e) => setOpenMentor(e.target.checked)}
+              onChange={e => setOpenMentor(e.target.checked)}
             />
             <div></div>
             <span>Open Mentor</span>

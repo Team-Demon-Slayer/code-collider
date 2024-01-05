@@ -20,23 +20,23 @@
   height: 75%;
   padding-top: 20px;
   padding-bottom: 20px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .column1 {
   position: relative;
-  width: 48%;
+  width: 46%;
   height: fit-content;
   justify-content: center;
 }
 
 .column2 {
   position: relative;
-  width: 50vw;
+  width: 42%;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .edit-icon {
@@ -49,12 +49,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: var(--dark-color);
+  background-color: var(--grey-color);
   color: var(--white-color);
   border-radius: 50px;
   padding: 25px;
   width: 90%;
   height: 90%;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 .profile-header {
   display: flex;
@@ -64,7 +65,7 @@
   font-size: 25px;
   top: -20px;
   left: 0;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 50px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
@@ -83,6 +84,7 @@
   width: 64%;
   height: 64%;
   position: relative;
+  box-shadow: 2px 2px 0px 1px var(--red-color);
 }
 .profile-image-edit-container {
   display: flex;
@@ -95,7 +97,7 @@
   font-size: 20px;
   top: 65%;
   left: 70%;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--red-color);
   border-radius: 50px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
@@ -112,54 +114,70 @@
   padding: 10px 20px;
   position: relative;
   font-weight: 600;
-  margin-top: 40px;
   font-size: x-large;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
+  box-shadow: 2px 2px 0px 1px var(--red-color);
   color: var(--dark-color);
   border-radius: 20px;
-  box-shadow: 2px 2px 0px 1px var(--red-color);
   width: 25vw;
   height: 3vh;
   align-items: center;
   justify-content: flex-start;
+  outline: none;
+  border: none;
 }
-.edit-profile-name {
+.edit-profile-name-btn {
+  display: flex;
   position: absolute;
+  color: var(--red-color);
+  font-size: 25px;
+  top: 50%;
+  transform: translateY(-50%);
   left: 90%;
   cursor: pointer;
-  color: var(--red-color);
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
-.edit-profile-name:hover {
+.edit-profile-name-btn:hover {
   opacity: 0.7;
   scale: 0.97;
 }
-.profile-textarea {
+.edit-profile {
   display: flex;
   padding: 10px 20px;
   position: relative;
   font-weight: 600;
-  margin-top: 38px;
   font-size: x-large;
-  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
   background-color: var(--white-color);
   color: var(--dark-color);
   border-radius: 20px;
-  height: 3vh;
-  box-shadow: 2px 2px 0px 1px var(--red-color);
   width: 25vw;
+  height: 3vh;
   align-items: center;
   justify-content: flex-start;
+  resize: none;
+  border: none;
+  outline: none;
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
+  box-shadow: inset 2px 2px 0px 1px var(--dark-color);
 }
-.profile-confirm {
+.profile-name-field {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+  margin-top: 40px;
+}
+.profile-confirm-btn {
   display: flex;
   position: absolute;
-  color:var(--teal-color);
+  color: var(--teal-color);
   font-size: 25px;
-  bottom: 38px;
-  right: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 90%;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
-.profile-confirm:hover {
+.profile-confirm-btn:hover {
   opacity: 0.7;
   scale: 0.97;
 }
@@ -169,12 +187,13 @@
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
-  background-color: var(--dark-color);
+  background-color: var(--grey-color);
   color: var(--white-color);
   border-radius: 50px;
   padding: 25px;
-  width: 43vw;
+  width: 42vw;
   height: 30vh;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .languages-header {
@@ -185,25 +204,26 @@
   font-size: x-large;
   top: -20px;
   left: 0;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 50px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
 }
 .experience-info {
-  margin-top: 33px;
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   font-size: 50px;
   position: relative;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--grey-color);
+  color: var(--dark-color);
   border-radius: 50px;
   padding: 25px;
-  width: 43vw;
+  width: 42vw;
   height: 14vh;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 .experience-edit-content {
   margin-top: 33px;
@@ -271,7 +291,7 @@
   font-size: x-large;
   top: -20px;
   left: 0;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 50px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
@@ -282,19 +302,20 @@
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  background-color: var(--dark-color);
+  background-color: var(--grey-color);
   color: var(--white-color);
   border-radius: 50px;
-  width: 100%;
+  width: 99%;
   height: 150px;
   box-sizing: border-box;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .bio-container {
   display: flex;
   width: 100%;
   height: 100px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
 }
@@ -309,7 +330,7 @@
   font-size: x-large;
   top: -20px;
   left: 0;
-  background-color: var(--white-color);
+  background-color: var(--grey-color);
   color: var(--dark-color);
   border-radius: 50px;
   box-shadow: 2px 2px 0px 1px var(--red-color);
@@ -317,13 +338,15 @@
 .bio-content {
   margin: 40px;
 }
-.bio-textarea{
-  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
-  width:100%;
-  height:10vh;
-  border:0;
-  background-color: var(--dark-color);
-  color: var(--white-color);
+.bio-textarea {
+  font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
+  width: 98%;
+  height: 90%;
+  padding: 10px;
+  border: 0;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  resize: none;
 }
 .bio-textarea-edit{
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" ;
@@ -343,12 +366,14 @@
   scale: 0.97;
 }
 
-.bio-cancel{
-  color: var(--red-color);
+.bio-cancel {
+  color: var(--teal-color);
   cursor: pointer;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 .bio-cancel:hover {
-  color: var(--yellow-color);
+  scale: 0.97;
+  opacity: 0.7;
 }
 
 .bio-confirm {

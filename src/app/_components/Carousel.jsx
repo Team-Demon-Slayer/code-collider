@@ -86,7 +86,7 @@ export default function Carousel({ projects, getProject, header }) {
           const text = truncateString(project.description, 50);
           const openSpots = project.max_developers - project.users.length;
           return (
-            (openSpots > 0 ||
+            (openSpots >= 0 ||
               !project.active ||
               header === "Current Projects") && (
               <div
