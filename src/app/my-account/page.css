@@ -126,6 +126,15 @@
   outline: none;
   border: none;
 }
+.mentor-icon {
+  display:flex;
+  position: absolute;
+  top: -5px;
+  size:30px;
+  font-size: 25px;
+  left: 0;
+  color:var(--red-color);
+}
 .edit-profile-name-btn {
   display: flex;
   position: absolute;
