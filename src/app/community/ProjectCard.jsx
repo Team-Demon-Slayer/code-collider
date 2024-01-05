@@ -23,6 +23,9 @@ export default function ProjectCard({ project }) {
     }
   };
 
+  // FIXME: delete
+  // return <div>{JSON.stringify(project)}</div>
+
   return (
     <div className="current-project-details-info">
       <div className="project-card-head">
