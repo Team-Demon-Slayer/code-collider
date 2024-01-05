@@ -31,9 +31,8 @@ export default function ProjectModal({ project, closeModal }) {
   const differenceInTime = date1.getTime() - date2.getTime();
   const differenceInDays = differenceInTime / (1000 * 3600 * 24);
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <FaTimes className="close-modal-btn" onClick={handleCloseModal} />
+    <div className="modal-overlay" onClick={handleCloseModal}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="modal-header-title-date">
             <div className="modal-header-title">{project.title}</div>
