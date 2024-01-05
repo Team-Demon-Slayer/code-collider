@@ -13,7 +13,7 @@ import Pagination from '../../Pagination';
 export default function BrowsePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
-  const { keyword, language, spots, startDate, openMentor, user } =
+  const { keyword, language, spots, startDate, openMentor, user, languageSelected, debouncedKeyword } =
     useCommunityContext();
   useEffect(() => {
     async function getprojects() {
@@ -24,13 +24,15 @@ export default function BrowsePage({ params: { page } }) {
     }
     getprojects();
   }, [page]);
+
+  useEffect( () => { console.log(debouncedKeyword); }, [debouncedKeyword])// FIXME: remove
   return (
     <>
       <div className="page-container">
         {isLoading ? (
           <span className="loader"></span>
         ) : (
-          projects.map(p => <ProjectCard key={p.if} project={p} />)
+          projects.map(p => <ProjectCard key={p.id} project={p} />)
         )}
       </div>
       <Pagination pages={5} />

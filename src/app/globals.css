@@ -25,12 +25,12 @@ body {
   align-items: flex-start;
   position: relative;
   font-family: "__Inter_e66fe9", "__Inter_Fallback_e66fe9" !important;
-  background-color: var(--grey-color);
+  background-color: var(--white-color);
 }
 body section {
   margin: 0px;
   width: 100%;
-  height: 95%;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

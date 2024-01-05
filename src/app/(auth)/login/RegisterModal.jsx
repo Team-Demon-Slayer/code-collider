@@ -76,6 +76,7 @@ const RegisterModal = ({
             email: email,
             experience: experienceLevel,
             reason_for_joining: reasonForJoining,
+            profile_photo: "https://ujxeijwxbsrjfzqemtaq.supabase.co/storage/v1/object/public/Profile/code-collider-logo.png",
             ...(reasonForJoining === "Mentoring" && { is_mentor: true }),
           }
         ]);

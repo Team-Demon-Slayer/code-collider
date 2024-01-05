@@ -5,7 +5,6 @@ import getUserColor from "../../_utils/getUserColor.js";
 import { IoMdSend } from "react-icons/io";
 import supabase from "../../api/_db/index.js";
 import { v4 as uuidv4 } from "uuid";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function MessageBoard({
   messages,
@@ -16,8 +15,6 @@ export default function MessageBoard({
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef(null);
-
-  const supabaseClient = createClientComponentClient();
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -41,12 +38,12 @@ export default function MessageBoard({
     }
     console.log("get user", user);
 
-    const { data: userData, error: userError } = await supabaseClient
+    const { data: userData, error: userError } = await supabase
       .from("users")
       .select("username")
       .eq("email", user.email);
 
-    const { error } = await supabaseClient.from("messages").insert({
+    const { error } = await supabase.from("messages").insert({
       id: uuidv4(),
       project_id: project_meta.id,
       posted_by: userData[0].username,
