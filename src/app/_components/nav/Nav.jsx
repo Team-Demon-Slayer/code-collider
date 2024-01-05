@@ -71,7 +71,6 @@ export default function Nav() {
   useEffect(() => {
     const fetchUserData = async () => {
       const { data, error } = await supabase.auth.getSession();
-      console.log(data.session);
       if (error || !data.session) {
         setValidUser(false);
         router.push("/login");
@@ -115,8 +114,8 @@ export default function Nav() {
   }, [currentURL]);
 
   return (
-    (validUser &&
-      validPath) && (
+    validUser &&
+    validPath && (
       <div className={`app`}>
         <SideNav
           updateTitle={updateTitle}

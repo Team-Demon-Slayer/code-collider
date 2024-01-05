@@ -1,22 +1,28 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   getProjectPage,
   getFilteredProjectsPage,
-  getFilteredProjectsPageByLanguage
-} from '@/app/api/_db/_models/projectsModels';
-import useCommunityContext from '../../useCommunityContext';
-import { getExpandedUser } from '@/app/api/_db/_models/usersModels';
-import ShowcaseCard from '../../ShowcaseCard';
-import Pagination from '../../Pagination';
+  getFilteredProjectsPageByLanguage,
+} from "@/app/api/_db/_models/projectsModels";
+import useCommunityContext from "../../useCommunityContext";
+import { getExpandedUser } from "@/app/api/_db/_models/usersModels";
+import ShowcaseCard from "../../ShowcaseCard";
+import Pagination from "../../Pagination";
 
 export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [userUpvotes, setUserUpvotes] = useState([]);
-  const { keyword, language, user, languageSelected, debouncedKeyword, selectedLanguage } =
-    useCommunityContext();
+  const {
+    keyword,
+    language,
+    user,
+    languageSelected,
+    debouncedKeyword,
+    selectedLanguage,
+  } = useCommunityContext();
 
   useEffect(() => {
     async function getprojects() {
@@ -32,7 +38,6 @@ export default function ShowcasePage({ params: { page } }) {
           null,
           false
         );
-        console.log({ projects }); // FIXME: remove
         setProjects(projects[0].projects);
       } else {
         const projects = await getFilteredProjectsPage(
@@ -44,7 +49,6 @@ export default function ShowcasePage({ params: { page } }) {
           null,
           false
         );
-        console.log({ projects }); // FIXME: removeß
         setProjects(projects);
       }
       setIsLoading(false);
@@ -62,15 +66,15 @@ export default function ShowcasePage({ params: { page } }) {
     getUserUpvotes();
   }, [user]);
 
-  useEffect( () => { console.log(debouncedKeyword); }, [debouncedKeyword])// FIXME: remove
-
   return (
     <>
       <div className="page-container">
         {isLoading ? (
           <span className="loader"></span>
         ) : (
-          projects?.map(p => <ShowcaseCard key={p.id} project={p} userUpvotes={userUpvotes} />)
+          projects?.map((p) => (
+            <ShowcaseCard key={p.id} project={p} userUpvotes={userUpvotes} />
+          ))
         )}
       </div>
       <Pagination pages={5} />

@@ -16,7 +16,6 @@ export default function ProfileModal({
     if (e.target.src === user.profile_photo) {
       setChanged(false);
     } else setChanged(true);
-    console.log(user.profile_photo);
   };
   const handleUpdateAvatar = async () => {
     const { data, error } = await supabase

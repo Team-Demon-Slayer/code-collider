@@ -34,7 +34,6 @@ export default function ProjectPage({ params }) {
       .eq("id", taskId);
 
     if (error) {
-      console.log(error);
       return;
     }
 
@@ -44,7 +43,6 @@ export default function ProjectPage({ params }) {
       .eq("id", taskId);
 
     if (completeError) {
-      console.log(completeError);
       return;
     }
     setTriggerUpdate(!triggerUpdate);
@@ -88,7 +86,6 @@ export default function ProjectPage({ params }) {
       await supabase.auth.getSession();
 
     if (sessionError) {
-      console.log(sessionError);
       return;
     }
     setUserId(sessionData.session.user.id);
@@ -98,14 +95,12 @@ export default function ProjectPage({ params }) {
   };
 
   const handleClaimTask = async (task) => {
-    console.log(task);
     if (!task.owner) {
       const { error } = await supabase
         .from("deliverables")
         .update({ owner: username })
         .eq("id", task.id);
       if (error) {
-        console.log(error);
         return;
       }
 
@@ -116,7 +111,6 @@ export default function ProjectPage({ params }) {
         .update({ owner: null })
         .eq("id", task.id);
       if (error) {
-        console.log(error);
         return;
       }
 
@@ -131,7 +125,6 @@ export default function ProjectPage({ params }) {
       .eq("id", taskId);
 
     if (error) {
-      console.log(error);
       return;
     }
     setTriggerUpdate(!triggerUpdate);
@@ -140,7 +133,6 @@ export default function ProjectPage({ params }) {
   const handleAddTask = async (newTask) => {
     const { error } = await supabase.from("deliverables").insert(newTask);
     if (error) {
-      console.log(error);
       return;
     }
     setTriggerUpdate(!triggerUpdate);
@@ -155,7 +147,6 @@ export default function ProjectPage({ params }) {
       .eq("id", task_id);
 
     if (error) {
-      console.log(error);
       return;
     }
 
@@ -174,7 +165,6 @@ export default function ProjectPage({ params }) {
       .eq("id", params.projectId);
 
     if (error) {
-      console.log(error);
       return;
     }
 
@@ -198,7 +188,6 @@ export default function ProjectPage({ params }) {
     const fetchUserData = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error) {
-        console.log(error);
         return;
       }
       const { data: profile } = await supabase
@@ -220,7 +209,6 @@ export default function ProjectPage({ params }) {
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "deliverables" },
         (payload) => {
-          console.log("INSERT payload:", payload);
           getData();
         }
       )
@@ -228,7 +216,6 @@ export default function ProjectPage({ params }) {
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "deliverables" },
         (payload) => {
-          console.log("UPDATE payload:", payload);
           getData();
         }
       )
