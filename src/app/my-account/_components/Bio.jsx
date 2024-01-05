@@ -2,27 +2,47 @@
 import "../page.css";
 import React, { useState, useEffect } from "react";
 import supabase from "../../api/_db/index.js";
-import BioModal from "./BioModal.jsx";
 import { FaPencil } from "react-icons/fa6";
-export default function Bio({ user, handleUpdate }) {
-  const [modalState, setModalState] = useState(false);
-  const handleModal = () => {
-    setModalState(!modalState);
+import { AiOutlineClose } from 'react-icons/ai';
+export default function Bio({user,handleUpdate}) {
+  const [editState, setEditState] = useState(false);
+  const [text, setText] = useState(user.bio);
+  const [initialText, setInitialText] = useState('');
+  const [changed, setChanged] = useState(false);
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+    if (e.target.value === initialText) {
+      setChanged(false);
+    }
+    else {
+      setChanged(true);
+    }
+  }
+  const handleUpdateBio = async () => {
+    const { data, error } = await supabase
+      .from('users')
+      .update({
+        bio: text,
+      })
+      .eq('id', user.id)
+    handleUpdate();
+    handleEdit();
+  }
+  const handleEdit = () => {
+    setInitialText(user.bio);
+    setChanged(false);
+    setEditState(!editState);
   };
-  return (
-    <div className="bio-info">
-      <div className="bio-header" onClick={handleModal}>
+  return(
+    <div className= "bio-info">
+      <div className="bio-header" onClick={handleEdit}>
         Bio &nbsp;
-        <FaPencil className="edit-icon-bio" />
+        {!editState ? <FaPencil className="edit-icon-bio"/>:<AiOutlineClose className="bio-cancel"/>}
       </div>
-      <div className="bio-content">{user.bio}</div>
-      {modalState && (
-        <BioModal
-          user={user}
-          handleModal={handleModal}
-          handleUpdate={handleUpdate}
-        />
-      )}
+      <div className="bio-content">
+      <textarea className={!editState ? "bio-textarea":"bio-textarea-edit"} defaultValue={user.bio} placeholder="Write a short bio about yourself..." onChange={(e)=>handleTextChange(e)} disabled={!editState}></textarea>
+       { changed && <button className="save-button" onClick={handleUpdateBio}>Save</button>};
+      </div>
     </div>
-  );
+  )
 }
