@@ -289,7 +289,8 @@ export const getFilteredProjectsPageByLanguage = async (
   spots,
   gtDate,
   ltDate,
-  mentor
+  mentor,
+  search
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
@@ -297,6 +298,8 @@ export const getFilteredProjectsPageByLanguage = async (
     throw new Error("Need a language for language based query!");
     return;
   }
+
+  const searchFilter = search == null ? [""] : ['projects.title', `%${search}%`]
   const activeFilter = ["projects.active", active];
   const languageFilter = ["url", language];
   const spotsFilter =
@@ -338,6 +341,7 @@ export const getFilteredProjectsPageByLanguage = async (
     .gt(...gtDateFilter)
     .lt(...ltDateFilter)
     .is(...mentorFilter)
+    .ilike(...searchFilter)
     .order("start_date", { referencedTable: "projects", ascending: true })
     .range(rangeStart, rangeEnd, { referencedTable: "projects" });
 
@@ -356,11 +360,14 @@ export const getFilteredProjectsPage = async (
   spots,
   gtDate,
   ltDate,
-  mentor
+  mentor,
+  search
 ) => {
   let rangeStart = (page - 1) * count;
   let rangeEnd = rangeStart + (count - 1);
 
+
+  const searchFilter = search == null ? [""] : ['title', `%${search}%`]
   const activeFilter = ["active", active];
   const spotsFilter =
     spots === undefined || spots === null ? [""] : ["available_spots", spots];
@@ -394,6 +401,7 @@ export const getFilteredProjectsPage = async (
     .gt(...gtDateFilter)
     .lt(...ltDateFilter)
     .is(...mentorFilter)
+    .ilike(...searchFilter)
     .order("start_date")
     .range(rangeStart, rangeEnd);
 
