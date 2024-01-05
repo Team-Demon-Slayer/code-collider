@@ -27,7 +27,6 @@ export default function Languages({user, languages}) {
     setModalState(!modalState);
   };
   const handleLanguageSelection = (language) => {
-    console.log(user);
     setSelectedLanguages((prevSelectedLanguages) => {
       if (prevSelectedLanguages.includes(language)) {
         return prevSelectedLanguages.filter((lang) => lang !== language);
