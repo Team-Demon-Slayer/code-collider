@@ -31,7 +31,6 @@ const codingLanguagesAndFrameworks = [
   { name: "Swift", url: "swift" },
   { name: "TypeScript", url: "ts" },
   { name: "Zig", url: "zig" },
-  // Added Frameworks and Libraries
   { name: "React", url: "react" },
   { name: "Next.js", url: "nextjs" },
   { name: "Angular", url: "angular" },
@@ -44,11 +43,6 @@ const codingLanguagesAndFrameworks = [
   { name: "Spring", url: "spring" },
   { name: "Ruby on Rails", url: "rails" }
 ];
-
-
-const data = {
-  
-}
 export default codingLanguagesAndFrameworks;
 
 

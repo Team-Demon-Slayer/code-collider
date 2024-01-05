@@ -82,7 +82,7 @@ export default function Profile({ user, handleUpdate }) {
           disabled={!editState}
           defaultValue={user.username}
         />
-        {user.is_mentor && <FaGraduationCap className="edit-icon" />}
+        {user.is_mentor && <FaGraduationCap className="mentor-icon" />}
         {editState ? (
           <FaCheck className="profile-confirm-btn" onClick={handleUpdateUser} />
         ) : (
