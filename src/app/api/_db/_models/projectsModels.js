@@ -20,6 +20,7 @@ export const getProject = async (projectId) => {
       finish_date,
       mentor(id,username),
       active,
+      available_spots,
       upvotes(count)
       `
     )
@@ -57,6 +58,7 @@ export const getProjectPage = async (
       mentor(id,username),
       active,
       repo_link,
+      available_spots,
       upvotes(count)
     `
     )
@@ -100,6 +102,7 @@ export const getProjectPageByLanguage = async (
         finish_date,
         mentor(id,username),
         active,
+        available_spots,
         upvotes(count)
       )
     `
@@ -133,6 +136,7 @@ export const getMyProjects = async (userId) => {
         finish_date,
         mentor(id,username),
         active,
+        available_spots,
         upvotes(count)
       )
     `
@@ -164,6 +168,7 @@ export const getMyMentorProjects = async (userId) => {
         finish_date,
         mentor(id,username),
         active,
+        available_spots,
         upvotes(count)
       )
     `
@@ -265,6 +270,7 @@ export const getCurrentProject = async (userId) => {
           finish_date,
           mentor(id,username),
           active,
+          available_spots,
           upvotes(count),
           repo_link
         )
@@ -280,4 +286,124 @@ export const getCurrentProject = async (userId) => {
   }
 
   return data;
-};
+}
+
+
+export const getFilteredProjectsPageByLanguage = async (
+  language,
+  active,
+  page = 1,
+  count = 10,
+  spots,
+  gtDate,
+  ltDate,
+  mentor
+) => {
+  let rangeStart = (page - 1) * count;
+  let rangeEnd = rangeStart + (count - 1);
+  if(!language) {
+    throw new Error('Need a language for language based query!');
+    return;
+  }
+  const activeFilter = ['projects.active', active];
+  const languageFilter = ['url', language];
+  const spotsFilter = (spots === undefined || spots === null) ? [''] : ['projects.available_spots', spots];
+  const spotsFilter2 = (active === true && !(mentor === true)) ? ['projects.available_spots', 0] : [''];
+  const gtDateFilter = gtDate == null ? [''] : ['projects.start_date', gtDate];
+  const ltDateFilter = ltDate == null ? [''] : ['projects.finish_date', ltDate];
+  const mentorFilter = mentor === true ? ['projects.mentor', null] : [''];
+  const { data, error } = await supabase
+    .from('languages')
+    .select(`
+      projects(
+        id,
+        title,
+        owner(id,username),
+        languages(name,url),
+        description,
+        max_developers,
+        users!projects_users(id,username),
+        start_date,
+        finish_date,
+        mentor(id,username),
+        active,
+        available_spots,
+        upvotes(count)
+      )
+    `)
+    .eq(...languageFilter)
+    .eq(...activeFilter)
+    .eq(...spotsFilter)
+    .gt(...spotsFilter2)
+    .gt(...gtDateFilter)
+    .lt(...ltDateFilter)
+    .is(...mentorFilter)
+    .order(
+      "start_date",
+      { referencedTable: "projects", ascending: true },
+    )
+    .range(rangeStart, rangeEnd, { referencedTable: 'projects' });
+
+
+
+  if(error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
+
+export const getFilteredProjectsPage = async (
+  active,
+  page = 1,
+  count = 10,
+  spots,
+  gtDate,
+  ltDate,
+  mentor
+) => {
+  let rangeStart = (page - 1) * count;
+  let rangeEnd = rangeStart + (count - 1);
+
+  const activeFilter = ['active', active];
+  const spotsFilter = (spots === undefined || spots === null) ? [''] : ['available_spots', spots];
+  const spotsFilter2 = (active === true && !(mentor === true)) ? ['available_spots', 0] : [''];
+  const gtDateFilter = gtDate == null ? [''] : ['start_date', gtDate];
+  const ltDateFilter = ltDate == null ? [''] : ['finish_date', ltDate];
+  const mentorFilter = mentor === true ? ['mentor', null] : [''];
+  const { data, error } = await supabase
+    .from('projects')
+    .select(`
+      id,
+      title,
+      owner(id,username),
+      languages(name,url),
+      description,
+      max_developers,
+      users!projects_users(id,username),
+      start_date,
+      finish_date,
+      mentor(id,username),
+      active,
+      available_spots,
+      upvotes(count)
+    `)
+    .eq(...activeFilter)
+    .eq(...spotsFilter)
+    .gt(...spotsFilter2)
+    .gt(...gtDateFilter)
+    .lt(...ltDateFilter)
+    .is(...mentorFilter)
+    .order(
+      "start_date",
+    )
+    .range(rangeStart, rangeEnd);
+
+  if(error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
