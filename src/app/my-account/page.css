@@ -356,3 +356,32 @@
   cursor: pointer;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
+
+
+.language-label {
+  margin: 2px;
+  padding: 10px;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  border-radius: 15px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-label.selected {
+  background-color: var(--teal-color);
+  color: #fff;
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
