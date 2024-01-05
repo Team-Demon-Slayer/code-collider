@@ -1,5 +1,5 @@
-const { createClientComponentClient } = require("@supabase/auth-helpers-nextjs");
-const supabase = createClientComponentClient();
+const supabase = require('../');
+
 
 export const getMiniUser = async (userId) => {
   let { data, error } = await supabase

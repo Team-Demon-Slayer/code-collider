@@ -2,7 +2,15 @@
 import { useState, useEffect } from 'react';
 import { getDeliverables } from './_db/_models/deliverablesModels.js';
 import { getExpandedUser } from './_db/_models/usersModels.js';
-import { getProjectPage, joinProject, getMyProjects, getMyMentorProjects, getCurrentProject } from './_db/_models/projectsModels.js';
+import {
+  getProjectPage,
+  joinProject,
+  getMyProjects,
+  getMyMentorProjects,
+  getCurrentProject,
+  getFilteredProjectsPageByLanguage,
+  getFilteredProjectsPage
+} from './_db/_models/projectsModels.js';
 
 export default function Api() {
 
@@ -69,6 +77,24 @@ export default function Api() {
     .catch((err) => {
       console.error(err);
     });
+
+    getFilteredProjectsPageByLanguage('react', null, 2, 1, null, null, null, null)
+    .then((res) => {
+      console.log('Filtered Projects Page By Language');
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+
+    getFilteredProjectsPage(null, 1, 5, null, null, null, null)
+    .then((res) => {
+      console.log('Filtered Projects Page');
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
 
   }, [])
 
