@@ -9,6 +9,7 @@ import Bio from "./_components/Bio.jsx";
 import { getExpandedUser } from "../api/_db/_models/usersModels.js";
 export default function Account() {
   const [user, setUser] = useState(null);
+  const [languages, setLanguages] = useState([]);
   const [update, setUpdate] = useState(false);
   const handleUpdate = () => {
     setUpdate(!update);
@@ -23,7 +24,12 @@ export default function Account() {
       return;
     }
     const user = await getExpandedUser(data.session.user.id);
+    const language_names = []
+    user.languages.map((language) => {
+      language.name && language_names.push(language.name);
+    });
     setUser(user);
+    setLanguages(language_names);
   };
   useEffect(() => {
     getUser();
@@ -38,7 +44,7 @@ export default function Account() {
           <Profile user={user} handleUpdate={handleUpdate} />
         </div>
         <div className="column2">
-          <Languages user={user} handleUpdate={handleUpdate} />
+          <Languages user={user} handleUpdate={handleUpdate} languages = {languages} />
           <Experience user={user} handleUpdate={handleUpdate} />
         </div>
       </div>
