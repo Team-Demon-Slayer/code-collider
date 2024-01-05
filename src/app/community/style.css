@@ -1,3 +1,37 @@
+.project-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  cursor: default;
+  width: 95%;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  height: 155px;
+  border-radius: 60px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  min-height: 240px;
+}
+
+.project-showcase-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  cursor: default;
+  width: 95%;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  height: 155px;
+  border-radius: 60px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
+  min-height: 200px;
+}
+
 .community-container {
   display: flex;
   flex-direction: column;
@@ -11,10 +45,6 @@
   position: relative;
   overflow-y: hidden;
   margin-top: 90px;
-}
-
-.current-project-details-info {
-  min-height: 250px;
 }
 
 .page-container {

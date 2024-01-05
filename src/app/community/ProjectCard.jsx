@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 import { joinProject } from '../api/_db/_models/projectsModels';
 import useCommunityContext from './useCommunityContext';
 import supabase from '../api/_db/index.js';
-import '../_stylesheets/currentProjectStyle.css';
 
 export default function ProjectCard({ project }) {
   const router = useRouter();
@@ -34,7 +33,7 @@ export default function ProjectCard({ project }) {
   };
 
   return (
-    <div className="current-project-details-info">
+    <div className="project-card-info">
       <div className="project-card-head">
         <div className="project-details-title">
           <div className="project-details-current-project">
