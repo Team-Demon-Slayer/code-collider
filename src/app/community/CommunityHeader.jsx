@@ -102,6 +102,8 @@ export default function CommunityHeader() {
           <input
             className="search-input"
             type="number"
+            min={1}
+            max={5}
             value={spots}
             onChange={(e) => setSpots(e.target.value)}
           />
