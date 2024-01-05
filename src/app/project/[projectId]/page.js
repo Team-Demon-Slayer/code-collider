@@ -10,8 +10,10 @@ import ProjectDetails from "./ProjectDetails.jsx";
 // import deliverablesModels from "../../api/_db/_models/deliverablesModels";
 import supabase from "../../api/_db/index";
 import { getMessages } from "../../api/_db/_models/messagesModels.js";
-import { getProject } from "../../api/_db/_models/projectsModels.js";
+import { getProject, leaveProject } from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
+
+import { useRouter } from 'next/navigation'
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,6 +28,8 @@ export default function ProjectPage({ params }) {
   const [isLoading, setIsLoading] = useState(true);
   const [triggerUpdate, setTriggerUpdate] = useState(false);
   const [user, setUser] = useState(null);
+
+  const router = useRouter();
 
   const handleMarkComplete = async (taskId) => {
     const { data, error } = await supabase
@@ -171,6 +175,16 @@ export default function ProjectPage({ params }) {
     setTriggerUpdate(!triggerUpdate);
   };
 
+  const handleLeaveProject = async () => {
+    try {
+      await leaveProject(project_meta.id);
+      router.push('/');
+    } catch(err) {
+      console.error(err);
+      return;
+    }
+  }
+
   useEffect(() => {
     getData();
     setIsLoading(false);
@@ -291,6 +305,13 @@ export default function ProjectPage({ params }) {
                 {!project_meta.active ? "Open Project" : "Close Project"}
               </div>
             )}
+            <div
+              onClick={handleLeaveProject}
+              className="link-project"
+              target="_blank"
+            >
+              LEAVE PROJECT
+            </div>
           </div>
         </div>
         <MessageBoard
