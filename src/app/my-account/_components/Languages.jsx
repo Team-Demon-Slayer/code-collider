@@ -27,7 +27,6 @@ export default function Languages({user}) {
     setModalState(!modalState);
   };
   const handleLanguageSelection = (language) => {
-    console.log(user);
     setSelectedLanguages((prevSelectedLanguages) => {
       if (prevSelectedLanguages.includes(language)) {
         return prevSelectedLanguages.filter((lang) => lang !== language);
@@ -35,7 +34,6 @@ export default function Languages({user}) {
         return [...prevSelectedLanguages, language];
       }
     });
-    console.log(selectedLanguages);
   };
   return <main>
     <div className= "languages-info">
