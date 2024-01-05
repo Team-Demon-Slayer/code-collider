@@ -11,7 +11,6 @@ export default function Experience({ user , handleUpdate}) {
   const [initialExperience, setInitialExperience] = useState('');
   const [changed, setChanged] = useState(false);
   const handleExperienceChange = (e) => {
-    console.log(e.target.value);
     setExperience(e.target.value);
     if (e.target.value === initialExperience) {
       setChanged(false);

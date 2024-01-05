@@ -11,7 +11,6 @@ export default function Bio({ user, handleUpdate }) {
   const [initialText, setInitialText] = useState("");
   const [changed, setChanged] = useState(false);
   const handleTextChange = (e) => {
-    console.log(e.target);
     setText(e.target.value);
     if (e.target.value === initialText) {
       setChanged(false);
@@ -35,14 +34,11 @@ export default function Bio({ user, handleUpdate }) {
     setEditState(!editState);
   };
   const handleKeyDown = (event) => {
-    console.log(event);
     if(event.key==='Enter' && text === initialText) {
       handleEdit();
-      console.log("HandleEdit");
     }
     else if (event.key === 'Enter' ) {
      handleUpdateBio();
-     console.log("Enter");
     }
   }
   return(
