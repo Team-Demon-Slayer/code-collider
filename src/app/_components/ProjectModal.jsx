@@ -13,6 +13,10 @@ export default function ProjectModal({ project, closeModal }) {
 
   const router = useRouter();
 
+  const handleNavToProject = () => {
+    router.push(`/project/${project.id}`);
+  };
+
   const handleJoinProject = async () => {
     joinProject(project.id)
       .then(() => router.push(`/project/${project.id}`))
@@ -69,13 +73,12 @@ export default function ProjectModal({ project, closeModal }) {
                 JOIN PROJECT
               </button>
             ) : (
-              <a
-                href={project.repo_link}
-                target="_blank"
+              <div
+                onClick={handleNavToProject}
                 className="modal-footer-join-btn"
               >
                 VIEW PROJECT
-              </a>
+              </div>
             )}
           </div>
         </div>
