@@ -75,7 +75,7 @@ export default function ShowcasePage({ params: { page } }) {
       const projectsCount = await supabase
         .from('projects')
         .select('id', { count: 'exact', head: true })
-        .eq('active', true);
+        .eq('active', false);
       const pageCount = Math.ceil(projectsCount.count / 10);
       setPageCount(pageCount);
     }
