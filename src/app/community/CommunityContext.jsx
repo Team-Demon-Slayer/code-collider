@@ -11,7 +11,7 @@ export function CommunityProvider({ children }) {
   const [language, setLanguage] = useState('');
   const [spots, setSpots] = useState('');
   const [startDate, setStartDate] = useState(new Date('2021-01-01'));
-  const [openMentor, setOpenMentor] = useState(false);
+  const [openMentor, setOpenMentor] = useState(true);
   const [user, setUser] = useState(null);
   const [languageSelected, setLanguageSelected] = useState(true);
   const debouncedKeyword = useDebounce(keyword, 1000);
