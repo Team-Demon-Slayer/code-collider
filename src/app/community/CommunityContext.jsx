@@ -9,7 +9,7 @@ export const CommunityContext = createContext();
 export function CommunityProvider({ children }) {
   const [keyword, setKeyword] = useState('');
   const [language, setLanguage] = useState('');
-  const [spots, setSpots] = useState(2);
+  const [spots, setSpots] = useState('');
   const [startDate, setStartDate] = useState(new Date('2021-01-01'));
   const [openMentor, setOpenMentor] = useState(false);
   const [user, setUser] = useState(null);

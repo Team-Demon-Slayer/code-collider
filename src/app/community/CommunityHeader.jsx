@@ -37,7 +37,7 @@ export default function CommunityHeader() {
   const getAllLanguages = useCallback(async () => {
     const allLanguages = await supabase.from("languages").select();
     return allLanguages;
-  }, [supabase]);
+  }, []);
 
   const [languages, setLanguages] = useState([]);
 
@@ -104,7 +104,7 @@ export default function CommunityHeader() {
             type="number"
             min={1}
             max={5}
-            value={spots}
+            value={spots ?? ""}
             onChange={(e) => setSpots(e.target.value)}
           />
           <input
