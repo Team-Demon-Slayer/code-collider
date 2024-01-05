@@ -120,18 +120,20 @@
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  color: var(--white-color);
+  color: #fff;
   box-shadow: 2px 2px 0px 1px var(--white-color);
   padding: 5px 10px;
   min-width: 150px;
   margin-right: 45px;
   transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
   border: none;
+  height: 30px;
+  box-shadow: 2px 2px 0px 1px var(--dark-color);
 }
 
 .project-upvote-button:disabled {
   cursor: not-allowed;
-  background-color: #444;
+  background-color: #161a12;
 }
 
 .project-join-btn:disabled {
