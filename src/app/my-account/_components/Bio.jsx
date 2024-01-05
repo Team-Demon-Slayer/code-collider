@@ -33,23 +33,30 @@ export default function Bio({ user, handleUpdate }) {
     setChanged(false);
     setEditState(!editState);
   };
-  const handleKeyDown = (event) => {
-    if(event.key==='Enter' && text === initialText) {
-      handleEdit();
-    }
-    else if (event.key === 'Enter' ) {
-     handleUpdateBio();
-    }
-  }
-  return(
-    <div className= "bio-info">
-      <div className="bio-header">
+  return (
+    <div className="bio-info">
+      <div className="bio-header" onClick={handleEdit}>
         Bio &nbsp;
-        {!editState ? <FaPencil onClick={handleEdit} className="edit-icon-bio"/>:<AiOutlineClose onClick={handleEdit} className="bio-cancel"/>}
+        {!editState ? (
+          <FaPencil className="edit-icon-bio" />
+        ) : (
+          <FaCheck className="bio-cancel" />
+        )}
       </div>
       <div className="bio-content">
-      <textarea className={!editState ? "bio-textarea":"bio-textarea-edit"} defaultValue={user.bio} onKeyDown={handleKeyDown} placeholder="Write a short bio about yourself..." onChange={(e)=>handleTextChange(e)} disabled={!editState}></textarea>
-       { changed && <button className="save-button" onClick={handleUpdateBio} >Save</button>};
+        <textarea
+          className={!editState ? "bio-textarea" : "bio-textarea-edit"}
+          defaultValue={user.bio}
+          placeholder="Write a short bio about yourself..."
+          onChange={(e) => handleTextChange(e)}
+          disabled={!editState}
+        ></textarea>
+        {changed && (
+          <button className="save-button" onClick={handleUpdateBio}>
+            Save
+          </button>
+        )}
+        ;
       </div>
     </div>
   );
