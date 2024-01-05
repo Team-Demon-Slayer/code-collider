@@ -9,7 +9,8 @@ import {
   getMyMentorProjects,
   getCurrentProject,
   getFilteredProjectsPageByLanguage,
-  getFilteredProjectsPage
+  getFilteredProjectsPage,
+  leaveProject
 } from './_db/_models/projectsModels.js';
 
 export default function Api() {
@@ -42,14 +43,14 @@ export default function Api() {
       console.error(err);
     });
 
-    joinProject('512b933e-aa62-11ee-b32a-02c6baa627c7')
-    .then((res) => {
-      console.log('Join Project');
-      console.log(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    // joinProject('512b933e-aa62-11ee-b32a-02c6baa627c7')
+    // .then((res) => {
+    //   console.log('Join Project');
+    //   console.log(res);
+    // })
+    // .catch((err) => {
+    //   console.error(err);
+    // });
 
     getMyProjects('9c202e1c-2ad3-403e-b0ee-62310138aa88')
     .then((res) => {
@@ -85,7 +86,7 @@ export default function Api() {
     })
     .catch((err) => {
       console.error(err);
-    })
+    });
 
     getFilteredProjectsPage(true, 1, 5, null, null, null, false, 'pix')
     .then((res) => {
@@ -94,7 +95,16 @@ export default function Api() {
     })
     .catch((err) => {
       console.error(err);
+    });
+
+    leaveProject('61e4cbc8-0abe-4c29-9ab1-68d9f44139bc')
+    .then((res) => {
+      console.log('Leave Project');
+      console.log(res);
     })
+    .catch((err) => {
+      console.error(err);
+    });
 
   }, [])
 

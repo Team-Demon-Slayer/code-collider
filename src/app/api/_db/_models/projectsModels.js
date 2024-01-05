@@ -412,3 +412,32 @@ export const getFilteredProjectsPage = async (
 
   return data;
 };
+
+export const leaveProject = async (project_id) => {
+  const { data: user, error: err1 } = await supabase.auth.getUser();
+
+  console.log(user);
+
+  if(err1) {
+    console.error(err1);
+  }
+
+  const user_id = user.user.id;
+
+  console.log(user_id, project_id);
+
+  const { data: res, error: err2 } = await supabase
+    .from('projects_users')
+    .delete()
+    .eq('user_id', user_id)
+    .eq('project_id', project_id);
+
+  console.log('Response: ', res);
+
+  if(err2) {
+    console.error(err2);
+    return;
+  }
+
+  return 'Project Left';
+}
