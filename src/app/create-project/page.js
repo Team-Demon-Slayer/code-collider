@@ -10,6 +10,7 @@ import Image from "next/image";
 import formatDate from "../_utils/formatDate.js";
 import "../_stylesheets/createProject.css";
 import { MdOutlineDateRange } from "react-icons/md";
+import { joinProject } from "../api/_db/_models/projectsModels.js";
 
 const applyFunc = (func, newValue) => {
   func(newValue);
@@ -71,24 +72,19 @@ export default function CreateProject() {
         start_date: start,
         finish_date: end,
         estimated_hours: 4,
-        // mentor: null,
-        // upvotes: 0,
       });
       if (error) {
         console.error(error);
         return;
       }
-      const { error: projectError } = await supabase
-        .from("projects_users")
-        .insert({
-          project_id: newId,
-          user_id: userId.session.user.id,
+      joinProject(newId)
+        .then(() => {
+          router.push(`/my-projects`);
+        })
+        .catch((err) => {
+          console.error(err);
+          return;
         });
-      if (projectError) {
-        console.error(projectError);
-        return;
-      }
-      router.push(`/my-projects`);
     } else if (startDate > endDate) {
       alert("Start date cannot be after end date!");
     } else {
