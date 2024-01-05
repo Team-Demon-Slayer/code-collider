@@ -49,15 +49,12 @@ export default function ProjectDetails({ project_meta, username, userId }) {
       roomOne
         .on("presence", { event: "sync" }, () => {
           const newState = roomOne.presenceState();
-          console.log("sync", newState);
           updateOnlineMembers(newState);
         })
         .on("presence", { event: "join" }, ({ key, newPresences }) => {
-          console.log("join", key, newPresences);
           updateOnlineMembers(newPresences);
         })
         .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
-          console.log("leave", key, leftPresences);
           setOnlineMember((prevMembers) => {
             const updatedMembers = { ...prevMembers };
             delete updatedMembers[key];

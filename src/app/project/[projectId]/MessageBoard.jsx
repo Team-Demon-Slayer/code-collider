@@ -33,10 +33,8 @@ export default function MessageBoard({
     } = await supabase.auth.getUser();
 
     if (!user) {
-      console.log(user);
       return;
     }
-    console.log("get user", user);
 
     const { data: userData, error: userError } = await supabase
       .from("users")
