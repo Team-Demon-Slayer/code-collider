@@ -10,10 +10,13 @@ import ProjectDetails from "./ProjectDetails.jsx";
 // import deliverablesModels from "../../api/_db/_models/deliverablesModels";
 import supabase from "../../api/_db/index";
 import { getMessages } from "../../api/_db/_models/messagesModels.js";
-import { getProject, leaveProject } from "../../api/_db/_models/projectsModels.js";
+import {
+  getProject,
+  leaveProject,
+} from "../../api/_db/_models/projectsModels.js";
 import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -178,12 +181,12 @@ export default function ProjectPage({ params }) {
   const handleLeaveProject = async () => {
     try {
       await leaveProject(project_meta.id);
-      router.push('/');
-    } catch(err) {
+      router.push("/");
+    } catch (err) {
       console.error(err);
       return;
     }
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -305,11 +308,7 @@ export default function ProjectPage({ params }) {
                 {!project_meta.active ? "Open Project" : "Close Project"}
               </div>
             )}
-            <div
-              onClick={handleLeaveProject}
-              className="link-project"
-              target="_blank"
-            >
+            <div onClick={handleLeaveProject} className="close-project-btn">
               LEAVE PROJECT
             </div>
           </div>
