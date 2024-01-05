@@ -111,51 +111,51 @@
 .online-indicator-user-1 {
   background-color: var(--red-color);
   position: absolute;
-  top: -3px;
-  left: 89%;
+  top: 0;
+  left: -8px;
   border-radius: 50px;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--dark-color);
 }
 .online-indicator-user-2 {
   background-color: var(--yellow-color);
   position: absolute;
-  top: -3px;
-  left: 89%;
+  top: 0;
+  left: -8px;
   border-radius: 50px;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--dark-color);
 }
 .online-indicator-user-3 {
   background-color: var(--teal-color);
   position: absolute;
-  top: -3px;
-  left: 89%;
+  top: 0;
+  left: -8px;
   border-radius: 50px;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--dark-color);
 }
 .online-indicator-user-4 {
   background-color: var(--dark-color);
   position: absolute;
-  top: -3px;
-  left: 89%;
+  top: 0;
+  left: -8px;
   border-radius: 50px;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--dark-color);
 }
 .online-indicator-user-5 {
   background-color: var(--white-color);
   position: absolute;
-  top: -3px;
-  left: 89%;
+  top: 0;
+  left: -8px;
   border-radius: 50px;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--dark-color);
 }
 
