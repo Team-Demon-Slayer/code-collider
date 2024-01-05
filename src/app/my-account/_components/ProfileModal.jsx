@@ -34,16 +34,18 @@ export default function ProfileModal({
           <div className="edit-modal-header">Select a Profile Photo</div>
           <div className="edit-avatar-list">
             {avatarList.map((item, index) => {
-              return (
-                <img
-                  key={index}
-                  src={item}
-                  onClick={handleAvatarChange}
-                  alt="avatar"
-                  value={item}
-                  className={avatar === item ? "avatar-selected" : "avatar"}
-                />
-              );
+              if(index !==0){
+                return (
+                  <img
+                    key={index}
+                    src={item}
+                    onClick={handleAvatarChange}
+                    alt="avatar"
+                    value={item}
+                    className={avatar === item ? "avatar-selected" : "avatar"}
+                  />
+                );
+              }
             })}
           </div>
           {changed && (
