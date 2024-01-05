@@ -84,7 +84,7 @@ export default function CreateProject() {
         owner: userId.session.user.id,
         description,
         max_developers: engineers,
-        repo_link: "www.github.com",
+        repo_link: repo ? repo : "https://github.com/dashboard",
         start_date: start,
         finish_date: end,
         estimated_hours: 4,
