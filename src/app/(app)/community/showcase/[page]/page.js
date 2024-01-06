@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   getProjectPage,
   getFilteredProjectsPage,
-  getFilteredProjectsPageByLanguage
-} from '@/app/api/_db/_models/projectsModels';
-import useCommunityContext from '../../useCommunityContext';
-import { getExpandedUser } from '@/app/api/_db/_models/usersModels';
-import supabase from '../../../../api/_db/index';
-import ShowcaseCard from '../../ShowcaseCard';
-import Pagination from '../../Pagination';
+  getFilteredProjectsPageByLanguage,
+} from "@/app/api/_db/_models/projectsModels";
+import useCommunityContext from "../../useCommunityContext";
+import { getExpandedUser } from "@/app/api/_db/_models/usersModels";
+import supabase from "../../../api/_db/index";
+import ShowcaseCard from "../../ShowcaseCard";
+import Pagination from "../../Pagination";
 
 export default function ShowcasePage({ params: { page } }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function ShowcasePage({ params: { page } }) {
     user,
     languageSelected,
     debouncedKeyword,
-    selectedLanguage
+    selectedLanguage,
   } = useCommunityContext();
 
   useEffect(() => {
@@ -73,9 +73,9 @@ export default function ShowcasePage({ params: { page } }) {
   useEffect(() => {
     async function getPageCount() {
       const projectsCount = await supabase
-        .from('projects')
-        .select('id', { count: 'exact', head: true })
-        .eq('active', false);
+        .from("projects")
+        .select("id", { count: "exact", head: true })
+        .eq("active", false);
       const pageCount = Math.ceil(projectsCount.count / 10);
       setPageCount(pageCount);
     }
@@ -88,7 +88,7 @@ export default function ShowcasePage({ params: { page } }) {
         {isLoading ? (
           <span className="loader"></span>
         ) : (
-          projects?.map(p => (
+          projects?.map((p) => (
             <ShowcaseCard key={p.id} project={p} userUpvotes={userUpvotes} />
           ))
         )}
