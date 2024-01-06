@@ -1,9 +1,12 @@
 "use client";
 
 import "../globals.css";
-import { getProjectPage, getCurrentProject } from "../api/_db/_models/projectsModels.js";
-import { useState, useEffect } from "react"
-import supabase from "../api/_db/index.js";
+import {
+  getProjectPage,
+  getCurrentProject,
+} from "./api/_db/_models/projectsModels.js";
+import { useState, useEffect } from "react";
+import supabase from "./api/_db/index.js";
 import HomePage from "./_components/HomePage.jsx";
 
 export default function Home() {
@@ -23,7 +26,9 @@ export default function Home() {
   };
 
   const selectCurrentProject = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const data = await getCurrentProject(user.id);
     setCurrentProject(data[0]?.busy_dates[0]?.projects);
   };
@@ -34,14 +39,20 @@ export default function Home() {
       await getSpotlightProjects();
       await selectCurrentProject();
       setIsLoading(false);
-    }
+    };
     getProjects();
   }, []);
 
   return (
     <main className="main-container">
-      {(isLoading) ? ( <span className="loader"></span> ) : (
-        <HomePage recentProjects={recentProjects} spotlightProjects={spotlightProjects} currentProject={currentProject} />
+      {isLoading ? (
+        <span className="loader"></span>
+      ) : (
+        <HomePage
+          recentProjects={recentProjects}
+          spotlightProjects={spotlightProjects}
+          currentProject={currentProject}
+        />
       )}
     </main>
   );

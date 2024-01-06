@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "../nav.css";
-import supabase from "../../../../api/_db/index.js";
+import supabase from "../../../api/_db/index.js";
 import { useRouter } from "next/navigation";
 import { PiDiamondBold } from "react-icons/pi";
 import { PiDiamondFill } from "react-icons/pi";
