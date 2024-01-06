@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaLock } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import getUserColor from "../../_utils/getUserColor.js";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import "./style.css";
 
 export default function ProjectDetails({ project_meta, username, userId }) {

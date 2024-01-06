@@ -7,7 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import getUserColor from "../../_utils/getUserColor.js";
 import formatDate from "../../_utils/formatDate.js";
 
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 
 export default function TaskModal({
   task,

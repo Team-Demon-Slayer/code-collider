@@ -4,7 +4,7 @@ import "../_stylesheets/projectModalStyle.css";
 import formatDate from "../_utils/formatDate.js";
 import { FaTimes } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { joinProject } from "../../api/_db/_models/projectsModels.js";
+import { joinProject } from "../api/_db/_models/projectsModels.js";
 
 export default function ProjectModal({ project, closeModal }) {
   const handleCloseModal = () => {

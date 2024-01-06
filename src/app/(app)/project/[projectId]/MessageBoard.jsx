@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import getUserColor from "../../_utils/getUserColor.js";
 import { IoMdSend } from "react-icons/io";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { v4 as uuidv4 } from "uuid";
 
 export default function MessageBoard({

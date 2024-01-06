@@ -8,13 +8,13 @@ import ProjectDetails from "./ProjectDetails.jsx";
 // import messagesModels from "../../api/_db/_models/messagesModels";
 // import projectsModels from "../../api/_db/_models/projectsModels";
 // import deliverablesModels from "../../api/_db/_models/deliverablesModels";
-import supabase from "../../../api/_db/index";
-import { getMessages } from "../../../api/_db/_models/messagesModels.js";
+import supabase from "../../api/_db/index";
+import { getMessages } from "../../api/_db/_models/messagesModels.js";
 import {
   getProject,
   leaveProject,
-} from "../../../api/_db/_models/projectsModels.js";
-import { getDeliverables } from "../../../api/_db/_models/deliverablesModels.js";
+} from "../../api/_db/_models/projectsModels.js";
+import { getDeliverables } from "../../api/_db/_models/deliverablesModels.js";
 
 import { useRouter } from "next/navigation";
 

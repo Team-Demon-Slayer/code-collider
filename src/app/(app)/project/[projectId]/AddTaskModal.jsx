@@ -7,7 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import mockData from "./mock-data.js";
 import getUserColor from "../../_utils/getUserColor.js";
 import formatDate from "../../_utils/formatDate.js";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { v4 as uuidv4 } from "uuid";
 
 const { tasks } = mockData;
