@@ -2,14 +2,14 @@
 
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import supabase from "../../api/_db/index.js";
+import supabase from "../api/_db/index.js";
 import React, { useState, useEffect } from "react";
 import isALanguageIn from "./helper-funcs/isALanguageIn.js";
 import Image from "next/image";
 import formatDate from "../_utils/formatDate.js";
 import "../_stylesheets/createProject.css";
 import { MdOutlineDateRange } from "react-icons/md";
-import { joinProject } from "../../api/_db/_models/projectsModels.js";
+import { joinProject } from "../api/_db/_models/projectsModels.js";
 
 const getLanguages = async () => {
   const allLanguages = await supabase.from("languages").select();
