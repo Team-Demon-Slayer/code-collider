@@ -63,16 +63,13 @@
 <br />
     <h3>Create Project</h3>
   <img src="./public/assets/images/create-project.gif" alt="create project page" width="600px" />
-</div>
 <br />
     <h3>Browse Projects</h3>
   <img src="./public/assets/images/browse-projects.gif" alt="browse project page" width="600px" />
-</div>
 <br />
     <h3>Project Page</h3>
   <img src="./public/assets/images/project-page-live-1.gif" alt="live project page" width="600px" />
   <img src="./public/assets/images/project-page-live-2.gif" alt="live project page" width="600px" />
-</div>
 <br />
     <h3>My Account</h3>
   <img src="./public/assets/images/my-account.gif" alt="my account page" width="600px" />
