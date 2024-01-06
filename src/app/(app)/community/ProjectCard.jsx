@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-import { joinProject } from '../../api/_db/_models/projectsModels';
-import useCommunityContext from './useCommunityContext';
-import supabase from '../../api/_db/index.js';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { joinProject } from "../api/_db/_models/projectsModels";
+import useCommunityContext from "./useCommunityContext";
+import supabase from "../api/_db/index.js";
 
 export default function ProjectCard({ project }) {
   const router = useRouter();
@@ -26,9 +26,9 @@ export default function ProjectCard({ project }) {
 
   const handleMentorProject = async () => {
     await supabase
-      .from('projects')
+      .from("projects")
       .update({ mentor: user.id })
-      .eq('id', project.id);
+      .eq("id", project.id);
     router.push(`/project/${project.id}`);
   };
 
@@ -63,7 +63,7 @@ export default function ProjectCard({ project }) {
             return (
               <div className="team-member" key={id}>
                 @{username}
-                {index === project.registeredDevelopers - 1 ? '' : ' |'}
+                {index === project.registeredDevelopers - 1 ? "" : " |"}
               </div>
             );
           })}

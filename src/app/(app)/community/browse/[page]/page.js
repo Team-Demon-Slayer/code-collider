@@ -6,7 +6,7 @@ import {
   getFilteredProjectsPageByLanguage,
 } from "@/app/api/_db/_models/projectsModels";
 import useCommunityContext from "../../useCommunityContext";
-import supabase from "../../../../api/_db/index";
+import supabase from "../../../api/_db/index";
 import ProjectCard from "../../ProjectCard";
 import Pagination from "../../Pagination";
 
@@ -42,7 +42,7 @@ export default function BrowsePage({ params: { page } }) {
           convertedStartDate,
           null,
           openMentor,
-          debouncedKeyword,
+          debouncedKeyword
         );
         setProjects(projects[0].projects);
       } else {
@@ -54,7 +54,7 @@ export default function BrowsePage({ params: { page } }) {
           convertedStartDate,
           null,
           openMentor,
-          debouncedKeyword,
+          debouncedKeyword
         );
         setProjects(projects);
       }
@@ -69,7 +69,7 @@ export default function BrowsePage({ params: { page } }) {
     startDate,
     openMentor,
     convertedStartDate,
-    debouncedKeyword
+    debouncedKeyword,
   ]);
 
   useEffect(() => {

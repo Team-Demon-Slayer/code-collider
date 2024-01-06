@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import supabase from "../../api/_db/index.js";
+import supabase from "../api/_db/index.js";
 import useCommunityContext from "./useCommunityContext.js";
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
