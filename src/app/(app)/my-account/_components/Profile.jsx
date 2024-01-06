@@ -1,7 +1,7 @@
 "use client";
 import "../page.css";
 import React, { useState, useEffect } from "react";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { FaPencil, FaGraduationCap } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import ProfileModal from "./ProfileModal.jsx";

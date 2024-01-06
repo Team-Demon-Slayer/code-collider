@@ -1,7 +1,7 @@
 "use client";
 import "../page.css";
 import React, { useState, useEffect } from "react";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { FaPencil } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
