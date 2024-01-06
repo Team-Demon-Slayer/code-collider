@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   getFilteredProjectsPage,
   getFilteredProjectsPageByLanguage,
-} from "@/app/api/_db/_models/projectsModels";
+} from "../../../api/_db/_models/projectsModels";
 import useCommunityContext from "../../useCommunityContext";
 import supabase from "../../../api/_db/index";
 import ProjectCard from "../../ProjectCard";
