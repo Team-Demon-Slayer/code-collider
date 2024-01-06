@@ -1,6 +1,6 @@
 "use client";
 import "../modals.css";
-import supabase from "../../../api/_db/index.js";
+import supabase from "../../api/_db/index.js";
 import { AiOutlineClose } from "react-icons/ai";
 import React, { useState, useEffect } from "react";
 export default function ProfileModal({
@@ -34,7 +34,7 @@ export default function ProfileModal({
           <div className="edit-modal-header">Select a Profile Photo</div>
           <div className="edit-avatar-list">
             {avatarList.map((item, index) => {
-              if(index !==0){
+              if (index !== 0) {
                 return (
                   <img
                     key={index}

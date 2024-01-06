@@ -1,8 +1,8 @@
 "use client";
 import "../page.css";
-import supabase from '../../../api/_db/index.js';
+import supabase from "../../api/_db/index.js";
 import React, { useState, useEffect } from "react";
-export default function Languages({user, languages}) {
+export default function Languages({ user, languages }) {
   const [modalState, setModalState] = useState(false);
   const [selectedLanguages, setSelectedLanguages] = useState(languages);
   const codingLanguages = [
@@ -35,23 +35,24 @@ export default function Languages({user, languages}) {
       }
     });
   };
-  return <main>
-    <div className= "languages-info">
-      <div className="languages-header">
-        Languages
-      </div>
-      <div className="languages-grid">
-              {codingLanguages.map((language) => (
-                <label
-                  key={language}
-                  className={`language-label ${selectedLanguages.includes(language) ? "selected" : ""
-                    }`}
-                  onClick={() => handleLanguageSelection(language)}
-                >
-                  {language}
-                </label>
-              ))}
+  return (
+    <main>
+      <div className="languages-info">
+        <div className="languages-header">Languages</div>
+        <div className="languages-grid">
+          {codingLanguages.map((language) => (
+            <label
+              key={language}
+              className={`language-label ${
+                selectedLanguages.includes(language) ? "selected" : ""
+              }`}
+              onClick={() => handleLanguageSelection(language)}
+            >
+              {language}
+            </label>
+          ))}
         </div>
-    </div>
-  </main>;
+      </div>
+    </main>
+  );
 }
