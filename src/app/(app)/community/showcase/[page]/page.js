@@ -5,9 +5,9 @@ import {
   getProjectPage,
   getFilteredProjectsPage,
   getFilteredProjectsPageByLanguage,
-} from "@/app/api/_db/_models/projectsModels";
+} from "../../../api/_db/_models/projectsModels";
 import useCommunityContext from "../../useCommunityContext";
-import { getExpandedUser } from "@/app/api/_db/_models/usersModels";
+import { getExpandedUser } from "../../../api/_db/_models/usersModels";
 import supabase from "../../../api/_db/index";
 import ShowcaseCard from "../../ShowcaseCard";
 import Pagination from "../../Pagination";
