@@ -77,7 +77,7 @@
 
 <br />
 <p>
-  Code Collider is a secure collaberation platform where developers of all skill levels can work together on group projects and recieve mentoring from senior developers.
+  Code Collider is a secure collaboration platform where developers of all skill levels can work together on group projects and receive mentoring from senior developers.
 </p>
 
 ### Built With
